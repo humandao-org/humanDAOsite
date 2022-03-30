@@ -176,7 +176,7 @@ class Token extends React.Component {
                   <p className="font-press-start font-bold text-lg sm:text-xl lg:text-3xl -tracking-24">
                     {Number(this.props.blok.token_holders).toLocaleString()}
                   </p>
-                  <div className="chart-container" style={{ position: 'relative', height: '15vw', width: '40vw' }}>
+                  <div className="chart-container" style={{ position: 'relative', height: '15vw', width: '35vw' }}>
                     <Line options={options} data={this.state.tokenHolders} />
                   </div>
                 </div>
@@ -191,7 +191,7 @@ class Token extends React.Component {
                   <p className="font-press-start font-bold text-lg sm:text-xl lg:text-3xl -tracking-24">
                     {this.props.blok.percent_staked}%
                   </p>
-                  <div className="chart-container" style={{ position: 'relative', height: '15vw', width: '40vw' }}>
+                  <div className="chart-container" style={{ position: 'relative', height: '15vw', width: '35vw' }}>
                     <Line options={options} data={this.state.stakingPercentage} />
                   </div>
                 </div>
