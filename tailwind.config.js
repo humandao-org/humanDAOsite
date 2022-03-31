@@ -4,7 +4,13 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'press-start': ['"Press Start 2P"', 'cursive'],
+        'bungee':['"Bungee"'],
+        'play':['"Play"'],
+      },      
+    },
   },
   plugins: [],
 }
