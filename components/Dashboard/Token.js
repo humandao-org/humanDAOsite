@@ -168,7 +168,7 @@ class Token extends React.Component {
           {/* Holders and Staking */}
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-2 md:gap-5 lg:gap-2 p-5">
             <div className="flex  rounded-xl p-2">
-              <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full flex-wrap md:inline-flex">
+              <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full flex-wrap md:inline-flex" style={{overflow: 'auto'}}>
                 <div className="md:ml-2 flex-col inline-flex">
                   <p className="font-play uppercase text-lg sm:text-lg lg:text-3xl">
                     Token holders
@@ -176,14 +176,14 @@ class Token extends React.Component {
                   <p className="font-press-start font-bold text-lg sm:text-xl lg:text-3xl -tracking-24">
                     {Number(this.props.blok.token_holders).toLocaleString()}
                   </p>
-                  <div className="chart-container" style={{ position: 'relative', height: '15vw', width: '35vw' }}>
+                  <div className="chart-container" style={{ position: 'relative', minHeight: '200px' }}>
                     <Line options={options} data={this.state.tokenHolders} />
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex  rounded-xl p-2">
-              <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full md:inline-flex">
+              <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full md:inline-flex" style={{overflow: 'auto'}}>
                 <div className="md:ml-2 flex-col inline-flex">
                   <p className="font-play uppercase text-lg sm:text-xl lg:text-3xl">
                     Percent staking
@@ -191,7 +191,7 @@ class Token extends React.Component {
                   <p className="font-press-start font-bold text-lg sm:text-xl lg:text-3xl -tracking-24">
                     {this.props.blok.percent_staked}%
                   </p>
-                  <div className="chart-container" style={{ position: 'relative', height: '15vw', width: '35vw' }}>
+                  <div className="chart-container" style={{ position: 'relative', minHeight: '200px' }}>
                     <Line options={options} data={this.state.stakingPercentage} />
                   </div>
                 </div>
