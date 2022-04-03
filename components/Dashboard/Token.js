@@ -112,11 +112,11 @@ class Token extends React.Component {
             <img src={this.props.blok.token_image.filename}></img>
             {Number(this.props.blok.token_price).toLocaleString()} <span className="text-xl">USD</span>
           </span>
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-rows-2 lg:grid-flow-col gap-2 md:gap-3 lg:gap-2 flex-wrap  p-5">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-rows-2 lg:grid-flow-col gap-2 md:gap-3 lg:gap-2 flex-wrap  p-5 pb-0">
             <div className="row-span-3">
               <div className="flex flex-wrap rounded-xl p-2">
                 <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full lg:max-h-96 text-center justify-center lg:inline-flex" style={{overflow: 'auto'}}>
-                  <div className="chart-container" style={{ position: 'relative', height: '35vh', width: '70vw' }}>
+                  <div className="chart-container lg:w-full" style={{ position: 'relative', minHeight: '300px' }}>
                     <Line options={options} data={this.state.tokenStats} />
                   </div>
                 </div>
@@ -155,7 +155,7 @@ class Token extends React.Component {
                 <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full md:inline-flex">
                   <div className="md:ml-2 flex-col inline-flex">
                     <p className="font-play uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl">
-                      Fully Diluted Valuation
+                      Fully Diluted MC
                     </p>
                     <p className="font-press-start font-bold text-lg sm:text-xl lg:text-3xl -tracking-24">
                       ${Number(this.props.blok.fully_diluted_value).toLocaleString()}
@@ -169,14 +169,14 @@ class Token extends React.Component {
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-2 md:gap-5 lg:gap-2 p-5">
             <div className="flex  rounded-xl p-2">
               <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full flex-wrap md:inline-flex" style={{overflow: 'auto'}}>
-                <div className="md:ml-2 flex-col inline-flex">
+                <div className="md:ml-2 flex-col inline-flex w-full">
                   <p className="font-play uppercase text-lg sm:text-lg lg:text-3xl">
                     Token holders
                   </p>
                   <p className="font-press-start font-bold text-lg sm:text-xl lg:text-3xl -tracking-24">
                     {Number(this.props.blok.token_holders).toLocaleString()}
                   </p>
-                  <div className="chart-container" style={{ position: 'relative', minHeight: '200px', width: '70vh' }}>
+                  <div className="chart-container w-full" style={{ position: 'relative', minHeight: '240px' }}>
                     <Line options={options} data={this.state.tokenHolders} />
                   </div>
                 </div>
@@ -184,14 +184,14 @@ class Token extends React.Component {
             </div>
             <div className="flex flex-wrap rounded-xl p-2">
               <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full md:inline-flex" style={{overflow: 'auto', maxHeight: '500px' }}>
-                <div className="md:ml-2 flex-col inline-flex">
+                <div className="md:ml-2 flex-col inline-flex w-full">
                   <p className="font-play uppercase text-lg sm:text-xl lg:text-3xl">
                     Percent staking
                   </p>
                   <p className="font-press-start font-bold text-lg sm:text-xl lg:text-3xl -tracking-24">
                     {this.props.blok.percent_staked}%
                   </p>
-                  <div className="chart-container" style={{ position: 'relative', minHeight: '200px', width: '70vh' }}>
+                  <div className="chart-container w-full" style={{ position: 'relative', minHeight: '240px' }}>
                     <Line options={options} data={this.state.stakingPercentage} />
                   </div>
                 </div>
