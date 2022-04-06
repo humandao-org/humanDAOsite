@@ -12,19 +12,17 @@ const AssetList = ({ blok }) => (
         <div className="overflow-auto rounded-lg shadow-md">
           <table className="w-full divide-y divide-gray-200 text-center">
             <thead className="bg-gray-50">  
-              <tr className="">
-                <th>Project</th>
-                <th>Investment Ratio</th>
-                <th>Value</th>
+              <tr className="text-left">
+                <th className="px-2">Asset</th>
+                <th className="px-2">Amount</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {blok.entries
                 ? blok.entries.map((entry) => (
-                  <tr key={entry._uid}>
-                    <td>{entry.label}</td>
-                    <td>{entry.ratio}%</td>
-                    <td>${Number(entry.value).toLocaleString()}</td>
+                  <tr key={entry._uid} className="text-left">
+                    <td className="px-2">{entry.label}</td>
+                    <td className="px-2">{Number(entry.value).toLocaleString()}</td>
                   </tr>
                 ))
               : null}
