@@ -108,7 +108,7 @@ class Token extends React.Component {
             {this.props.blok.header}
           </h1>
           {/* Token Info */}
-          <span className="mt-5 ml-4 flex items-end font-bold font-play text-7xl w-full">
+          <span className="mt-5 ml-4 flex items-end font-bold font-play text-6xl lg:text-7xl w-full">
             <img src={this.props.blok.token_image.filename}></img>
             {Number(this.props.blok.token_price).toLocaleString()} <span className="text-xl">USD</span>
           </span>

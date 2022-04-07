@@ -11,13 +11,15 @@ const Milestones = ({ blok }) => (
       <div className={`grid grid-cols-${blok.cols ? blok.cols : '1'} md:grid-cols-${blok.cols_md ? blok.cols_md : '1'} lg:grid-cols-${blok.cols_lg ? blok.cols_lg : '1'} gap-2 md:gap-5 lg:gap-2 p-5`}>
         {blok.blocks
             ? blok.blocks.map((milestone) => (
-              <div className="flex p-2 flex-wrap" key={milestone._uid}>
-                <div className="Card-1 bg-white rounded-md p-2 w-full text-center justify-center flex-wrap md:inline-flex">
+              <div className="p-2" key={milestone._uid}>
+                <div className="Card-1 bg-white rounded-md p-2 w-full justify-center md:inline-flex">
+                  <div className="align-center">
                   <img
-                    className="bg-white rounded-full h-20 w-20 text-center md:justify-center"
+                    className="mx-auto bg-white rounded-full h-20 w-20 text-center md:justify-center"
                     src={milestone.image.filename}
                   ></img>
-                  <div className="md:ml-2 text-center justify-center md:flex-col">
+                  </div>
+                  <div className="md:ml-2 md:flex-col">
                     <p className={`font-play font-bold text-${milestone.label_size}xl text-center justify-center`}>
                       {milestone.label}
                     </p>

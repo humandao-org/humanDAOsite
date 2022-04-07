@@ -16,7 +16,7 @@ export default function Dashboard(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className="Title text-center font-press-start text-4xl text-white mb-8" >humanDAO Dashboard V1</h1>
+      <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 text-white mb-8" >humanDAO Dashboard V1</h1>
       <DynamicComponent blok={story.content} /> 
     </div>
   )
