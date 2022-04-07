@@ -141,7 +141,7 @@ class Token extends React.Component {
                 <div className="Card-1 bg-white rounded-md p-2 w-full md:inline-flex">
                   <div className="md:ml-2 flex-col inline-flex">
                     <p className="font-play uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl">
-                      Market Cap
+                      Circulating Market Cap
                     </p>
                     <p className="font-press-start font-bold text-lg sm:text-xl lg:text-3xl -tracking-24">
                     ${Number(this.props.blok.market_cap).toLocaleString()}
