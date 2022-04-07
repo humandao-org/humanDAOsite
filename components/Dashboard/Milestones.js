@@ -4,7 +4,7 @@ import { sbEditable } from "@storyblok/storyblok-editable";
 
 const Milestones = ({ blok }) => (
   <div>
-    <section className="Milestones bg-green-100 rounded md:mx-24 lg:mx-32 m-4 mt-0 p-4" {...sbEditable(blok)}>
+      <section className="Milestones bg-purple-200 rounded md:mx-24 lg:mx-32 m-4 mt-0 p-4" {...sbEditable(blok)}>
       <h1 className="font-bungee font-bold text-3xl text-center md:text-left">
         {blok.label}
       </h1>
@@ -12,9 +12,9 @@ const Milestones = ({ blok }) => (
         {blok.blocks
             ? blok.blocks.map((milestone) => (
               <div className="flex p-2 flex-wrap" key={milestone._uid}>
-                <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full text-center justify-center flex-wrap md:inline-flex">
+                <div className="Card-1 bg-white rounded-md p-2 w-full text-center justify-center flex-wrap md:inline-flex">
                   <img
-                    className="bg-white rounded-full h-24 w-24 justify-center"
+                    className="bg-white rounded-full h-20 w-20 text-center md:justify-center"
                     src={milestone.image.filename}
                   ></img>
                   <div className="md:ml-2 text-center justify-center md:flex-col">

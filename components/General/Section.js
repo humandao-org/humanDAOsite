@@ -3,7 +3,7 @@ import { sbEditable } from "@storyblok/storyblok-editable";
 
 const Section = ({ blok }) => (
   <div>
-    <section className="Section bg-green-100 rounded md:mx-24 lg:mx-32 m-4 mt-0 p-4" {...sbEditable(blok)}>
+    <section className="Section bg-purple-200 rounded md:mx-24 lg:mx-32 m-4 mt-0 p-4" {...sbEditable(blok)}>
       <h1 className="font-bungee font-bold text-3xl text-center md:text-left">
         {blok.header}
       </h1>

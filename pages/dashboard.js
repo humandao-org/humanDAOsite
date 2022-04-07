@@ -15,7 +15,8 @@ export default function Dashboard(props) {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
- 
+
+      <h1 className="Title text-center font-press-start text-4xl text-white mb-8" >humanDAO Dashboard V1</h1>
       <DynamicComponent blok={story.content} /> 
     </div>
   )

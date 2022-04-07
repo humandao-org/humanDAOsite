@@ -103,7 +103,7 @@ class Token extends React.Component {
     return (
       <div {...sbEditable(this.props.blok)}>
         {/* HDAO TOKEN */}
-        <section className="Token bg-green-100 rounded md:mx-24 lg:mx-32 m-4 p-4">
+        <section className="Token bg-purple-200 rounded md:mx-24 lg:mx-32 m-4 p-4">
           <h1 className="font-bungee font-bold text-3xl text-center md:text-left">
             {this.props.blok.header}
           </h1>
@@ -115,7 +115,7 @@ class Token extends React.Component {
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-rows-2 lg:grid-flow-col gap-2 md:gap-3 lg:gap-2 flex-wrap  p-5 pb-0">
             <div className="row-span-3">
               <div className="flex flex-wrap rounded-xl p-2">
-                <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full lg:max-h-96 text-center justify-center lg:inline-flex" style={{overflow: 'auto'}}>
+                <div className="Card-1 bg-white rounded-md p-2 w-full lg:max-h-96 text-center justify-center lg:inline-flex" style={{overflow: 'auto'}}>
                   <div className="chart-container lg:w-full" style={{ position: 'relative', minHeight: '300px' }}>
                     <Line options={options} data={this.state.tokenStats} />
                   </div>
@@ -124,7 +124,7 @@ class Token extends React.Component {
             </div>
             <div className="col-span-1">
               <div className="flex  rounded-xl p-2">
-                <div className="Card-2 bg-yellow-300 rounded-md p-2 w-full md:inline-flex">
+                <div className="Card-2 bg-white rounded-md p-2 w-full md:inline-flex">
                   <div className="md:ml-2 flex-col inline-flex">
                     <p className="font-play uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl">
                       Circulating Supply
@@ -138,7 +138,7 @@ class Token extends React.Component {
             </div>
             <div className="col-span-1">
               <div className="flex  rounded-xl p-2">
-                <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full md:inline-flex">
+                <div className="Card-1 bg-white rounded-md p-2 w-full md:inline-flex">
                   <div className="md:ml-2 flex-col inline-flex">
                     <p className="font-play uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl">
                       Market Cap
@@ -152,7 +152,7 @@ class Token extends React.Component {
             </div>
             <div className="col-span-1">
               <div className="flex  rounded-xl p-2">
-                <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full md:inline-flex">
+                <div className="Card-1 bg-white rounded-md p-2 w-full md:inline-flex">
                   <div className="md:ml-2 flex-col inline-flex">
                     <p className="font-play uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl">
                       Fully Diluted MC
@@ -168,7 +168,7 @@ class Token extends React.Component {
           {/* Holders and Staking */}
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-2 md:gap-5 lg:gap-2 p-5">
             <div className="flex  rounded-xl p-2">
-              <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full flex-wrap md:inline-flex" style={{overflow: 'auto'}}>
+              <div className="Card-1 bg-white rounded-md p-2 w-full flex-wrap md:inline-flex" style={{overflow: 'auto'}}>
                 <div className="md:ml-2 flex-col inline-flex w-full">
                   <p className="font-play uppercase text-lg sm:text-lg lg:text-3xl">
                     Token holders
@@ -183,7 +183,7 @@ class Token extends React.Component {
               </div>
             </div>
             <div className="flex flex-wrap rounded-xl p-2">
-              <div className="Card-1 bg-yellow-300 rounded-md p-2 w-full md:inline-flex" style={{overflow: 'auto', maxHeight: '500px' }}>
+              <div className="Card-1 bg-white rounded-md p-2 w-full md:inline-flex" style={{overflow: 'auto', maxHeight: '500px' }}>
                 <div className="md:ml-2 flex-col inline-flex w-full">
                   <p className="font-play uppercase text-lg sm:text-xl lg:text-3xl">
                     Percent staking
