@@ -11,7 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
+// import { faker } from '@faker-js/faker';
 
 ChartJS.register(
   CategoryScale,
@@ -29,6 +29,7 @@ export const options = {
   aspectRatio: 3.25,
   plugins: {
     legend: {
+      display: false,
       position: 'top',
     },
     title: {
@@ -38,38 +39,18 @@ export const options = {
   },
 };
 
-/*
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-*/
-
 class Token extends React.Component {
   constructor(props) {
     super(props);
     this.state = {date: new Date()};
-    this.state = { 
+    this.state = {
+      tokenPrice: "0.0001", 
+      percentStaked: "0",
       tokenStats : { 
-        labels: ['2022-03-23', '2022-03-24', '2022-03-25', '2022-03-26', '2022-03-27', '2022-03-28', '2022-03-29'],      
+        labels: [], // ['2022-03-23', '2022-03-24', '2022-03-25', '2022-03-26', '2022-03-27', '2022-03-28', '2022-03-29'],      
         datasets: [{
           label: '$HDAO - 5 days',
-          data: [0.23, 0.25, 0.16, 0.18, 0.22, 0.30, 0.28],
+          data: [], // 0.23, 0.25, 0.16, 0.18, 0.22, 0.30, 0.28],
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
         }]
@@ -84,10 +65,10 @@ class Token extends React.Component {
         }]
       },
       stakingPercentage : { 
-        labels: ['Nov 2021', 'Dec 2021', 'Jan 2022', 'Feb 2022', 'March 2022', 'April 2022'],      
+        labels: [], // 'Nov 2021', 'Dec 2021', 'Jan 2022', 'Feb 2022', 'March 2022', 'April 2022'],      
         datasets: [{
           label: 'Staked percentage - 6 months',
-          data: [0, 0, 22, 28, 29, 32],
+          data: [], // [0, 0, 22, 28, 29, 32],
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
         }]
@@ -96,7 +77,22 @@ class Token extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.blok.header)
+    // console.log(this.props.blok.token_price)
+    let sortedRows = this.props.blok.token_price.tbody.sort((a, b) => {
+      if (a.body[0].value < b.body[0].value) return -1
+      else if  (a.body[0].value > b.body[0].value) return 1
+      else return 0
+    })
+    this.setState({ tokenPrice : sortedRows[sortedRows.length - 1].body[1].value })
+    this.setState({ percentStaked: this.props.blok.percent_staked.tbody[this.props.blok.percent_staked.tbody.length-1].body[1].value })
+    sortedRows.forEach(row => {
+      this.state.tokenStats.labels.push(row.body[0].value)
+      this.state.tokenStats.datasets[0].data.push(row.body[1].value)
+    })
+    this.props.blok.percent_staked.tbody.forEach(row => {
+      this.state.stakingPercentage.labels.push(row.body[0].value)
+      this.state.stakingPercentage.datasets[0].data.push(row.body[1].value)
+    })
   }
 
   render() {
@@ -110,7 +106,7 @@ class Token extends React.Component {
           {/* Token Info */}
           <span className="mt-4 lg:mt-0 lg:ml-4 flex items-end font-bold font-press-start text-4xl lg:text-5xl w-full">
             <img className="w-12 h-12 lg:w-16 lg:h-16 lg:mt-2" src={this.props.blok.token_image.filename}></img>
-            {Number(this.props.blok.token_price).toLocaleString()} <span className="text-sm lg:text-xl">USD</span>
+            {Number(this.state.tokenPrice).toLocaleString()} <span className="text-sm lg:text-xl">USD</span>
           </span>
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-rows-2 lg:grid-flow-col gap-2 md:gap-3 lg:gap-2 flex-wrap  p-2 pb-0">
             <div className="row-span-3">
@@ -189,7 +185,7 @@ class Token extends React.Component {
                     Percent staking
                   </p>
                   <p className="font-press-start font-bold text-lg sm:text-xl lg:text-3xl -tracking-24">
-                    {this.props.blok.percent_staked}%
+                    {this.state.percentStaked}%
                   </p>
                   <div className="chart-container w-full" style={{ position: 'relative', minHeight: '240px' }}>
                     <Line options={options} data={this.state.stakingPercentage} />
