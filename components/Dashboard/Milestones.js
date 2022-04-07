@@ -4,11 +4,11 @@ import { sbEditable } from "@storyblok/storyblok-editable";
 
 const Milestones = ({ blok }) => (
   <div>
-      <section className="Milestones bg-purple-200 rounded md:mx-24 lg:mx-32 m-4 mt-0 p-4" {...sbEditable(blok)}>
+      <section className="Milestones bg-purple-200 rounded md:mx-24 lg:mx-32 m-8 mt-0 p-4" {...sbEditable(blok)}>
       <h1 className="font-bungee font-bold text-3xl text-center md:text-left">
         {blok.label}
       </h1>
-      <div className={`grid grid-cols-${blok.cols ? blok.cols : '1'} md:grid-cols-${blok.cols_md ? blok.cols_md : '1'} lg:grid-cols-${blok.cols_lg ? blok.cols_lg : '1'} gap-2 md:gap-5 lg:gap-2 p-5`}>
+      <div className={`grid grid-cols-${blok.cols ? blok.cols : '1'} md:grid-cols-${blok.cols_md ? blok.cols_md : '1'} lg:grid-cols-${blok.cols_lg ? blok.cols_lg : '1'} gap-2 md:gap-5 lg:gap-2`}>
         {blok.blocks
             ? blok.blocks.map((milestone) => (
               <div className="p-2" key={milestone._uid}>

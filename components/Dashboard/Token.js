@@ -103,19 +103,19 @@ class Token extends React.Component {
     return (
       <div {...sbEditable(this.props.blok)}>
         {/* HDAO TOKEN */}
-        <section className="Token bg-purple-200 rounded md:mx-24 lg:mx-32 m-4 p-4">
+        <section className="Token bg-purple-200 rounded md:mx-24 lg:mx-32 m-8 mt-0 p-4">
           <h1 className="font-bungee font-bold text-3xl text-center md:text-left">
             {this.props.blok.header}
           </h1>
           {/* Token Info */}
-          <span className="mt-5 ml-4 flex items-end font-bold font-play text-6xl lg:text-7xl w-full">
+          <span className="mt-2 ml-4 flex items-end font-bold font-play text-6xl lg:text-7xl w-full">
             <img src={this.props.blok.token_image.filename}></img>
             {Number(this.props.blok.token_price).toLocaleString()} <span className="text-xl">USD</span>
           </span>
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-rows-2 lg:grid-flow-col gap-2 md:gap-3 lg:gap-2 flex-wrap  p-5 pb-0">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-rows-2 lg:grid-flow-col gap-2 md:gap-3 lg:gap-2 flex-wrap  p-2 pb-0">
             <div className="row-span-3">
-              <div className="flex flex-wrap rounded-xl p-2">
-                <div className="Card-1 bg-white rounded-md p-2 w-full lg:max-h-96 text-center justify-center lg:inline-flex" style={{overflow: 'auto'}}>
+              <div className="flex flex-wrap rounded-xl lg:p-2">
+                <div className="Card-1 bg-white rounded-md w-full lg:max-h-96 text-center justify-center lg:inline-flex" style={{overflow: 'auto'}}>
                   <div className="chart-container lg:w-full" style={{ position: 'relative', minHeight: '300px' }}>
                     <Line options={options} data={this.state.tokenStats} />
                   </div>
@@ -123,7 +123,7 @@ class Token extends React.Component {
               </div>
             </div>
             <div className="col-span-1">
-              <div className="flex  rounded-xl p-2">
+              <div className="flex  rounded-xl lg:p-2">
                 <div className="Card-2 bg-white rounded-md p-2 w-full md:inline-flex">
                   <div className="md:ml-2 flex-col inline-flex">
                     <p className="font-play uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl">
@@ -137,7 +137,7 @@ class Token extends React.Component {
               </div>
             </div>
             <div className="col-span-1">
-              <div className="flex  rounded-xl p-2">
+              <div className="flex  rounded-xl lg:p-2">
                 <div className="Card-1 bg-white rounded-md p-2 w-full md:inline-flex">
                   <div className="md:ml-2 flex-col inline-flex">
                     <p className="font-play uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl">
@@ -151,7 +151,7 @@ class Token extends React.Component {
               </div>
             </div>
             <div className="col-span-1">
-              <div className="flex  rounded-xl p-2">
+              <div className="flex  rounded-xl lg:p-2">
                 <div className="Card-1 bg-white rounded-md p-2 w-full md:inline-flex">
                   <div className="md:ml-2 flex-col inline-flex">
                     <p className="font-play uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl">
@@ -166,8 +166,8 @@ class Token extends React.Component {
             </div>
           </div>
           {/* Holders and Staking */}
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-2 md:gap-5 lg:gap-2 p-5">
-            <div className="flex  rounded-xl p-2">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-2 md:gap-5 lg:gap-2 p-2">
+            <div className="flex  rounded-xl lg:p-2">
               <div className="Card-1 bg-white rounded-md p-2 w-full flex-wrap md:inline-flex" style={{overflow: 'auto'}}>
                 <div className="md:ml-2 flex-col inline-flex w-full">
                   <p className="font-play uppercase text-lg sm:text-lg lg:text-3xl">
@@ -182,7 +182,7 @@ class Token extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="flex flex-wrap rounded-xl p-2">
+            <div className="flex flex-wrap rounded-xl lg:p-2">
               <div className="Card-1 bg-white rounded-md p-2 w-full md:inline-flex" style={{overflow: 'auto', maxHeight: '500px' }}>
                 <div className="md:ml-2 flex-col inline-flex w-full">
                   <p className="font-play uppercase text-lg sm:text-xl lg:text-3xl">
