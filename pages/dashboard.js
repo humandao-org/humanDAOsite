@@ -12,8 +12,8 @@ export default function Dashboard(props) {
   return (
     <div className="bg-fixed pt-20 pb-20" style={{ height: '100%', backgroundImage: `url(${story.content.bg_image.filename})` }}> 
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Dashboard - HumanDAO</title>
+        <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
       </Head>
 
       <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 text-white mb-8" >humanDAO Dashboard V1</h1>
