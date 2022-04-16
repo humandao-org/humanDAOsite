@@ -1,5 +1,5 @@
 import React from "react";
-import { sbEditable } from "@storyblok/storyblok-editable";
+import { storyblokEditable } from "@storyblok/react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -97,9 +97,9 @@ class Token extends React.Component {
 
   render() {
     return (
-      <div {...sbEditable(this.props.blok)}>
+      <div {...storyblokEditable(this.props.blok)}>
         {/* HDAO TOKEN */}
-        <section className="Token bg-purple-200 rounded md:mx-24 lg:mx-32 m-8 mt-0 p-4">
+        <section className="Token bg-purple-200 rounded md:mx-24 lg:mx-32 m-8 mt-0 p-4" {...storyblokEditable(this.props.blok)}>
           <h1 className="font-bungee font-bold text-3xl text-center md:text-left">
             {this.props.blok.header}
           </h1>

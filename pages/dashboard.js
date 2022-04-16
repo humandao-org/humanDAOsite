@@ -1,23 +1,26 @@
 import Head from "next/head"
 // import styles from "../styles/Dashboard.module.css"
+import { useStoryblokState, storyblokEditable, StoryblokComponent } from "@storyblok/react";
  
 // The Storyblok Client
-import Storyblok from "../lib/storyblok"
-import DynamicComponent from '../components/DynamicComponent'
+// import Storyblok from "../lib/storyblok"
+// import DynamicComponent from '../components/DynamicComponent'
+import { getStoryblokApi } from "@storyblok/react"
 
-export default function Dashboard(props) {
-  const story = props.story
-  
+export default function Dashboard({ story }) {
+  // const story = props.story
+  story = useStoryblokState(story);
+  // console.log(story)
   // className={'styles.container'}
   return (
     <div className="bg-fixed pt-20 pb-20" style={{ height: '100%', backgroundImage: `url(${story.content.bg_image.filename})` }}> 
       <Head>
-        <title>Dashboard - HumanDAO</title>
+        <title>Dashboard - humanDAO</title>
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
       </Head>
 
-      <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 text-white mb-8" >humanDAO Dashboard V1</h1>
-      <DynamicComponent blok={story.content} /> 
+      <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 text-white mb-8" {...storyblokEditable(story.content)}>humanDAO Dashboard V1</h1>
+      <StoryblokComponent blok={story.content} /> 
     </div>
   )
 }
@@ -36,11 +39,13 @@ export async function getStaticProps({ preview = false }) {
     sbParams.cv = Date.now();
   }
  
-  let { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
+  const storyblokApi = getStoryblokApi();
+  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
  
   return {
     props: {
       story: data ? data.story : null,
+      key: data ? data.story.id : false,
       preview,
     },
     revalidate: 3600, // revalidate every hour

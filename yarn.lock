@@ -165,6 +165,20 @@
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.1.tgz"
   "version" "1.1.1"
 
+"@storyblok/js@^1.0.4":
+  "integrity" "sha512-R6rJ44ouCcQrCUDOKaeM1oRVW6tqIMfvLVC6SxfSIG0X+JkNtl9iS/cY4OfuaSiZnLndmN9ZkTEusderRvdODA=="
+  "resolved" "https://registry.npmjs.org/@storyblok/js/-/js-1.1.0.tgz"
+  "version" "1.1.0"
+  dependencies:
+    "storyblok-js-client" "^4.2.0"
+
+"@storyblok/react@^1.0.5":
+  "integrity" "sha512-h77CjnLBMIVhqv2pyc2+JyHoWeWp573Iianx+6563+i9f9qsMmwfZTFjs0Ay/Hy64E0zOrJSzF4cj2ej1WeLJQ=="
+  "resolved" "https://registry.npmjs.org/@storyblok/react/-/react-1.0.5.tgz"
+  "version" "1.0.5"
+  dependencies:
+    "@storyblok/js" "^1.0.4"
+
 "@storyblok/storyblok-editable@^1.1.0":
   "integrity" "sha512-D/OtU2O2pjK+dZaTnWqyhlpz8jGnzZ+8DkZg7O+FTf/r5612RyO7jzRyEkS/opOyYuyFHtw1NwkSVCvnYURf1A=="
   "resolved" "https://registry.npmjs.org/@storyblok/storyblok-editable/-/storyblok-editable-1.1.0.tgz"
@@ -1688,13 +1702,6 @@
   "resolved" "https://registry.npmjs.org/punycode/-/punycode-2.1.1.tgz"
   "version" "2.1.1"
 
-"qs@^6.9.4":
-  "integrity" "sha512-wr7M2E0OFRfIfJZjKGieI8lBKb7fRCH4Fv5KNPEs7gJ8jadvotdsS08PzOKR7opXhZ/Xkjtt3WF9g38drmyRqQ=="
-  "resolved" "https://registry.npmjs.org/qs/-/qs-6.10.3.tgz"
-  "version" "6.10.3"
-  dependencies:
-    "side-channel" "^1.0.4"
-
 "queue-microtask@^1.2.2":
   "integrity" "sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A=="
   "resolved" "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
@@ -1724,7 +1731,7 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-"react@^16.8.0 || ^17.0.0", "react@17.0.2":
+"react@^16.8.0 || ^17.0.0", "react@>=16.0.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -1849,12 +1856,15 @@
   "resolved" "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"
   "version" "1.0.2"
 
-"storyblok-js-client@^4.1.6":
-  "integrity" "sha512-7TpXlbyBbNsKdvwR/fJO+mSySBOtCWLFE+8YwUmGF6ipOYFjVctUg60AhD1H5ljWg4wjFBMlqMZrq8/cdFNTxQ=="
-  "resolved" "https://registry.npmjs.org/storyblok-js-client/-/storyblok-js-client-4.1.6.tgz"
-  "version" "4.1.6"
-  dependencies:
-    "qs" "^6.9.4"
+"storyblok-js-client@^4.1.6", "storyblok-js-client@^4.2.0":
+  "integrity" "sha512-kdv7G0+0BsCzbVRjAnRC00GPRRWfP0YK0yE0gUj3waEc2ekwxV9iHQBR9cRxz3YYk/hLWn3zJg8lTTrQmzQsdg=="
+  "resolved" "https://registry.npmjs.org/storyblok-js-client/-/storyblok-js-client-4.3.1.tgz"
+  "version" "4.3.1"
+
+"storyblok-rich-text-react-renderer@^2.5.2":
+  "integrity" "sha512-JgTPUJsPmxhmkKpP6nNivaGiIP0Te0+HXNSDm4df6CWSCi+LSrfrYGh9OFx+Bla1UujWhdxCj9OpY3dXzbdv3w=="
+  "resolved" "https://registry.npmjs.org/storyblok-rich-text-react-renderer/-/storyblok-rich-text-react-renderer-2.5.2.tgz"
+  "version" "2.5.2"
 
 "string.prototype.matchall@^4.0.6":
   "integrity" "sha512-f48okCX7JiwVi1NXCVWcFnZgADDC/n2vePlQ/KUCNqCikLLilQvwjMO8+BHVKvgzH0JB0J9LEPgxOGT02RoETg=="

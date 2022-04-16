@@ -1,18 +1,17 @@
-import DynamicComponent from "../DynamicComponent";
-import { sbEditable } from "@storyblok/storyblok-editable";
+import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 
 const Section = ({ blok }) => (
   <div>
-    <section className="Section bg-purple-200 rounded md:mx-24 lg:mx-32 m-8 mt-0 p-4" {...sbEditable(blok)}>
+    <section className="Section bg-purple-200 rounded md:mx-24 lg:mx-32 m-8 mt-0 p-4" {...storyblokEditable(blok)}>
       <h1 className="font-bungee font-bold text-3xl text-center md:text-left">
         {blok.header}
       </h1>
       <div className={`grid grid-cols-${blok.cols ? blok.cols : '1'} md:grid-cols-${blok.cols_md ? blok.cols_md : '1'} lg:grid-cols-${blok.cols_lg ? blok.cols_lg : '1'} gap-2 md:gap-5 lg:gap-2 p-5`}>
-        {blok.blocks
+        { blok.blocks
         ? blok.blocks.map((blok) => (
-            <DynamicComponent blok={blok} key={blok._uid} />
+            <StoryblokComponent blok={blok} key={blok._uid} />
           ))
-        : null}
+        : null} 
       </div>
     </section>
   </div>

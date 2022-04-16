@@ -1,9 +1,9 @@
-import DynamicComponent from "../DynamicComponent";
+import { StoryblokComponent } from "@storyblok/react";
 
 const Collection = ({ blok }) => (
     blok.blocks
       ? blok.blocks.map((blok) => (
-          <DynamicComponent blok={blok} key={blok._uid} />
+          <StoryblokComponent blok={blok} key={blok._uid} />
         ))
       : null
 );

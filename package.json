@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@storyblok/react": "^1.0.5",
     "@storyblok/storyblok-editable": "^1.1.0",
     "axios": "^0.21.4",
     "chart.js": "^3.7.1",
@@ -16,7 +17,8 @@
     "react": "17.0.2",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "17.0.2",
-    "storyblok-js-client": "^4.1.6"
+    "storyblok-js-client": "^4.1.6",
+    "storyblok-rich-text-react-renderer": "^2.5.2"
   },
   "devDependencies": {
     "@faker-js/faker": "^6.0.0",
