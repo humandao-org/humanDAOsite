@@ -11,8 +11,7 @@ class TeachingModuleText extends React.Component {
   }
 
   moveToNextElement = () => {
-    this.state.visibleIndex = this.state.visibleIndex + 1 
-    // this.setState({ visibleIndex: this.state.visibleIndex + 1 }) 
+    this.setState({ visibleIndex: this.state.visibleIndex + 1 }) 
   }
 
   render() {
