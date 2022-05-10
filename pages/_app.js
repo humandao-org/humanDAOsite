@@ -9,11 +9,13 @@ import AssetList from "../components/Dashboard/AssetList";
 import Question from "../components/Education/Question"
 import TeachingModule from "../components/Education/TeachingModule"
 import TeachingModuleText from "../components/Education/TeachingModuleText";
+import Staking from "../components/Dashboard/Staking";
 
 const components = {
   collection: Collection,
   milestones: Milestones,
   token: Token,
+  staking: Staking,
   asset_list: AssetList,
   section: Section,
   page: Page,

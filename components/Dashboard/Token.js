@@ -49,17 +49,17 @@ class Token extends React.Component {
       tokenStats : { 
         labels: [], // ['2022-03-23', '2022-03-24', '2022-03-25', '2022-03-26', '2022-03-27', '2022-03-28', '2022-03-29'],      
         datasets: [{
-          label: '$HDAO - 5 days',
+          label: '$HDAO - 30 days',
           data: [], // 0.23, 0.25, 0.16, 0.18, 0.22, 0.30, 0.28],
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
         }]
       },
       tokenHolders : { 
-        labels: ['Nov 2021', 'Dec 2021', 'Jan 2022', 'Feb 2022', 'March 2022', 'April 2022'],      
+        labels: ['Dec 2021', 'Jan 2022', 'Feb 2022', 'March 2022', 'April 2022', 'May 2022'],      
         datasets: [{
           label: 'Number of holders - 6 months',
-          data: [543, 764, 987, 1284, 1397, 1412],
+          data: [764, 987, 1284, 1397, 1412, 1350],
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
         }]
