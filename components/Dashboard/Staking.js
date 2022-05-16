@@ -58,7 +58,7 @@ const Staking = ({ blok }) => (
         </div>
       </div>
       <p className="italic">{blok.note}</p>
-      <p className="text-lg">Stake HDAO here: <a className="text-white font-bold" href="{blok.url}" target="_blank">humanDAO staking platform.</a></p>
+      <p className="text-lg">Stake HDAO here: <a className="text-white font-bold" href={blok.url} rel="noreferrer" target="_blank">humanDAO staking platform.</a></p>
     </div>
   </div>
 );
