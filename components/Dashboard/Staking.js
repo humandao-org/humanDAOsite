@@ -10,7 +10,7 @@ const Staking = ({ blok }) => (
         <div className="Card-2 bg-white rounded-md p-2 w-full md:inline-flex">
           <div className="md:ml-2 flex-col inline-flex">
             <p className="font-play uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl">
-              APR HDAO-ETH LP     
+              APR HDAO-USDC LP     
             </p>
             <p className="font-press-start font-bold text-lg sm:text-xl lg:text-3xl -tracking-24">
               {blok.lp_ethereum}
@@ -58,7 +58,7 @@ const Staking = ({ blok }) => (
         </div>
       </div>
       <p className="italic">{blok.note}</p>
-      <p className="text-lg">Stake HDAO here: <a className="text-white font-bold" href="{blok.url}" target="_blank">humanDAO staking platform.</a></p>
+      <p className="text-lg">Stake HDAO here: <a className="text-white font-bold" href={blok.url} rel="noreferrer" target="_blank">humanDAO staking platform.</a></p>
     </div>
   </div>
 );

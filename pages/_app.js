@@ -10,6 +10,7 @@ import Question from "../components/Education/Question"
 import TeachingModule from "../components/Education/TeachingModule"
 import TeachingModuleText from "../components/Education/TeachingModuleText";
 import Staking from "../components/Dashboard/Staking";
+import TextBlock from "../components/General/TextBlock";
 
 const components = {
   collection: Collection,
@@ -21,7 +22,8 @@ const components = {
   page: Page,
   question: Question,
   teaching_module: TeachingModule,
-  teaching_module_text: TeachingModuleText
+  teaching_module_text: TeachingModuleText,
+  text_block: TextBlock
 };
 
 storyblokInit({
