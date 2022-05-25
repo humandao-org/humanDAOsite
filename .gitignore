@@ -36,3 +36,4 @@ yarn-error.log*
 # vercel
 .vercel
 pages/dashboard_story.json
+package-lock.json.delete
