@@ -7,7 +7,7 @@ const Section = ({ blok }) => (
         {blok.header}
       </h1>)
       }
-      <div className={`grid gap-${blok.gap ? blok.gap : '2' } md:gap-${blok.gap_md ? blok.gap_md : '4' } lg:gap-${blok.gap_lg ? toString(blok.gap_lg) : '6' } grid-cols-${blok.cols ? blok.cols : '1'} md:grid-cols-${blok.cols_md ? blok.cols_md : '1'} lg:grid-cols-${blok.cols_lg ? blok.cols_lg : '1'} py-5`}>
+      <div className={`grid gap-${blok.gap || '2'} md:gap-${blok.gap_md || '3'} lg:gap-${blok.gap_lg || '4'} grid-cols-${blok.cols ? blok.cols : '1'} md:grid-cols-${blok.cols_md ? blok.cols_md : '1'} lg:grid-cols-${blok.cols_lg ? blok.cols_lg : '1'} py-5`}>
         { blok.blocks
         ? blok.blocks.map((blok) => (
             <StoryblokComponent blok={blok} key={blok._uid} />
