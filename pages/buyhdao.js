@@ -5,6 +5,10 @@ import { getStoryblokApi } from "@storyblok/react"
 import { ethers } from "ethers";
 import Web3Modal from "web3modal"
 import WalletConnectProvider from "@walletconnect/web3-provider"
+
+import { SwapWidget } from '@uniswap/widgets'
+import '@uniswap/widgets/fonts.css'
+
 // Infura endpoint
 const INFURA_ID = "1dc03bb35a274a3c918f23a0646bcd23"
 const jsonRpcEndpoint = `https://mainnet.infura.io/v3/${INFURA_ID}`
@@ -54,9 +58,6 @@ export default function BuyHDAO({ story }) {
     const accounts = await library.listAccounts();
     const network = await library.getNetwork();
 
-    // await web3Modal.toggleModal();
-    // const provider = new ethers.providers.Web3Provider(instance);
-    // console.log(_provider)
     setProvider(provider)
     setLibrary(library);
 
@@ -65,46 +66,7 @@ export default function BuyHDAO({ story }) {
 
     console.log('this is run once?')
 
-    // Subscribe to accounts change
-    /*
-    provider.on("accountsChanged", (accounts) => {
-      if (accounts) setAccount(accounts[0]);
-      console.log(accounts);
-    });
-    */
-
-    // Subscribe to chainId change for ethers
-    /*
-    provider.on("network", (newnetwork, oldnetwork) => {
-      console.log(newnetwork);
-      console.log(oldnetwork)
-    });
-    */
-
-    /*
-    provider.on("chainChanged", async (what) => {
-      console.log('chain changed', what)
-      // setChainId(what);
-      const network = await library.getNetwork();
-      setChainId(network.chainId);
-    });
-    */
-
-    /*
-    // Subscribe to _provider connection
-    provider.on("connect", (info) => {
-      console.log(info);
-    });
-    */
-
-    /*
-    // Subscribe to _provider disconnection
-    provider.on("disconnect", ({ error: { code, message }}) => {
-      console.log(error);
-    });
-    */
-    // console.log(constProvider)
-    const signer = library.getSigner();
+    // const signer = library.getSigner();
   }
   
   useEffect(() => {
@@ -155,7 +117,7 @@ export default function BuyHDAO({ story }) {
   }, [provider]);
 
 
-  // console.log(story)
+  console.log(story)
   // className={'styles.container'}
   return (
     <div className={`bg-fixed pt-20 pb-20 text-${story.content.text_color ? story.content.text_color : 'black'}`} style={
@@ -186,22 +148,19 @@ export default function BuyHDAO({ story }) {
         ) }
       </div>
       <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 mb-8" {...storyblokEditable(story.content)}>{story.content.header}</h1>
+      <StoryblokComponent blok={story.content} /> 
+    </div>
+  )
+}
+
+/*
       <div className="Uniswap flex justify-center mb-8">
         <SwapWidget
           provider={provider}
           jsonRpcEndpoint={jsonRpcEndpoint}
         />
       </div>
-      <StoryblokComponent blok={story.content} /> 
-    </div>
-  )
-}
-
-import { SwapWidget } from '@uniswap/widgets'
-import '@uniswap/widgets/fonts.css'
-
-// Web3 provider as described in the requirements above
-// import { provider } from './your/provider'
+*/
 
 
 export async function getStaticProps({ preview = false }) {
