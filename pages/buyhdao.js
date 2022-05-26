@@ -148,25 +148,16 @@ export default function BuyHDAO({ story }) {
         ) }
       </div>
       <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 mb-8" {...storyblokEditable(story.content)}>{story.content.header}</h1>
-      <StoryblokComponent blok={story.content} /> 
-    </div>
-  )
-}
-
-/*
-  @walletconnect/web3-provider
-  web3modal
-  ethers
-  uniswap-widget
-  
       <div className="Uniswap flex justify-center mb-8">
         <SwapWidget
           provider={provider}
           jsonRpcEndpoint={jsonRpcEndpoint}
         />
       </div>
-*/
-
+      <StoryblokComponent blok={story.content} /> 
+    </div>
+  )
+}
 
 export async function getStaticProps({ preview = false }) {
   // home is the default slug for the homepage in Storyblok
