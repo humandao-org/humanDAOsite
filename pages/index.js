@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css"
 import Link from 'next/link'
 
+/*
 import { CeramicClient } from '@ceramicnetwork/http-client'
 import { DID } from 'dids'
 import { getResolver as getKeyResolver } from 'key-did-resolver'
@@ -49,6 +50,7 @@ async function tryAuthenticate() {
   }
   await authenticateWithEthereum(window.ethereum)
 }
+*/
 
 
 import {
@@ -113,8 +115,6 @@ export default function Home({ story }) {
           </div>
         </div>
       </div>
-
-      <button type="button" onClick={tryAuthenticate}>Connect</button>
     </div>);
 }
 
