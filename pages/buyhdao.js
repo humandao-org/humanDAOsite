@@ -154,6 +154,11 @@ export default function BuyHDAO({ story }) {
 }
 
 /*
+  @walletconnect/web3-provider
+  web3modal
+  ethers
+  uniswap-widget
+  
       <div className="Uniswap flex justify-center mb-8">
         <SwapWidget
           provider={provider}
