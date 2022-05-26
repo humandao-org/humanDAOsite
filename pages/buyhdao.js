@@ -24,7 +24,7 @@ export default function BuyHDAO({ story }) {
 
   const connect = async () => {
     const providerOptions = {
-      // Example with injected providers
+
       injected: {
         display: {
           name: "Injected",
@@ -32,7 +32,7 @@ export default function BuyHDAO({ story }) {
         },
         package: null
       },
-      // Example with WalletConnect provider
+
       walletconnect: {
         package: WalletConnectProvider,
         options: {
@@ -76,7 +76,6 @@ export default function BuyHDAO({ story }) {
   }, [])
 
   useEffect(() => {
-    console.log('user effect run')
 
     const refreshState = () => {
       setAccount();
@@ -116,8 +115,6 @@ export default function BuyHDAO({ story }) {
     }
   }, [provider]);
 
-
-  console.log(story)
   // className={'styles.container'}
   return (
     <div className={`bg-fixed pt-20 pb-20 text-${story.content.text_color ? story.content.text_color : 'black'}`} style={
