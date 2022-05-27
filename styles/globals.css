@@ -23,7 +23,6 @@
   }
   ol {
     @apply list-decimal ml-6 my-2;
-
   }
 }
 @tailwind components;
@@ -48,3 +47,12 @@ input[type="radio"]:checked + label{
  color: #3490DC;
 }
 
+section img {
+  width: 90%;
+  /* transform: translateX(51%); */
+  margin-left: 5%;
+}
+
+section code {
+  font-size: small;
+}
