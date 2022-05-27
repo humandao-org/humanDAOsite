@@ -47,12 +47,11 @@ input[type="radio"]:checked + label{
  color: #3490DC;
 }
 
-section img {
+.Card img {
   width: 90%;
-  /* transform: translateX(51%); */
   margin-left: 5%;
 }
 
-section code {
+.Card code {
   font-size: small;
 }

@@ -1,7 +1,7 @@
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 
 const Card = ({ blok }) => (
-  <div className="flex justify-center" {...storyblokEditable(blok)}>
+  <div className="Card flex justify-center" {...storyblokEditable(blok)}>
     <div 
       className={`block rounded-lg shadow-lg text-${blok.text_align || 'left'} w-${blok.width || 'auto'} ${blok.max_width || 'max-w-none'}`}
       style={Object.assign({}, blok.bg_color && { backgroundColor: blok.bg_color })}

@@ -11,7 +11,6 @@ export default function Dashboard({ story }) {
   // const story = props.story
   story = useStoryblokState(story);
   // console.log(story)
-  // className={'styles.container'}
   return (
     <div className="bg-fixed pt-20 pb-20" style={{ height: '100%', backgroundImage: `url(${story.content.bg_image.filename})` }}> 
       <Head>
