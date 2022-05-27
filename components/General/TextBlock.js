@@ -41,8 +41,8 @@ class TextBlock extends React.Component {
   render() {
     return (
       <div {...storyblokEditable(this.props.blok)}>
-        { this.props.blok.headline ? (<h2 className="font-bungee font-bold mt-2 text-center md:text-left">{this.props.blok.headline}</h2>) : null }
-        <div className="pt-4 pb-8">{render(this.props.blok.text)}</div>
+        { this.props.blok.headline ? (<h2 className="font-bungee font-bold">{this.props.blok.headline}</h2>) : null }
+        <div className={`pt-${this.props.blok.padding || '0'}`}>{render(this.props.blok.text)}</div>
       </div>
     )
   }

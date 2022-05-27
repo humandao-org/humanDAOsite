@@ -22,6 +22,75 @@ export default function BuyHDAO({ story }) {
   const [account, setAccount] = useState();
   const [web3modal, setWeb3Modal] = useState();
 
+  const MY_TOKEN_LIST = [
+    {
+      "name": "Dai Stablecoin",
+      "address": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+      "symbol": "DAI",
+      "decimals": 18,
+      "chainId": 1,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png"
+    },
+    {
+      "name": "Tether USD",
+      "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+      "symbol": "USDT",
+      "decimals": 6,
+      "chainId": 1,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
+    },
+    {
+      "name": "USD Coin",
+      "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "symbol": "USDC",
+      "decimals": 6,
+      "chainId": 1,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+    },
+    {
+      "name": "HDAO Token",
+      "address": "0xdac657ffd44a3b9d8aba8749830bf14beb66ff2d",
+      "symbol": "HDAO",
+      "decimals": 18,
+      "chainId": 1,
+      "logoURI": "https://assets.coingecko.com/coins/images/21138/small/Untitled-2.jpg?1645163749"
+    },
+    {
+      "name": "Wrapped Ether",
+      "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "symbol": "WETH",
+      "decimals": 18,
+      "chainId": 1,
+      "logoURI": "https://assets.coingecko.com/coins/images/2518/small/weth.png?1628852295"
+    },
+    {
+      "name": "ChainLink Token",
+      "address": "0x514910771AF9Ca656af840dff83E8264EcF986CA",
+      "symbol": "LINK",
+      "decimals": 18,
+      "chainId": 1,
+      "logoURI": "https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png?1547034700"
+    },
+    {
+      "name": "Wrapped Bitcoin",
+      "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "symbol": "WBTC",
+      "decimals": 18,
+      "chainId": 1,
+      "logoURI": "https://assets.coingecko.com/coins/images/7598/small/wrapped_bitcoin_wbtc.png?1548822744"
+    },
+    {
+      "name": "Binance USD",
+      "address": "0x4fabb145d64652a948d72533023f6e7a623c7c53",
+      "symbol": "BUSD",
+      "decimals": 18,
+      "chainId": 1,
+      "logoURI": "https://assets.coingecko.com/coins/images/9576/small/BUSD.png?1568947766"
+    },
+    
+  ]
+
+
   const connect = async () => {
     const providerOptions = {
 
@@ -145,10 +214,11 @@ export default function BuyHDAO({ story }) {
         ) }
       </div>
       <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 mb-8" {...storyblokEditable(story.content)}>{story.content.header}</h1>
-      <div className="Uniswap flex justify-center mb-8">
+      <div className="Uniswap flex justify-center">
         <SwapWidget
           provider={provider}
           jsonRpcEndpoint={jsonRpcEndpoint}
+          tokenList={MY_TOKEN_LIST}
         />
       </div>
       <StoryblokComponent blok={story.content} /> 

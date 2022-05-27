@@ -1,16 +1,17 @@
-import "../styles/globals.css";
-import { storyblokInit, apiPlugin } from "@storyblok/react";
-import Collection from "../components/General/Collection";
-import Milestones from "../components/Dashboard/Milestones";
-import Page from "../components/Page";
-import Token from "../components/Dashboard/Token";
-import Section from "../components/General/Section";
-import AssetList from "../components/Dashboard/AssetList";
+import "../styles/globals.css"
+import { storyblokInit, apiPlugin } from "@storyblok/react"
+import Collection from "../components/General/Collection"
+import Milestones from "../components/Dashboard/Milestones"
+import Page from "../components/Page"
+import Token from "../components/Dashboard/Token"
+import Section from "../components/General/Section"
+import AssetList from "../components/Dashboard/AssetList"
 import Question from "../components/Education/Question"
 import TeachingModule from "../components/Education/TeachingModule"
-import TeachingModuleText from "../components/Education/TeachingModuleText";
-import Staking from "../components/Dashboard/Staking";
-import TextBlock from "../components/General/TextBlock";
+import TeachingModuleText from "../components/Education/TeachingModuleText"
+import Staking from "../components/Dashboard/Staking"
+import TextBlock from "../components/General/TextBlock"
+import Card from "../components/General/Card"
 
 const components = {
   collection: Collection,
@@ -23,7 +24,8 @@ const components = {
   question: Question,
   teaching_module: TeachingModule,
   teaching_module_text: TeachingModuleText,
-  text_block: TextBlock
+  text_block: TextBlock,
+  card: Card
 };
 
 storyblokInit({

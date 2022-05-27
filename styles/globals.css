@@ -1,13 +1,19 @@
 @tailwind base;
 @layer base {
   h1 {
-    @apply text-2xl;
+    @apply text-2xl font-bungee font-bold
   }
   h2 {
-    @apply text-xl;
+    @apply text-xl font-bungee font-bold
   }
   h3 {
-    @apply text-lg;
+    @apply text-lg font-bungee
+  }
+  h4 {
+    @apply text-base font-bungee
+  }
+  h5 {
+    @apply text-sm font-bungee
   }
   a {
     @apply text-blue-600 underline;

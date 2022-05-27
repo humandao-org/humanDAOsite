@@ -8,6 +8,31 @@ module.exports = {
     {
       pattern: /bg-(red|green|blue)-(100|200|300)/,
     },
+    {
+      pattern: /max-w-.+/,
+    },
+    {
+      pattern: /text-[left|right|center|justify]/,
+    },
+    {
+      pattern: /p-\d+/,
+      variants: ['sm', 'lg', 'md'],
+    },
+    {
+      pattern: /w-.+/,
+    },
+    {
+      pattern: /py-\d+/,
+      variants: ['sm', 'lg', 'md'],
+    },
+    {
+      pattern: /pt-\d+/,
+      variants: ['sm', 'lg', 'md'],
+    },
+    {
+      pattern: /pb-\d+/,
+      variants: ['sm', 'lg', 'md'],
+    },
     { 
       pattern: /grid-cols-.+/,
       variants: ['lg', 'md'],
