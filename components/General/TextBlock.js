@@ -1,6 +1,7 @@
 import React from "react";
 import { storyblokEditable } from "@storyblok/react";
 import { render, NODE_UL, NODE_LI } from 'storyblok-rich-text-react-renderer';
+import styles from "/styles/TextBlock.module.css"
 
 /*
 const MySchema = require('storyblok-js-client/dist/schema')
@@ -42,7 +43,7 @@ class TextBlock extends React.Component {
     return (
       <div {...storyblokEditable(this.props.blok)}>
         { this.props.blok.headline ? (<h2 className="font-bungee font-bold">{this.props.blok.headline}</h2>) : null }
-        <div className={`pt-${this.props.blok.padding || '0'}`}>{render(this.props.blok.text)}</div>
+        <div className={`${styles.narrow_solve} pt-${this.props.blok.padding || '0'}`}>{render(this.props.blok.text)}</div>
       </div>
     )
   }

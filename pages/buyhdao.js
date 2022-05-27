@@ -5,7 +5,6 @@ import { getStoryblokApi } from "@storyblok/react"
 import { ethers } from "ethers";
 import Web3Modal from "web3modal"
 import WalletConnectProvider from "@walletconnect/web3-provider"
-import styles from "../styles/TextBlock.module.css"
 
 import { SwapWidget } from '@uniswap/widgets'
 import '@uniswap/widgets/fonts.css'
@@ -187,7 +186,7 @@ export default function BuyHDAO({ story }) {
 
   // className={'styles.container'}
   return (
-    <div className={`Card ${styles.container} bg-fixed pt-12 pb-20 text-${story.content.text_color ? story.content.text_color : 'black'}`} style={
+    <div className={`bg-fixed pt-12 pb-20 text-${story.content.text_color ? story.content.text_color : 'black'}`} style={
         Object.assign(
           {}, 
           story.content.bg_image && { minHeight: '100vh', backgroundImage: `url(${story.content.bg_image.filename})` }, 
