@@ -186,7 +186,7 @@ export default function BuyHDAO({ story }) {
 
   // className={'styles.container'}
   return (
-    <div className={`bg-fixed pt-20 pb-20 text-${story.content.text_color ? story.content.text_color : 'black'}`} style={
+    <div className={`bg-fixed pt-12 pb-20 text-${story.content.text_color ? story.content.text_color : 'black'}`} style={
         Object.assign(
           {}, 
           story.content.bg_image && { minHeight: '100vh', backgroundImage: `url(${story.content.bg_image.filename})` }, 
@@ -197,7 +197,7 @@ export default function BuyHDAO({ story }) {
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
       </Head>
 
-      <div className="md:mx-24 lg:mx-32 m-8" style={{ position: 'absolute', top: 0, right: 0 }}>
+      <div className="m-6 -mt-6 md:mr-24 lg:mr-32 text-right">
         { (!account) && (<button type="button"
           className="text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 m-1 py-2.5 focus:outline-none disabled:opacity-60" 
           onClick={connect}
