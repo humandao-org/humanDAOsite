@@ -219,7 +219,9 @@ export default function BuyHDAO({ story }) {
           provider={provider}
           jsonRpcEndpoint={jsonRpcEndpoint}
           tokenList={MY_TOKEN_LIST}
-        />
+          defaultInputTokenAddress={'NATIVE'}
+          defaultOutputTokenAddress={'0xdac657ffd44a3b9d8aba8749830bf14beb66ff2d'} // HDAO contract address
+      />
       </div>
       <StoryblokComponent blok={story.content} /> 
     </div>
