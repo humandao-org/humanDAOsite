@@ -138,7 +138,7 @@ export default function Ambassador({ story }) {
             <p
               className="mb-7 text-center text-xl font-semibold -tracking-default text-dark"
             >
-              Here's your ambassador link!
+              Here&#39;s your ambassador link!
             </p>
             <div className="mx-auto w-full max-w-[597px] space-y-7 sm:space-y-9">
               <input
