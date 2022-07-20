@@ -21,8 +21,10 @@
     "react-chartjs-2": "^4.0.1",
     "react-dom": "17.0.2",
     "react-redux": "^7.2.8",
+    "react-router": "^6.3.0",
     "storyblok-js-client": "^4.1.6",
     "storyblok-rich-text-react-renderer": "^2.5.2",
+    "tailwindcss-animatecss": "^1.0.7",
     "web3modal": "^1.9.7"
   },
   "devDependencies": {

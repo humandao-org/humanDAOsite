@@ -46,3 +46,13 @@ box-shadow: 0px 0px 0px 2px white inset;
 input[type="radio"]:checked + label{
  color: #3490DC;
 }
+
+.nav-list {
+  @apply pointer-events-none invisible absolute top-full left-0 right-0 z-40 h-0 w-full overflow-hidden bg-[#F8F3F3] px-8 opacity-0 transition-all duration-300
+  md:pointer-events-auto md:visible md:static md:!h-auto md:w-auto md:bg-transparent md:px-0 md:opacity-100;
+}
+
+.nav-list[open] {
+  @apply pointer-events-auto visible py-8 opacity-100 md:py-0;
+}
+

@@ -1,4 +1,6 @@
 import "../styles/globals.css"
+import "../public/assets/fonts/stylesheet.css"
+import "../public/assets/theme/theme.css"
 import { storyblokInit, apiPlugin } from "@storyblok/react"
 import Collection from "../components/General/Collection"
 import Milestones from "../components/Dashboard/Milestones"
