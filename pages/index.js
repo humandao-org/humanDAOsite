@@ -33,9 +33,7 @@ export default function Ambassador({ story }) {
         <meta name="twitter:description" content="Support the underserved and get paid to help spread the word about this novel NFT project." />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="theme-color" content="#c5bcff" />
-        <link rel="icon" href="https://secureservercdn.net/198.71.233.86/cb6.757.myftpupload.com/wp-content/uploads/2021/12/HDAO-logo-transp-60x60-1.png?time=1651092601" sizes="32x32" />
-        <link rel="icon" href="https://secureservercdn.net/198.71.233.86/cb6.757.myftpupload.com/wp-content/uploads/2021/12/HDAO-logo-transp-60x60-1.png?time=1651092601" sizes="192x192" />
-        <link rel="apple-touch-icon" href="https://secureservercdn.net/198.71.233.86/cb6.757.myftpupload.com/wp-content/uploads/2021/12/HDAO-logo-transp-60x60-1.png?time=1651092601" />
+        <link rel="icon" href="/hdao-logo.ico" />
         <title>Ambassador Program</title>
       </Head>
       <div className="relative z-10 mx-auto w-full">
@@ -194,7 +192,7 @@ export default function Ambassador({ story }) {
             <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
               <h3 className="mb-2 text-3.5xl font-bold leading-none text-black">Got questions about PA NFTs?</h3>
               <Link href="mailto:hdao.helpdesk@gmail.com" target="_blank" rel="noreferrer">
-                <a className="mx-auto mt-[72px] block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Contact us</a>
+                <a className="mx-auto mt-12 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Contact us</a>
               </Link>
             </div>
           </div>
