@@ -107,7 +107,7 @@ export default function Ambassador({ story }) {
                 <input
                   id="affiliateURL"
                   type="text"
-                  defaultValue={"https://nft.humandao.org/?affiliate=" + query.id}
+                  defaultValue={"https://nft.humandao.org/?ambassador=" + query.id}
                   readOnly
                   className="block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4"
                 />
