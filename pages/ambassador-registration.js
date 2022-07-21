@@ -63,14 +63,21 @@ export default function Ambassador({ story }) {
   return (
     <div className="bg-[#F8F3F3]">
       <div className="relative z-10 mx-auto w-full overflow-hidden">
-        <nav className="sticky top-0 z-50  px-6 py-6">
+        <nav className="sticky z-20 top-0 px-6 py-6 bg-[#F8F3F3]">
           <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between gap-5">
-            <a href="https://ambassador.humandao.org" className="block w-full max-w-[250px] lg:max-w-[300px]">
-              <img src="assets/images/logo-main.svg" alt="Logo main" className="block h-auto w-full object-contain" />
+            <a className="block w-full max-w-[250px] lg:max-w-[300px]">
+              <object type="image/svg+xml" data="assets/images/logo-main.svg" alt="Logo main" className="w-full h-auto object-contain">
+                svg-animation
+              </object>
             </a>
 
             <div className="nav-list">
               <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
+                <li>
+                  <a href="https://ambassador.humandao.org" className="text-[15px] font-medium text-black hover:underline">
+                    Home
+                  </a>
+                </li>
                 <li>
                   <a href="https://nft.humandao.org/" className="text-[15px] font-medium text-black hover:underline">
                     PANFT site
@@ -169,7 +176,7 @@ export default function Ambassador({ story }) {
                 </div>
                 <div className="pt-2.5">
                   <button type="submit" className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl">
-                    Get your affiliate link
+                    Get your Ambassador link
                   </button>
                 </div>
               </form>
