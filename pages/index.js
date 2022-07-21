@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 
 import { useStoryblokState, getStoryblokApi, StoryblokComponent } from "@storyblok/react";
 
@@ -92,7 +93,7 @@ export default function Ambassador({ story }) {
               </Link>
             </div>
             <div className="w-full max-w-[552px]">
-              <img src="assets/images/panft-ambassador.png" alt="Panft Ambassador" className="h-auto w-full origin-left object-contain lg:scale-125 lg:transform" />
+              <Image src="/assets/images/panft-ambassador.png" layout="fill" objectFit="cover" alt="Panft Ambassador" className="h-auto w-full max-w-[50px] origin-left object-contain" />
             </div>
           </div>
         </header>
@@ -120,9 +121,7 @@ export default function Ambassador({ story }) {
             </div>
           </div>
           <Link href="/ambassador-registration">
-            <a href="/ambassador-registration" className="mx-auto mt-[72px] block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">
-              Become an Ambassador
-            </a>
+            <a className="mx-auto mt-[72px] block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Become an Ambassador</a>
           </Link>
         </section>
 
@@ -194,14 +193,9 @@ export default function Ambassador({ story }) {
           <div className="mx-auto flex w-full max-w-[900px] flex-wrap px-5">
             <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
               <h3 className="mb-2 text-3.5xl font-bold leading-none text-black">Got questions about PA NFTs?</h3>
-              <a
-                href="mailto:hdao.helpdesk@gmail.com"
-                target="_blank"
-                rel="noreferrer"
-                className="mx-auto mt-[72px] block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl"
-              >
-                Contact us
-              </a>
+              <Link href="mailto:hdao.helpdesk@gmail.com" target="_blank" rel="noreferrer">
+                <a className="mx-auto mt-[72px] block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Contact us</a>
+              </Link>
             </div>
           </div>
         </section>
