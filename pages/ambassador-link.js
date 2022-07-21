@@ -47,13 +47,13 @@ export default function Ambassador({ story }) {
   return (
     <div className="bg-[#F8F3F3]">
       <div className="relative z-10 mx-auto w-full overflow-hidden">
-        <nav className="relative z-50 px-6 py-6">
+        <nav className="sticky top-0 z-20 px-6 py-6">
           <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between gap-5">
             <a href="https://ambassador.humandao.org" className="block w-full max-w-[250px] lg:max-w-[300px]">
               <img src="assets/images/logo-main.svg" alt="Logo main" className="block h-auto w-full object-contain" />
             </a>
 
-            <div className="nav-list sticky top-0 z-20">
+            <div className="nav-list">
               <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
                 <li>
                   <a href="https://nft.humandao.org/" className="text-[15px] font-medium text-black hover:underline">
@@ -61,7 +61,7 @@ export default function Ambassador({ story }) {
                   </a>
                 </li>
                 <li>
-                  <a href="#faqs" className="text-[15px] font-medium text-black hover:underline">
+                  <a href="https://ambassador.humandao.org/#faqs" className="text-[15px] font-medium text-black hover:underline">
                     FAQs
                   </a>
                 </li>

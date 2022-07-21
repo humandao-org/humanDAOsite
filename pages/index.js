@@ -24,14 +24,13 @@ export default function Ambassador({ story }) {
   return (
     <div className="bg-[#F8F3F3]">
       <div className="relative z-10 mx-auto w-full overflow-hidden">
-        <nav className="relative z-50 px-6 py-6">
+        <nav className="sticky top-0 z-20 px-6 py-6">
           <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between gap-5">
             <a href="https://ambassador.humandao.org" className="block w-full max-w-[250px] lg:max-w-[300px]">
-              <img src="assets/images/logo-main.svg" alt="Logo main" className="block h-auto w-full object-contain" />
+              <img src="assets/images/logo-main.svg" alt="Logo main" className="w-full h-auto object-contain" />
             </a>
-            <p className="font-bungee text-base font-bold">Pocket Assistant NFT</p>
 
-            <div className="nav-list sticky top-0 z-20">
+            <div className="nav-list">
               <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
                 <li>
                   <a href="https://nft.humandao.org" className="text-[15px] font-medium text-black hover:underline">
@@ -39,9 +38,9 @@ export default function Ambassador({ story }) {
                   </a>
                 </li>
                 <li>
-                  <a href="#faqs" className="text-[15px] font-medium text-black hover:underline">
-                    FAQs
-                  </a>
+                  <Link href="#faqs" className="text-[15px] font-medium text-black hover:underline">
+                    <a>FAQs</a>
+                  </Link>
                 </li>
                 <li className="mx-auto md:mx-0">
                   <Link href="/ambassador-registration">
@@ -110,7 +109,7 @@ export default function Ambassador({ story }) {
           </Link>
         </section>
 
-        <section className="faqs px-5 pb-40 md:pb-96">
+        <section id="faqs" className="faqs px-5 pb-40 md:pb-96">
           <h2 className="mb-14 text-center text-3.5xl font-extrabold leading-none text-primary md:mb-28 md:text-5xl">FAQs</h2>
 
           <div className="mx-auto w-full max-w-[870px] space-y-12 md:space-y-20">
