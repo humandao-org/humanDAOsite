@@ -160,7 +160,7 @@ export default function Ambassador({ story }) {
               </div>
             </div>
 
-            <Link href="/ambassadors">
+            <Link href="/">
               <a
                 className="absolute bottom-4 left-1/2 -translate-x-1/2 transform text-sm font-semibold -tracking-default text-dark hover:underline"
                 >Return to homepage</a
