@@ -139,10 +139,11 @@ export default function Ambassador({ story }) {
               </p>
             </div>
           </div>
-
-          <a href="#"
-            className="mx-auto mt-[72px] block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Become
-            an ambassador</a>
+          <Link href="/ambassador-registration">
+            <a href="#"
+              className="mx-auto mt-[72px] block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Become
+              an ambassador</a>
+          </Link>
         </section>
 
         <section className="px-5 pb-40 md:pb-96">
