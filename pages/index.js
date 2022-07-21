@@ -33,7 +33,7 @@ export default function Ambassador({ story }) {
         <meta name="twitter:description" content="Support the underserved and get paid to help spread the word about this novel NFT project." />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="theme-color" content="#c5bcff" />
-        <link rel="icon" href="/hdao-logo.ico" />
+        <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
         <title>Ambassador Program</title>
       </Head>
       <div className="relative z-10 mx-auto w-full">
