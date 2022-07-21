@@ -93,7 +93,7 @@ export default function Ambassador({ story }) {
               </Link>
             </div>
             <div className="w-full max-w-[552px]">
-              <Image src="/assets/images/panft-ambassador.png" layout="fill" objectFit="cover" alt="Panft Ambassador" className="h-auto w-full max-w-[50px] origin-left object-contain" />
+              <img src="assets/images/panft-ambassador.png" alt="Panft Ambassador" className="h-auto w-full origin-left object-contain lg:scale-125 lg:transform" />
             </div>
           </div>
         </header>
