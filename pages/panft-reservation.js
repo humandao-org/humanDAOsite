@@ -10,11 +10,13 @@ export default function Reservation({ story }) {
       <Head>
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
       </Head>
-      <div className="relative z-10 mx-auto w-full overflow-hidden">
-        <nav className="relative z-50 px-6 py-6">
+      <div className="relative z-10 mx-auto w-full">
+        <nav className="sticky z-50 top-0 px-6 py-6 bg-[#F8F3F3]">
           <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between gap-5">
-            <a href="#" className="block w-full max-w-[250px] lg:max-w-[300px]">
-              <img src="assets/images/logo-main.svg" alt="Logo main" className="block h-auto w-full object-contain" />
+            <a className="block w-full max-w-[250px] lg:max-w-[300px]">
+              <object type="image/svg+xml" data="assets/images/logo-main.svg" alt="Logo main" className="w-full h-auto object-contain">
+                svg-animation
+              </object>
             </a>
 
             <Link href="/">
@@ -28,13 +30,8 @@ export default function Reservation({ story }) {
         <header className="py-24 px-5 lg:pt-52 lg:pb-80">
           <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center justify-between gap-16 lg:flex-row lg:gap-5">
             <div className="w-full max-w-[548px] text-center lg:text-left">
-              <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-primary sm:text-5xl md:text-6xl lg:mb-3">
-                Transform your <br className="hidden sm:inline-block" />
-                work with PANFT
-              </h1>
-              <p className="mb-7 text-xl font-semibold leading-[30px] tracking-[-0.54px] text-dark md:text-2xl lg:mb-3">
-                Our NFTs will connect our helpful and enthusiastic community of assistants with busy builders and DAOs big on vision but short on time.
-              </p>
+              <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-primary sm:text-5xl md:text-6xl lg:mb-3">Transform your work with PANFT</h1>
+              <p className="mb-7 text-xl font-semibold tracking-normal text-dark md:text-2xl lg:mb-3">Our NFTs will connect our helpful and enthusiastic community of assistants with busy builders and DAOs big on vision but short on time.</p>
               <a href="#" className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">
                 Reserve your spot
               </a>
@@ -93,10 +90,7 @@ export default function Reservation({ story }) {
           <div className="mx-auto w-full max-w-[870px] space-y-12 md:space-y-20">
             <div className="faq-box group" open>
               <button className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl">
-                <span>
-                  What is an Ambassador?
-                  <img src="assets/images/saluting-face.png" className="inline-block h-7 w-7 object-contain align-middle" alt="" />
-                </span>
+                <span>What is an Ambassador?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#111827" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -119,8 +113,8 @@ export default function Reservation({ story }) {
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>
                   The Ambassador shares their unique PANFT link with their community. Everyone that reserves AND ends up minting a PANFT will earn the Ambassador a % of the mint fee. REMEMBER, just because someone reserves a spot does NOT mean they
-                  ended up minting an NFT. People who place reservations can withdraw their funds and give up their spot in line any time before the 400th reservation and the subsequent mint.
-                  <strong>PANFT will only launch and be minted after receiving 400 reservations.</strong>
+                  ended up minting an NFT. People who place reservations can withdraw their funds and give up their spot in line any time before the 400th reservation and the subsequent mint.{" "}
+                  <b>PANFT will only launch and be minted after receiving 400 reservations.</b>
                 </p>
               </div>
             </div>
@@ -135,7 +129,7 @@ export default function Reservation({ story }) {
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>
                   For every reservation that ends up minting a PANFT through an Ambassador link,
-                  <strong>the Ambassador will receive 10% of the mint fee in the underlying token.</strong>
+                  <b>the Ambassador will receive 10% of the mint fee in the underlying token.</b>
                   For example, if the reservation/mint cost is 3,333 USDC, the referring Ambassadors will receive 333 USDC.
                 </p>
               </div>
@@ -186,7 +180,19 @@ export default function Reservation({ story }) {
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
-                <p>Keep in mind that we don&apos;t know when the mint and launch of PANFT will happen. It could be in 3 days, 3 weeks, or 3 months. It depends on reaching 400 reservations.</p>
+                <p>
+                  PANFT will be very limited. Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. From that point on there will be a daily
+                  auction for a single PANFT.
+                </p>
+                <p className="pt-4">
+                  <span className="font-bold">The genesis mint is the only time there will be a set fee for PANFTs. </span>The daily auctions will start at the genesis mint price ($3,333) and demand will dictate the winning bid.
+                </p>
+                <p className="pt-4">
+                  From the genesis mint we will test and improve the application and service before scaling up and offering more NFTs in batch auctions.{" "}
+                  <a className="underline hover:text-blue-400" href="https://forms.gle/D96hyhNDh9DDJAXa8" target="_blank" rel="noreferrer">
+                    Join the waitlist.
+                  </a>
+                </p>
               </div>
             </div>
 
@@ -205,7 +211,7 @@ export default function Reservation({ story }) {
                   <li>10% PANFT token holders</li>
                   <li>10% HDAO buyback</li>
                 </ul>
-                <p className="pt-6">That's right, PANFT holders will collect a portion of the fees 💪</p>
+                <p className="pt-6">That is right, PANFT holders will collect a portion of the fees 💪</p>
                 <p className="pt-6 italic">Additional PANFT features:</p>
                 <ul className="mx-auto list-disc pt-6 pl-4">
                   <li>Extremely limited</li>
