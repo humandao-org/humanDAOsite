@@ -27,9 +27,9 @@ export default function Ambassador({ story }) {
       <Head>
         <meta property="og:title" content="Ambassador Program" />
         <meta property="og:site_name" content="humanDAO" />
-        <meta property="og:image" content="https://res.cloudinary.com/daljbo1q0/image/upload/v1653621760/hdao-nft/hdao_nft_essxni.png" />
+        <meta property="og:image" content="https://res.cloudinary.com/daljbo1q0/image/upload/v1658430608/HDAO/thumbnail_fykmn2.png" />
         <meta name="description" content="Support the underserved and get paid to help spread the word about this novel NFT project." />
-        <meta name="twitter:image" content="https://res.cloudinary.com/daljbo1q0/image/upload/v1653621760/hdao-nft/hdao_nft_essxni.png" />
+        <meta name="twitter:image" content="https://res.cloudinary.com/daljbo1q0/image/upload/v1658430608/HDAO/thumbnail_fykmn2.png" />
         <meta name="twitter:description" content="Support the underserved and get paid to help spread the word about this novel NFT project." />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="theme-color" content="#c5bcff" />
