@@ -79,7 +79,7 @@ export default function Ambassador({ story }) {
               >
                 <li>
                   <a
-                    href="#"
+                    href="https://nft.humandao.org/"
                     className="text-[15px] font-medium text-black hover:underline"
                     >PANFT site</a
                   >
