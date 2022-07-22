@@ -39,8 +39,8 @@ export default function Reservation({ story }) {
                   </Link>
                 </li>
                 <li className="mx-auto md:mx-0">
-                  <Link href="/panft-reservation-deposit">
-                    <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Reserve PANFT</a>
+                  <Link href="https://ambassador.humandao.org">
+                    <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Become an Ambassador</a>
                   </Link>
                 </li>
               </ul>
