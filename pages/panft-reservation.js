@@ -65,9 +65,9 @@ export default function Reservation({ story }) {
             <div className="w-full max-w-[548px] text-center lg:text-left">
               <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-primary sm:text-5xl md:text-6xl lg:mb-3">Transform your work with PANFT</h1>
               <p className="mb-7 text-xl font-semibold tracking-normal text-dark md:text-2xl lg:mb-3">Our NFTs will connect our helpful and enthusiastic community of assistants with busy people and DAOs big on vision but short on time.</p>
-              <a href="/panft-reservation-deposit" className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">
-                Reserve your NFT
-              </a>
+              <Link href="/panft-reservation-deposit">
+                <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">Reserve your NFT</a>
+              </Link>
             </div>
             <div className="w-full max-w-[552px]">
               <img src="assets/images/reservation-banner.png" alt="Banner" className="h-auto w-full origin-left object-contain lg:scale-125 lg:transform" />
@@ -124,7 +124,7 @@ export default function Reservation({ story }) {
                       />
                     </svg>
                   </span>
-                  <span>Remember PANFT won't mint until 400 reservations are taken</span>
+                  <span>Remember PANFT won&#39;t mint until 400 reservations are taken</span>
                 </li>
                 <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-dark md:gap-6 md:text-2xl">
                   <span>
