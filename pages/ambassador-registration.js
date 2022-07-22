@@ -84,9 +84,14 @@ export default function Ambassador({ story }) {
                   </a>
                 </li>
                 <li>
-                  <a href="https://ambassador.humandao.org/#faqs" className="text-[15px] font-medium text-black hover:underline">
-                    FAQs
-                  </a>
+                  <Link href="https://ambassador.humandao.org/#faqs" className="text-[15px] font-medium">
+                    <a className="text-black hover:underline">FAQS</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="mailto:hdao.helpdesk@gmail.com" className="text-[15px] font-medium">
+                    <a className="text-black hover:underline">Contact</a>
+                  </Link>
                 </li>
                 {/* <li className="mx-auto md:mx-0">
                   <a href="#" className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">
