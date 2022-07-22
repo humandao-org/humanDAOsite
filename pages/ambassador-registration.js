@@ -1,10 +1,8 @@
 import Head from "next/head";
 import { useState } from "react";
-// import { Router } from "react-router-dom";
 import { registerAffiliate } from "../lib/affiliate";
-// import { useNavigate } from 'react-router-dom';
 import { useRouter } from "next/router";
-// import {createBrowserHistory} from 'history';
+import Link from "next/link";
 
 /*
 import {
