@@ -30,6 +30,15 @@ const components = {
   card: Card
 };
 
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
+
+
 storyblokInit({
   accessToken: "GWQZ8nicV4wbyoiQC8vUSgtt",
   use: [apiPlugin],
@@ -37,7 +46,11 @@ storyblokInit({
 });
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <RecoilRoot>
+      <Component {...pageProps} />
+    </RecoilRoot>
+  )
 }
 
 export default MyApp;

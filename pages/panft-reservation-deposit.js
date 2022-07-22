@@ -1,21 +1,159 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+//import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRecoilValue } from "recoil";
+import { ethers } from "ethers";
+import Web3Modal from "web3modal"
+import WalletConnectProvider from "@walletconnect/web3-provider"
+
+import { affiliateState } from "../state/atom";
+
+// Infura endpoint
+const INFURA_ID = "1dc03bb35a274a3c918f23a0646bcd23"
+const jsonRpcEndpoint = `https://mainnet.infura.io/v3/${INFURA_ID}`
 
 export default function Reservation({ story }) {
-  const { query } = useRouter();
+  const affiliate = useRecoilValue(affiliateState)
+  const [provider, setProvider] = useState()
+  const [library, setLibrary] = useState();
+  const [chainId, setChainId] = useState();
+  const [network, setNetwork] = useState();
+  const [account, setAccount] = useState();
+  const [web3modal, setWeb3Modal] = useState();
+
+  const connect = async () => {
+    const providerOptions = {
+
+      injected: {
+        display: {
+          name: "Injected",
+          description: "Connect with the provider in your Browser"
+        },
+        package: null
+      },
+
+      walletconnect: {
+        package: WalletConnectProvider,
+        options: {
+          infuraId: INFURA_ID, // required
+          rpc: {
+            1: `https://mainnet.infura.io/v3/${INFURA_ID}`,
+            137: "https://polygon-rpc.com",
+            80001: `https://polygon-mumbai.infura.io/v3/${INFURA_ID}`
+          }
+        }
+      }
+    }
+  
+    const web3Modal = new Web3Modal({
+      // network: "mainnet", // optional
+      cacheProvider: true, // optional
+      providerOptions // required
+    });
+    setWeb3Modal(web3Modal)
+
+    const provider = await web3Modal.connect();
+    const library = new ethers.providers.Web3Provider(provider);
+    const accounts = await library.listAccounts();
+    const network = await library.getNetwork();
+
+    setProvider(provider)
+    setLibrary(library);
+
+    if (accounts) setAccount(accounts[0]);
+    setChainId(network.chainId);
+
+    console.log('this is run once?')
+
+    // const signer = library.getSigner();
+  }
+  
+  useEffect(() => {
+    console.log('here')
+    if (web3modal && web3modal.cachedProvider) {
+        console.log('and here')
+        connect();
+    }
+  }, [])
+
+  useEffect(() => {
+
+    const refreshState = () => {
+      setAccount();
+      setChainId();
+      setNetwork("");
+      // setMessage("");
+      // setSignature("");
+      // setVerified(undefined);
+    };
+  
+    if (provider?.on) {
+      const handleAccountsChanged = (accounts) => {
+        console.log("accountsChanged", accounts);
+        if (accounts) setAccount(accounts[0]);
+      };
+
+      const handleChainChanged = (_hexChainId) => {
+        setChainId(parseInt(_hexChainId));
+      };
+
+      const handleDisconnect = (error) => {
+        web3modal.clearCachedProvider();
+        refreshState();
+      };
+
+      provider.on("accountsChanged", handleAccountsChanged);
+      provider.on("chainChanged", handleChainChanged);
+      provider.on("disconnect", handleDisconnect);
+
+      return () => {
+        if (provider.removeListener) {
+          provider.removeListener("accountsChanged", handleAccountsChanged);
+          provider.removeListener("chainChanged", handleChainChanged);
+          provider.removeListener("disconnect", handleDisconnect);
+        }
+      };
+    }
+  }, [provider]);
 
   return (
     <div className="bg-[#F8F3F3]">
-        <div className="relative z-10 mx-auto w-full overflow-hidden">
-            <nav className="relative z-50 px-6 py-6">
+        <div className="relative z-10 mx-auto w-full">
+            <nav className="sticky z-20 top-0 px-6 py-6 bg-[#F8F3F3]">
                 <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between gap-5">
-                    <a href="#" className="block w-full max-w-[250px] lg:max-w-[300px]"><img src="assets/images/logo-main.svg"
-                            alt="Logo main" className="block h-auto w-full object-contain" /></a>
-
-                    <a href="#"
-                        className="hidden rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary sm:block">Become
-                        an ambassador</a>
+                    <a className="block w-full max-w-[250px] lg:max-w-[300px]">
+                    <object type="image/svg+xml" data="assets/images/logo-main.svg" alt="Logo main" className="w-full h-auto object-contain">
+                        svg-animation
+                    </object>
+                    </a>
+                    <div className="nav-list">
+                        <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
+                            <li>
+                                <a href="#"
+                                    className="hidden rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary sm:block">Become
+                                    an ambassador</a>
+                            </li>
+                            <li>
+                                { (!account) && (<div
+                                    className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
+                                    onClick={connect}
+                                >Connect</div>)
+                                }
+                            </li>
+                            <li>
+                                { chainId && ( <div>
+                                    <div
+                                    className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
+                                    >{ chainId === 1 ? 'Ethereum' : chainId }</div>
+                                    <div
+                                    className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
+                                    >{ account ? (account.substring(0,4) + '...'+ account.substring(account.length-4)) : 'No wallet connected'}</div>
+                                </div>
+                                ) }
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
 

@@ -1,9 +1,23 @@
 import Head from "next/head";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+
+import { affiliateState } from "../state/atom";
 
 export default function Reservation({ story }) {
-  const { query } = useRouter();
+  // const { query } = useRouter();
+  const affiliate = useRecoilValue(affiliateState)
+  const setAffiliate = useSetRecoilState(affiliateState)
+
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(window.location.search)
+    const affiliateID = urlSearchParams.get('affiliate')
+    setAffiliate((oldData) => ({
+      affiliateId: affiliateID
+    }))
+  }, [])
 
   return (
     <div className="bg-[#F8F3F3]">
@@ -19,11 +33,9 @@ export default function Reservation({ story }) {
               </object>
             </a>
 
-            <Link href="/">
-              <a href="#" className="hidden rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary sm:block">
-                Become an ambassador
-              </a>
-            </Link>
+            <a href="#" className="hidden rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary sm:block">
+              Become an ambassador
+            </a>
           </div>
         </nav>
 
@@ -32,9 +44,11 @@ export default function Reservation({ story }) {
             <div className="w-full max-w-[548px] text-center lg:text-left">
               <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-primary sm:text-5xl md:text-6xl lg:mb-3">Transform your work with PANFT</h1>
               <p className="mb-7 text-xl font-semibold tracking-normal text-dark md:text-2xl lg:mb-3">Our NFTs will connect our helpful and enthusiastic community of assistants with busy builders and DAOs big on vision but short on time.</p>
-              <a href="#" className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">
-                Reserve your spot
-              </a>
+              <Link href="/panft-reservation-deposit">
+                <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">
+                  Reserve your spot
+                </a>
+              </Link>
             </div>
             <div className="w-full max-w-[552px]">
               <img src="assets/images/reservation-banner.png" alt="Banner" className="h-auto w-full origin-left object-contain lg:scale-125 lg:transform" />
