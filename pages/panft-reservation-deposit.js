@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
 import { ethers } from "ethers";
-import Web3Modal from "web3modal"
-import WalletConnectProvider from "@walletconnect/web3-provider"
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { affiliateState } from "../state/atom";
 
 // Infura endpoint
-const INFURA_ID = "1dc03bb35a274a3c918f23a0646bcd23"
-const jsonRpcEndpoint = `https://mainnet.infura.io/v3/${INFURA_ID}`
+const INFURA_ID = "1dc03bb35a274a3c918f23a0646bcd23";
+const jsonRpcEndpoint = `https://mainnet.infura.io/v3/${INFURA_ID}`;
 
 export default function Reservation({ story }) {
-  const affiliate = useRecoilValue(affiliateState)
-  const [provider, setProvider] = useState()
+  const affiliate = useRecoilValue(affiliateState);
+  const [provider, setProvider] = useState();
   const [library, setLibrary] = useState();
   const [chainId, setChainId] = useState();
   const [network, setNetwork] = useState();
@@ -24,13 +24,12 @@ export default function Reservation({ story }) {
 
   const connect = async () => {
     const providerOptions = {
-
       injected: {
         display: {
           name: "Injected",
-          description: "Connect with the provider in your Browser"
+          description: "Connect with the provider in your Browser",
         },
-        package: null
+        package: null,
       },
 
       walletconnect: {
@@ -40,45 +39,44 @@ export default function Reservation({ story }) {
           rpc: {
             1: `https://mainnet.infura.io/v3/${INFURA_ID}`,
             137: "https://polygon-rpc.com",
-            80001: `https://polygon-mumbai.infura.io/v3/${INFURA_ID}`
-          }
-        }
-      }
-    }
-  
+            80001: `https://polygon-mumbai.infura.io/v3/${INFURA_ID}`,
+          },
+        },
+      },
+    };
+
     const web3Modal = new Web3Modal({
       // network: "mainnet", // optional
       cacheProvider: true, // optional
-      providerOptions // required
+      providerOptions, // required
     });
-    setWeb3Modal(web3Modal)
+    setWeb3Modal(web3Modal);
 
     const provider = await web3Modal.connect();
     const library = new ethers.providers.Web3Provider(provider);
     const accounts = await library.listAccounts();
     const network = await library.getNetwork();
 
-    setProvider(provider)
+    setProvider(provider);
     setLibrary(library);
 
     if (accounts) setAccount(accounts[0]);
     setChainId(network.chainId);
 
-    console.log('this is run once?')
+    console.log("this is run once?");
 
     // const signer = library.getSigner();
-  }
-  
+  };
+
   useEffect(() => {
-    console.log('here')
+    console.log("here");
     if (web3modal && web3modal.cachedProvider) {
-        console.log('and here')
-        connect();
+      console.log("and here");
+      connect();
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-
     const refreshState = () => {
       setAccount();
       setChainId();
@@ -87,7 +85,7 @@ export default function Reservation({ story }) {
       // setSignature("");
       // setVerified(undefined);
     };
-  
+
     if (provider?.on) {
       const handleAccountsChanged = (accounts) => {
         console.log("accountsChanged", accounts);
@@ -152,19 +150,18 @@ export default function Reservation({ story }) {
                 </li>
                 {/* <li className="mx-auto md:mx-0">
                   <Link href="/panft-reservation-deposit">
-                    <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Reserve your NFT</a>
+                    <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6  text-secondary">Reserve your NFT</a>
                   </Link>
                 </li> */}
                 <li>
-                    { chainId && ( <div>
-                        <div
-                        className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
-                        >{ chainId === 1 ? 'Ethereum' : chainId }</div>
-                        <div
-                        className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
-                        >{ account ? (account.substring(0,4) + '...'+ account.substring(account.length-4)) : 'No wallet connected'}</div>
+                  {chainId && (
+                    <div>
+                      <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">{chainId === 1 ? "Ethereum" : chainId}</div>
+                      <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
+                        {account ? account.substring(0, 4) + "..." + account.substring(account.length - 4) : "No wallet connected"}
+                      </div>
                     </div>
-                    ) }
+                  )}
                 </li>
               </ul>
             </div>
@@ -182,14 +179,14 @@ export default function Reservation({ story }) {
 
         <section className="px-5 py-10 lg:pt-48 lg:pb-24">
           <div className="mx-auto w-full max-w-[1050px]">
-            <h1 className="mb-6 font-primary text-4xl font-extrabold tracking-[0.46px] text-primary sm:text-5xl md:text-6xl">Make your reservation</h1>
-            <p className="font-medium leading-7 tracking-[0.46px] text-black/60 sm:text-xl lg:text-2xl">
+            <h1 className="mb-6 font-primary text-4xl font-extrabold  text-primary sm:text-5xl md:text-6xl">Make your reservation</h1>
+            <p className="font-medium leading-7  text-black/60 sm:text-xl lg:text-2xl">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
 
             <div className="mt-11 mb-10 grid w-full grid-cols-1 gap-7 sm:grid-cols-2 lg:gap-12">
               <div className="rounded-[10px] bg-white px-7 pt-6 pb-14 shadow-account">
-                <h3 className="mb-10 font-primary text-lg font-extrabold tracking-[0.46px] text-black lg:text-2xl">Account Balance</h3>
+                <h3 className="mb-10 font-primary text-lg font-extrabold  text-black lg:text-2xl">Account Balance</h3>
 
                 <ul className="space-y-8 font-medium text-black lg:text-xl">
                   <li className="grid grid-cols-[max-content_1fr] items-center gap-3.5">
@@ -210,7 +207,7 @@ export default function Reservation({ story }) {
               </div>
 
               <div className="rounded-[10px] bg-white px-7 pt-6 pb-14 shadow-account">
-                <h3 className="mb-10 font-primary text-lg font-extrabold tracking-[0.46px] text-black lg:text-2xl">Your Holdings</h3>
+                <h3 className="mb-10 font-primary text-lg font-extrabold  text-black lg:text-2xl">Your Holdings</h3>
 
                 <ul className="space-y-8 font-medium text-black lg:text-xl">
                   <li className="grid grid-cols-[max-content_1fr] items-center gap-3.5">
@@ -234,14 +231,46 @@ export default function Reservation({ story }) {
             </div>
 
             <div className="rounded-[10px] bg-white px-7 pt-6 pb-14 shadow-account">
-              <h3 className="mb-10 font-primary text-lg font-extrabold tracking-[0.46px] text-black lg:text-2xl">Reserve Your Spot</h3>
+              <h3 className="mb-10 font-primary text-lg font-extrabold  text-black lg:text-2xl">Reserve Your Spot</h3>
+
+              <p className="mb-4 font-medium text-black lg:text-xl">Reserve using</p>
+              <div className="grid mb-10 grid-rows-1 grid-cols-3 w-full md:max-w-md rounded-full bg-gray-600 text-base font-bold text-white shadow-sm">
+                <div className="flex items-center justify-center mx-auto hover:bg-white/20 w-full text-center rounded-full">
+                  <span className="flex p-2 space-x-1">
+                    <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.svg?v=022" className="mx-auto" width="25" height="25"></img>
+                    <a href="#" className="mx-auto">
+                      USDC
+                    </a>
+                  </span>
+                </div>
+                <div className="flex items-center justify-center mx-auto hover:bg-white/20 w-full text-center rounded-full">
+                  <span className="flex p-2 space-x-1">
+                    <img src="https://cryptologos.cc/logos/tether-usdt-logo.svg?v=022" width="25" height="25"></img>
+                    <a href="#" className="mx-auto">
+                      USDT
+                    </a>
+                  </span>
+                </div>
+                <div className="flex items-center justify-center mx-auto hover:bg-white/20 w-full text-center rounded-full">
+                  <span className="flex p-2 space-x-1">
+                    <img src="https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg?v=022" width="25" height="25"></img>
+                    <a href="#" className="mx-auto">
+                      DAI
+                    </a>
+                  </span>
+                </div>
+              </div>
 
               <div className="mb-10 grid grid-cols-1 items-end gap-11 sm:grid-cols-[1fr_max-content]">
                 <div>
-                  <label htmlFor="deposit" className="mb-5 block font-medium tracking-[-0.46px] text-black lg:text-xl">
+                  <label htmlFor="deposit" className="mb-5 block font-medium text-black lg:text-xl">
                     Deposit Amount
                   </label>
-                  <input type="text" id="deposit" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
+                  <span className="flex">
+                    <p className="text-xs font-medium text-black/50">balance: </p>
+                    <p className="text-xs font-medium text-black/50"> 0.12 ETH</p>
+                  </span>
+                  <input type="number" id="deposit" step="0.01" placeholder="0.0" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
                 </div>
 
                 <button className="mx-auto block w-40 rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl">Deposit</button>
@@ -249,13 +278,19 @@ export default function Reservation({ story }) {
 
               <div className="grid grid-cols-1 items-end gap-11 sm:grid-cols-[1fr_max-content]">
                 <div>
-                  <label htmlFor="withdraw" className="mb-5 block font-medium tracking-[-0.46px] text-black lg:text-xl">
+                  <label htmlFor="withdraw" className="mb-5 block font-medium text-black lg:text-xl">
                     Withdraw Amount
                   </label>
-                  <input type="text" id="withdraw" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
+                  <div>
+                    <span className="flex">
+                      <p className="text-xs font-medium text-black/50">balance: </p>
+                      <p className="text-xs font-medium text-black/50"> 0.12 ETH</p>
+                    </span>
+                    <input type="number" step="0.01" id="withdraw" placeholder="0.0" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
+                  </div>
                 </div>
 
-                <button className="mx-auto block w-40 rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl">Withdraw</button>
+                <button className="mx-auto block w-40 rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-4 md:text-xl">Withdraw</button>
               </div>
             </div>
           </div>
