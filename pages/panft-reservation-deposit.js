@@ -156,6 +156,13 @@ export default function Reservation({ story }) {
                   </Link>
                 </li> */}
                 <li>
+                    { (!account) && (<div
+                        className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
+                        onClick={connect}
+                    >Connect</div>)
+                    }
+                </li>
+                <li>
                     { chainId && ( <div>
                         <div
                         className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
