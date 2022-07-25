@@ -8,16 +8,16 @@ import { affiliateState } from "../state/atom";
 
 export default function Reservation({ story }) {
   // const { query } = useRouter();
-  const affiliate = useRecoilValue(affiliateState)
-  const setAffiliate = useSetRecoilState(affiliateState)
+  const affiliate = useRecoilValue(affiliateState);
+  const setAffiliate = useSetRecoilState(affiliateState);
 
   useEffect(() => {
-    const urlSearchParams = new URLSearchParams(window.location.search)
-    const affiliateID = urlSearchParams.get('affiliate')
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const affiliateID = urlSearchParams.get("affiliate");
     setAffiliate((oldData) => ({
-      affiliateId: affiliateID
-    }))
-  }, [])
+      affiliateId: affiliateID,
+    }));
+  }, []);
 
   return (
     <div className="bg-[#F8F3F3]">
@@ -78,7 +78,9 @@ export default function Reservation({ story }) {
           <div className="mx-auto flex w-full max-w-[1100px] flex-col items-center justify-between gap-16 lg:flex-row lg:gap-5">
             <div className="w-full max-w-[548px] text-center lg:text-left">
               <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-primary sm:text-5xl md:text-6xl lg:mb-3">Transform your work with PANFT</h1>
-              <p className="mb-7 text-xl font-semibold tracking-normal text-dark md:text-2xl lg:mb-3">Our NFTs will connect our helpful and enthusiastic community of assistants with busy people and DAOs big on vision but short on time.</p>
+              <p className="mb-7 text-xl font-semibold tracking-normal text-dark md:text-2xl lg:mb-3">
+                Our NFTs will connect our helpful and enthusiastic community of assistants with busy people and DAOs big on vision but short on time. Make sure to read the FAQs.
+              </p>
               <Link href="/panft-reservation-deposit">
                 <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">Reserve your NFT</a>
               </Link>
@@ -179,12 +181,7 @@ export default function Reservation({ story }) {
                   Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter.{" "}
                   <span className="font-bold">You can withdraw your funds and give up your spot in line anytime prior to mint. </span>The funds are in escrow contract.
                 </p>
-                <p className="pt-4">
-                  Threes in mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA.{" "}
-                  <a className="underline hover:text-blue-400" href="https://forms.gle/D96hyhNDh9DDJAXa8" target="_blank" rel="noreferrer">
-                    Join the waitlist.
-                  </a>
-                </p>{" "}
+                <p className="pt-4">Threes in mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA.</p>{" "}
               </div>
             </div>
 
@@ -203,12 +200,7 @@ export default function Reservation({ story }) {
                 <p className="pt-4">
                   <span className="font-bold">The genesis mint is the only time there will be a set fee for PANFTs. </span>The daily auctions will start at the genesis mint price ($3,333) and demand will dictate the winning bid.
                 </p>
-                <p className="pt-4">
-                  From the genesis mint we will test and improve the application and service before scaling up and offering more NFTs in batch auctions.{" "}
-                  <a className="underline hover:text-blue-400" href="https://forms.gle/D96hyhNDh9DDJAXa8" target="_blank" rel="noreferrer">
-                    Join the waitlist.
-                  </a>
-                </p>
+                <p className="pt-4">From the genesis mint we will test and improve the application and service before scaling up and offering more NFTs in batch auctions. </p>
               </div>
             </div>
 
