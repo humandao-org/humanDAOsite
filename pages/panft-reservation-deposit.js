@@ -8,7 +8,7 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import ERC20 from '../contracts/erc20.json'
 import hDAOEscrow from '../contracts/hDAOEscrow.json'
-import { useAddress, useSigner, useAccount, useDisconnect, useMetamask, useChainId } from '@thirdweb-dev/react';
+import { useAddress, useSigner, useAccount, useDisconnect, useMetamask, useWalletConnect, useChainId } from '@thirdweb-dev/react';
 
 import { affiliateState } from "../state/atom";
 
@@ -36,22 +36,34 @@ export default function Reservation({ story }) {
     {
       chainID: 5,
       name: 'Goerli Testnet',
-      USDCaddress: '0x07865c6E87B9F70255377e024ace6630C1Eaa37F'
+      USDCaddress: '0x07865c6E87B9F70255377e024ace6630C1Eaa37F',
+      Currency: 'ETH',
+      logo: 'https://ethereum.org/static/a183661dd70e0e5c70689a0ec95ef0ba/13c43/eth-diamond-purple.png'
     },
     {
       chainID: 1,
       name: 'Ethereum',
-      USDCaddress: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+      USDCaddress: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+      USDTaddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+      DAIaddress: '0x6b175474e89094c44da98b954eedeac495271d0f',
+      Currency: 'ETH',
+      logo: 'https://ethereum.org/static/a183661dd70e0e5c70689a0ec95ef0ba/13c43/eth-diamond-purple.png'
     },
     {
       chainID: 137,
       name: 'Polygon',
-      USDCaddress: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+      USDCaddress: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174',
+      USDTaddress: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f',
+      DAIaddress: '0x8f3cf7ad23cd3cadbd9735aff958023239c6a063',
+      Currency: 'MATIC',
+      logo: 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=022'
     },
     {
       chainID: 80001,
       name: 'Mumbai Testnet',
-      USDCaddress: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747'
+      USDCaddress: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
+      Currency: 'MATIC',
+      logo: 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=022'
     }
   ]
 
@@ -64,8 +76,9 @@ export default function Reservation({ story }) {
   const account3 = useAccount()
   const signer3 = useSigner()
   const chain3 = useChainId()
-  const connectWithMetamask = useMetamask();
-  const disconnectWallet = useDisconnect();
+  const connectWithMetamask = useMetamask()
+  const connectWithWalletConnect = useWalletConnect()
+  const disconnectWallet = useDisconnect()
 
   async function queryTokenBalance(signer, account){
 
@@ -77,16 +90,30 @@ export default function Reservation({ story }) {
     const USDC = new ethers.Contract(usdcAddress, ERC20, signer)
 
     // await USDC.connect(signer).approve(hdaoEscrowCntractAddress, 500);
-    let ethBalance = await signer.getBalance();
-    ethBalance = ethers.utils.formatUnits(ethBalance)
-    ethBalance = Math.round(ethBalance * 1e4) / 1e4
-    setETHWalletBalance(ethBalance)
+    try {
+      let ethBalance = await signer.getBalance();
+      ethBalance = ethers.utils.formatUnits(ethBalance)
+      ethBalance = Math.round(ethBalance * 1e4) / 1e4
+      setETHWalletBalance(ethBalance)
+  
+      let usdcBalance = await USDC.balanceOf(account)
+      console.log("got USDC balance", usdcBalance)
+      setUSDCWalletBalance(ethers.utils.formatUnits(usdcBalance, 6))
 
-    USDC.balanceOf(account)
-    .then((result)=>{
-      console.log("got USDC balance", result)
-      setUSDCWalletBalance(Number(ethers.utils.formatUnits(result, 6)))
-    }).catch((e)=>console.log(e))
+      // Only do other stables if we are not on test networks
+      if (nw.chainID === 1 || nw.chainID === 137) {
+        const USDT = new ethers.Contract(nw.USDTaddress, ERC20, signer)
+        const DAI = new ethers.Contract(nw.DAIaddress, ERC20, signer)
+        const usdtBalance = await USDT.balanceOf(account)
+        setUSDTWalletBalance(ethers.utils.formatUnits(usdtBalance, 6))
+        let daiBalance = await DAI.balanceOf(account)
+        daiBalance = ethers.utils.formatUnits(daiBalance, 18)
+        daiBalance = Math.round(daiBalance * 1e4) / 1e4
+        setDAIWalletBalance(daiBalance)
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   useEffect(() => {
@@ -103,7 +130,9 @@ export default function Reservation({ story }) {
   useEffect(() => {
     console.log('chain id changed', chain3)
   }, [chain3])
+ 
 
+  // Assume mainnet
   /*
   const connect = async () => {
     const providerOptions = {
@@ -254,7 +283,7 @@ export default function Reservation({ story }) {
                   </Link>
                 </li> */}
                 <li>
-                  {!account3 && (
+                  {!address3 && (
                     <div className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" onClick={connectWithMetamask}>
                       Connect
                     </div>
@@ -298,9 +327,9 @@ export default function Reservation({ story }) {
                 <div className="grid sm:grid-cols-2 sm:grid-row-4 sm:gap-x-1 gap-y-4 font-medium text-black lg:text-xl">
                   <div className="flex hover:bg-white/20 space-x-2 w-full space-y-1.5 lg:space-y-1 rounded-full">
                     <span className="flex h-10 w-10 rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
-                      <img src="https://ethereum.org/static/a183661dd70e0e5c70689a0ec95ef0ba/13c43/eth-diamond-purple.png" className="w-8 h-8 object-contain"></img>
+                      <img src={network?.logo} className="w-8 h-8 object-contain"></img>
                     </span>
-                    <span className="text-xl md:text-2xl">  {ETHWalletBalance} ETH</span>
+                    <span className="text-xl md:text-2xl">  {ETHWalletBalance} {network?.Currency}</span>
                   </div>
                   <div className="flex hover:bg-white/20 space-x-2 w-full space-y-1.5 lg:space-y-1 rounded-full">
                     <span className="flex h-10 w-10 rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
@@ -312,13 +341,13 @@ export default function Reservation({ story }) {
                     <span className="flex h-10 w-10 rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
                       <img src="https://cryptologos.cc/logos/tether-usdt-logo.svg?v=022" className="w-8 h-8 object-contain"></img>
                     </span>
-                    <span className="text-xl md:text-2xl"> 12,345 USDT</span>
+                    <span className="text-xl md:text-2xl"> {USDTWalletBalance} USDT</span>
                   </div>
                   <div className="flex hover:bg-white/20 space-x-2 w-full space-y-1.5 lg:space-y-1 rounded-full">
                     <span className="flex h-10 w-10 rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
                       <img src="https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg?v=022" className="w-8 h-8 object-contain"></img>
                     </span>
-                    <span className="text-xl md:text-2xl"> 12,345 DAI</span>
+                    <span className="text-xl md:text-2xl"> {DAIWalletBalance} DAI</span>
                   </div>
                 </div>
               </div>
@@ -374,7 +403,7 @@ export default function Reservation({ story }) {
                     Deposit Amount
                   </label>
                   <span className="flex">
-                    <p className="text-xs font-medium text-black/50">account balance: </p>
+                    <p className="text-xs font-medium text-black/50">account balance:&nbsp;</p>
                     <p className="text-xs font-medium text-black/50"> 0.12 ETH</p>
                   </span>
                   <input type="number" id="deposit" step="0.01" placeholder="0.0" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
@@ -390,7 +419,7 @@ export default function Reservation({ story }) {
                   </label>
                   <div>
                     <span className="flex">
-                      <p className="text-xs font-medium text-black/50">escrow balance: </p>
+                      <p className="text-xs font-medium text-black/50">escrow balance:&nbsp;</p>
                       <p className="text-xs font-medium text-black/50"> 0.12 ETH</p>
                     </span>
                     <input type="number" step="0.01" id="withdraw" placeholder="0.0" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
