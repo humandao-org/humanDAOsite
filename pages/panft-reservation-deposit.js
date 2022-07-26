@@ -254,11 +254,11 @@ export default function Reservation({ story }) {
                   </Link>
                 </li> */}
                 <li>
-                  {(!account3) && (<div
-                        className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
-                        onClick={connectWithMetamask}
-                    >Connect</div>)
-                    }
+                  {!account3 && (
+                    <div className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" onClick={connectWithMetamask}>
+                      Connect
+                    </div>
+                  )}
                 </li>
                 <li>
                   {chain3 && (
@@ -291,47 +291,47 @@ export default function Reservation({ story }) {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
 
-            <div className="mt-11 mb-10 grid w-full grid-cols-1 gap-7 sm:grid-cols-2 lg:gap-12">
-              <div className="rounded-[10px] bg-white px-7 pt-6 pb-14 shadow-account">
-                <h3 className="mb-10 font-primary text-lg font-extrabold  text-black lg:text-2xl">Account Balance</h3>
+            <div className="mt-11 mb-10 grid w-full gap-7 lg:grid-cols-2 lg:gap-12">
+              <div className="rounded-[10px] bg-white px-7 pt-6 pb-8 shadow-account">
+                <h3 className="mb-10 font-primary text-lg font-extrabold  text-black lg:text-2xl">Your Account Balance</h3>
 
-                <ul className="space-y-8 font-medium text-black lg:text-xl">
-                  <li className="grid grid-cols-[max-content_1fr] items-center gap-3.5">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
-                      <img src="assets/images/eth-diamond-purple.png" alt="Diamond" className="h-full w-full object-contain" />
+                <div className="grid sm:grid-cols-2 sm:grid-row-4 sm:gap-x-1 gap-y-4 font-medium text-black lg:text-xl">
+                  <div className="flex hover:bg-white/20 space-x-2 w-full space-y-1.5 lg:space-y-1 rounded-full">
+                    <span className="flex h-10 w-10 rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
+                      <img src="https://ethereum.org/static/a183661dd70e0e5c70689a0ec95ef0ba/13c43/eth-diamond-purple.png" className="w-8 h-8 object-contain"></img>
                     </span>
-                    <span>
-                      <strong>Balance:</strong> {ETHWalletBalance} ETH
+                    <span className="text-xl md:text-2xl">  {ETHWalletBalance} ETH</span>
+                  </div>
+                  <div className="flex hover:bg-white/20 space-x-2 w-full space-y-1.5 lg:space-y-1 rounded-full">
+                    <span className="flex h-10 w-10 rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
+                      <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.svg?v=022" className="w-8 h-8 object-contain"></img>
                     </span>
-                  </li>
-                  <li className="grid grid-cols-[max-content_1fr] items-center gap-3.5">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">🔗</span>
-                    <span>
-                      <strong>Chain Info: </strong>Polygon Mainnet
+                    <span className="text-xl md:text-2xl"> {USDCWalletBalance} USDC</span>
+                  </div>
+                  <div className="flex hover:bg-white/20 space-x-2 w-full space-y-1.5 lg:space-y-1 rounded-full">
+                    <span className="flex h-10 w-10 rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
+                      <img src="https://cryptologos.cc/logos/tether-usdt-logo.svg?v=022" className="w-8 h-8 object-contain"></img>
                     </span>
-                  </li>
-                </ul>
+                    <span className="text-xl md:text-2xl"> 12,345 USDT</span>
+                  </div>
+                  <div className="flex hover:bg-white/20 space-x-2 w-full space-y-1.5 lg:space-y-1 rounded-full">
+                    <span className="flex h-10 w-10 rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
+                      <img src="https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg?v=022" className="w-8 h-8 object-contain"></img>
+                    </span>
+                    <span className="text-xl md:text-2xl"> 12,345 DAI</span>
+                  </div>
+                </div>
               </div>
+              <div className="rounded-[10px] bg-white px-7 pt-6 pb-8 shadow-account">
+                <h3 className="mb-10 font-primary text-lg font-extrabold  text-black lg:text-2xl">Reservation Balance</h3>
 
-              <div className="rounded-[10px] bg-white px-7 pt-6 pb-14 shadow-account">
-                <h3 className="mb-10 font-primary text-lg font-extrabold  text-black lg:text-2xl">Your Holdings</h3>
-
-                <ul className="space-y-8 font-medium text-black lg:text-xl">
+                <ul className="space-y-2 font-medium text-black lg:text-xl">
                   <li className="grid grid-cols-[max-content_1fr] items-center gap-3.5">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
-                      <img src="assets/images/coin.png" alt="Diamond" className="h-full w-full object-contain" />
+                    <span className="flex w-10 h-10 md:h-20 md:w-20 items-center justify-center rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
+                      <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.svg?v=022" alt="usdc logo" className="h-full w-full object-contain" />
                     </span>
-                    <span>
-                      <strong>Current: </strong>{USDCWalletBalance} USDC
-                    </span>
-                  </li>
-                  <li className="grid grid-cols-[max-content_1fr] items-center gap-3.5">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
-                      <img src="assets/images/coin.png" alt="Diamond" className="h-full w-full object-contain" />
-                    </span>
-                    <span>
-                      <strong>In escrow: </strong>2.12993484575 ETH
-                    </span>
+                    <span className="text-xl md:text-5xl font-medium">1,234.34 USDC</span>
+                    <div img src=""></div>
                   </li>
                 </ul>
               </div>
@@ -344,7 +344,7 @@ export default function Reservation({ story }) {
               <div className="grid mb-10 grid-rows-1 grid-cols-3 w-full md:max-w-md rounded-full bg-gray-600 text-base font-bold text-white shadow-sm">
                 <div className="flex items-center justify-center mx-auto hover:bg-white/20 w-full text-center rounded-full">
                   <span className="flex p-2 space-x-1">
-                    <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.svg?v=022" className="mx-auto" width="25" height="25"></img>
+                    <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.svg?v=022" alt="usdc logo" className="mx-auto" width="25" height="25"></img>
                     <a href="#" className="mx-auto">
                       USDC
                     </a>
@@ -352,7 +352,7 @@ export default function Reservation({ story }) {
                 </div>
                 <div className="flex items-center justify-center mx-auto hover:bg-white/20 w-full text-center rounded-full">
                   <span className="flex p-2 space-x-1">
-                    <img src="https://cryptologos.cc/logos/tether-usdt-logo.svg?v=022" width="25" height="25"></img>
+                    <img src="https://cryptologos.cc/logos/tether-usdt-logo.svg?v=022" alt="usdt logo" width="25" height="25"></img>
                     <a href="#" className="mx-auto">
                       USDT
                     </a>
@@ -360,7 +360,7 @@ export default function Reservation({ story }) {
                 </div>
                 <div className="flex items-center justify-center mx-auto hover:bg-white/20 w-full text-center rounded-full">
                   <span className="flex p-2 space-x-1">
-                    <img src="https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg?v=022" width="25" height="25"></img>
+                    <img src="https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg?v=022" alt="DAI logo" width="25" height="25"></img>
                     <a href="#" className="mx-auto">
                       DAI
                     </a>
@@ -374,7 +374,7 @@ export default function Reservation({ story }) {
                     Deposit Amount
                   </label>
                   <span className="flex">
-                    <p className="text-xs font-medium text-black/50">balance: </p>
+                    <p className="text-xs font-medium text-black/50">account balance: </p>
                     <p className="text-xs font-medium text-black/50"> 0.12 ETH</p>
                   </span>
                   <input type="number" id="deposit" step="0.01" placeholder="0.0" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
@@ -390,7 +390,7 @@ export default function Reservation({ story }) {
                   </label>
                   <div>
                     <span className="flex">
-                      <p className="text-xs font-medium text-black/50">balance: </p>
+                      <p className="text-xs font-medium text-black/50">escrow balance: </p>
                       <p className="text-xs font-medium text-black/50"> 0.12 ETH</p>
                     </span>
                     <input type="number" step="0.01" id="withdraw" placeholder="0.0" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
