@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 //import { useRouter } from "next/router";
 import Link from "next/link";
 import { useRecoilValue } from "recoil";
-import { ethers } from "ethers";
+import { ethers, Contract } from "ethers";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import ERC20 from '../contracts/erc20.json'
+import hDAOEscrow from '../contracts/hDAOEscrow.json'
+import { useAddress, useSigner, useAccount, useDisconnect, useMetamask, useChainId } from '@thirdweb-dev/react';
 
 import { affiliateState } from "../state/atom";
 
@@ -20,8 +23,88 @@ export default function Reservation({ story }) {
   const [chainId, setChainId] = useState();
   const [network, setNetwork] = useState();
   const [account, setAccount] = useState();
-  const [web3modal, setWeb3Modal] = useState();
+  // const [web3modal, setWeb3Modal] = useState();
+  const [USDCWalletBalance, setUSDCWalletBalance] = useState();
+  const [DAIWalletBalance, setDAIWalletBalance] = useState();
+  const [USDTWalletBalance, setUSDTWalletBalance] = useState();
+  const [ETHWalletBalance, setETHWalletBalance] = useState();
 
+  const USDCaddress = '0x07865c6E87B9F70255377e024ace6630C1Eaa37F'
+  const hdaoEscrowCntractAddress = '0xEbbcf1F75A7Bb13A6617D82Fe105D2484Af64F5a';
+
+  const networks = [
+    {
+      chainID: 5,
+      name: 'Goerli Testnet',
+      USDCaddress: '0x07865c6E87B9F70255377e024ace6630C1Eaa37F'
+    },
+    {
+      chainID: 1,
+      name: 'Ethereum',
+      USDCaddress: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+    },
+    {
+      chainID: 137,
+      name: 'Polygon',
+      USDCaddress: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174'
+    },
+    {
+      chainID: 80001,
+      name: 'Mumbai Testnet',
+      USDCaddress: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747'
+    }
+  ]
+
+  const getNetworkByChain = (chainID) => {
+    return networks.find((nw) => nw.chainID === chainID)
+  }
+
+  // third web provider
+  const address3 = useAddress()
+  const account3 = useAccount()
+  const signer3 = useSigner()
+  const chain3 = useChainId()
+  const connectWithMetamask = useMetamask();
+  const disconnectWallet = useDisconnect();
+
+  async function queryTokenBalance(signer, account){
+
+    // const provider = new ethers.providers.Web3Provider(window.ethereum)
+    // const erc20:Contract = new ethers.Contract(addressContract, abi, provider);
+    console.log('erc20', ERC20)
+    const nw = getNetworkByChain(chain3)
+    const usdcAddress = nw.USDCaddress
+    const USDC = new ethers.Contract(usdcAddress, ERC20, signer)
+
+    // await USDC.connect(signer).approve(hdaoEscrowCntractAddress, 500);
+    let ethBalance = await signer.getBalance();
+    ethBalance = ethers.utils.formatUnits(ethBalance)
+    ethBalance = Math.round(ethBalance * 1e4) / 1e4
+    setETHWalletBalance(ethBalance)
+
+    USDC.balanceOf(account)
+    .then((result)=>{
+      console.log("got USDC balance", result)
+      setUSDCWalletBalance(Number(ethers.utils.formatUnits(result, 6)))
+    }).catch((e)=>console.log(e))
+  }
+
+  useEffect(() => {
+    console.log('signer', signer3)
+    console.log('account', account3)
+    console.log('addres', address3)
+    if (signer3 && address3) {
+      queryTokenBalance(signer3, address3)
+    }
+    setNetwork(getNetworkByChain(chain3))
+
+  }, [signer3])
+
+  useEffect(() => {
+    console.log('chain id changed', chain3)
+  }, [chain3])
+
+  /*
   const connect = async () => {
     const providerOptions = {
       injected: {
@@ -38,6 +121,7 @@ export default function Reservation({ story }) {
           infuraId: INFURA_ID, // required
           rpc: {
             1: `https://mainnet.infura.io/v3/${INFURA_ID}`,
+            5: `https://goerli.prylabs.net`,
             137: "https://polygon-rpc.com",
             80001: `https://polygon-mumbai.infura.io/v3/${INFURA_ID}`,
           },
@@ -57,8 +141,10 @@ export default function Reservation({ story }) {
     const accounts = await library.listAccounts();
     const network = await library.getNetwork();
 
+    console.log('setting provider', provider)
     setProvider(provider);
     setLibrary(library);
+    console.log('setting library', library)
 
     if (accounts) setAccount(accounts[0]);
     setChainId(network.chainId);
@@ -69,14 +155,24 @@ export default function Reservation({ story }) {
   };
 
   useEffect(() => {
-    console.log("here");
+    console.log("connect use effect");
     if (web3modal && web3modal.cachedProvider) {
       console.log("and here");
       connect();
     }
   }, []);
 
+
   useEffect(() => {
+    console.log("chain id is: ", chainId)
+    if (account && library) {
+      console.log('both are set')
+      queryTokenBalance(library, account)
+    }
+  }, [account, library, chainId])
+
+  useEffect(() => {
+    console.log("refresh use effect");
     const refreshState = () => {
       setAccount();
       setChainId();
@@ -87,12 +183,14 @@ export default function Reservation({ story }) {
     };
 
     if (provider?.on) {
+      console.log('events attached')
       const handleAccountsChanged = (accounts) => {
         console.log("accountsChanged", accounts);
         if (accounts) setAccount(accounts[0]);
       };
 
       const handleChainChanged = (_hexChainId) => {
+        console.log("chains changed", account);
         setChainId(parseInt(_hexChainId));
       };
 
@@ -114,6 +212,8 @@ export default function Reservation({ story }) {
       };
     }
   }, [provider]);
+*/
+
 
   return (
     <div className="bg-[#F8F3F3]">
@@ -154,18 +254,18 @@ export default function Reservation({ story }) {
                   </Link>
                 </li> */}
                 <li>
-                  {(!account) && (<div
+                  {(!account3) && (<div
                         className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
-                        onClick={connect}
+                        onClick={connectWithMetamask}
                     >Connect</div>)
                     }
                 </li>
                 <li>
-                  {chainId && (
+                  {chain3 && (
                     <div>
-                      <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">{chainId === 1 ? "Ethereum" : chainId}</div>
+                      <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">{network?.name}</div>
                       <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
-                        {account ? account.substring(0, 4) + "..." + account.substring(account.length - 4) : "No wallet connected"}
+                        { address3 ? address3.substring(0, 4) + "..." + address3.substring(address3.length - 4) : "No wallet connected"}
                       </div>
                     </div>
                   )}
@@ -201,7 +301,7 @@ export default function Reservation({ story }) {
                       <img src="assets/images/eth-diamond-purple.png" alt="Diamond" className="h-full w-full object-contain" />
                     </span>
                     <span>
-                      <strong>Balance:</strong> 1.1242114729405 ETH
+                      <strong>Balance:</strong> {ETHWalletBalance} ETH
                     </span>
                   </li>
                   <li className="grid grid-cols-[max-content_1fr] items-center gap-3.5">
@@ -222,7 +322,7 @@ export default function Reservation({ story }) {
                       <img src="assets/images/coin.png" alt="Diamond" className="h-full w-full object-contain" />
                     </span>
                     <span>
-                      <strong>Current: </strong>1.1242114729405 ETH
+                      <strong>Current: </strong>{USDCWalletBalance} USDC
                     </span>
                   </li>
                   <li className="grid grid-cols-[max-content_1fr] items-center gap-3.5">

@@ -2,6 +2,7 @@ import "../styles/globals.css"
 import "../public/assets/fonts/stylesheet.css"
 import "../public/assets/theme/theme.css"
 import { storyblokInit, apiPlugin } from "@storyblok/react"
+import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
 import Collection from "../components/General/Collection"
 import Milestones from "../components/Dashboard/Milestones"
 import Page from "../components/Page"
@@ -45,10 +46,14 @@ storyblokInit({
   components,
 });
 
+const activeChainId = ChainId.Mainnet;
+
 function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>
-      <Component {...pageProps} />
+      <ThirdwebProvider desiredChainId={activeChainId}>
+        <Component {...pageProps} />
+      </ThirdwebProvider>
     </RecoilRoot>
   )
 }
