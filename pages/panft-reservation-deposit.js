@@ -265,7 +265,9 @@ export default function Reservation({ story }) {
         setInProgress(false)
       })      
   }
-  
+
+  setNetwork(getNetworkByChain(1))
+
   useEffect(async () => {
     console.log('signer', signer3)
     console.log('account', account3)
