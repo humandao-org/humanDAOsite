@@ -209,7 +209,7 @@ export default function Reservation({ story }) {
           setInProgress(false)
           setStatusMessage({ type: 'success', message: 'You successfully allowed the smart contract to recieve your selected coin. Next you need to confirm the actual transaction.' })
           // Approval is done so we can do the actual deposit
-          hdaoEscrowContract.connect(signer3).depositTokens(depositAmount, usdc32)
+          hdaoEscrowContract.connect(signer3).depositTokens(depositAmount, selectedStableCoin.name32)
             .then((tr) => {
               setInProgress(true)
               resetStatus()
@@ -256,7 +256,7 @@ export default function Reservation({ story }) {
         action: 'withdrawal_attempt',
         affiliate_id: affiliate.affiliateId,
         currency: selectedStableCoin.name,
-        amount: depositAmount,
+        amount: withdrawAmount,
         wallet: address3
       }
     }
