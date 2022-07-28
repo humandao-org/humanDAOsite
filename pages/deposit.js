@@ -502,7 +502,7 @@ export default function Reservation({ story }) {
                   </Link>
                 </li>
                 {/* <li className="mx-auto md:mx-0">
-                  <Link href="/panft-reservation-deposit">
+                  <Link href="/deposit">
                     <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6  text-secondary">Reserve your NFT</a>
                   </Link>
                 </li> */}
