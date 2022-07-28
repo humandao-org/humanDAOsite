@@ -73,7 +73,7 @@ export default function Reservation({ story }) {
       DAIaddress: '0x3eA3EfA40DB89571E9d0bbF123678E90647644EE',
       Currency: 'MATIC',
       logo: 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=022',
-      hdaoEscrowCntractAddress: '0x689b285fCCc63EB819C2EDc37A2B5248E3261Dc0'
+      hdaoEscrowCntractAddress: '0x15B7B1562909BEd4df3920d06C5A68A41154580D'
     }
   ]
 
@@ -292,16 +292,12 @@ export default function Reservation({ story }) {
   }, [])
 
   useEffect(async () => {
-    console.log('signer', signer3)
+    console.log('signer has changed', signer3)
     console.log('account', account3)
     console.log('addres', address3)
     if (signer3 && address3 && chain3) {
-      setNetwork(getNetworkByChain(chain3))
       await queryTokenBalance(signer3, address3)
       await queryEscrowBalance(signer3)
-      setIsNetworkAllowed(([5, 80001].includes(chain3)))
-      console.log('before calling change stable function - what is usdc: ', USDCWalletBalance)
-      // changeSelectedStableCoin(selectedStableCoin.name)
     }
   }, [signer3])
 
@@ -311,6 +307,9 @@ export default function Reservation({ story }) {
 
   useEffect(() => {
     console.log('chain id changed', chain3)
+    setNetwork(getNetworkByChain(chain3))
+    setIsNetworkAllowed(([5, 80001].includes(chain3)))
+    console.log("isNetworkAllowed should now become: ", [5, 80001].includes(chain3))
   }, [chain3])
 
   const handleChange = (value, method) => {
