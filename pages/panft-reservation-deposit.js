@@ -35,19 +35,9 @@ export default function Reservation({ story }) {
   const [DAIEscrowBalance, setDAIEscrowBalance] = useState(0)
   const [USDTEscrowBalance, setUSDTEscrowBalance] = useState(0)
   const [escrowTokenAndBalance, setEscrowTokenAndBalance] = useState()
-
-  const USDCaddress = '0x07865c6E87B9F70255377e024ace6630C1Eaa37F'
-  const hdaoEscrowCntractAddress = '0xEbbcf1F75A7Bb13A6617D82Fe105D2484Af64F5a';
-
+  const [isNetworkAllowed, setIsNetworkAllowed] = useState(true)
+  const [statusMessage, setStatusMessage] = useState({ type: 'none', message: '' })
   const networks = [
-    {
-      chainID: 5,
-      name: 'Goerli Testnet',
-      USDCaddress: '0x07865c6E87B9F70255377e024ace6630C1Eaa37F',
-      Currency: 'ETH',
-      logo: 'https://ethereum.org/static/a183661dd70e0e5c70689a0ec95ef0ba/13c43/eth-diamond-purple.png',
-      hdaoEscrowCntractAddress: '0xEbbcf1F75A7Bb13A6617D82Fe105D2484Af64F5a'
-    },
     {
       chainID: 1,
       name: 'Ethereum',
@@ -67,13 +57,29 @@ export default function Reservation({ story }) {
       logo: 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=022'
     },
     {
+      chainID: 5,
+      name: 'Goerli Testnet',
+      USDCaddress: '0x07865c6E87B9F70255377e024ace6630C1Eaa37F',
+      Currency: 'ETH',
+      logo: 'https://ethereum.org/static/a183661dd70e0e5c70689a0ec95ef0ba/13c43/eth-diamond-purple.png',
+      hdaoEscrowCntractOLD: '0xEbbcf1F75A7Bb13A6617D82Fe105D2484Af64F5a',
+      hdaoEscrowCntractAddress: '0x26855E8445efe3950FEAcAdEC4a6C85293B6c21c'
+    },
+    {
       chainID: 80001,
       name: 'Mumbai Testnet',
-      USDCaddress: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
+      USDCaddress: '0xd33602Ce228aDBc90625e4FC8071aAE0CAd11Fe9', // '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747', // 0xe11A86849d99F524cAC3E7A0Ec1241828e332C62 (18 decimals)
+      USDTaddress: '0x466DD1e48570FAA2E7f69B75139813e4F8EF75c2',
+      DAIaddress: '0x3eA3EfA40DB89571E9d0bbF123678E90647644EE',
       Currency: 'MATIC',
-      logo: 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=022'
+      logo: 'https://cryptologos.cc/logos/polygon-matic-logo.svg?v=022',
+      hdaoEscrowCntractAddress: '0x689b285fCCc63EB819C2EDc37A2B5248E3261Dc0'
     }
   ]
+
+  const resetStatus = () => {
+    setStatusMessage({ type: 'none', message : '' })
+  }
 
   const getNetworkByChain = (chainID) => {
     return networks.find((nw) => nw.chainID === chainID)
@@ -100,32 +106,36 @@ export default function Reservation({ story }) {
     // const provider = new ethers.providers.Web3Provider(window.ethereum)
     // const erc20:Contract = new ethers.Contract(addressContract, abi, provider);
     console.log('erc20', ERC20)
-    const nw = getNetworkByChain(chain3)
-    const usdcAddress = nw.USDCaddress
-    const USDC = new ethers.Contract(usdcAddress, ERC20, signer)
-
     // await USDC.connect(signer).approve(hdaoEscrowCntractAddress, 500);
     try {
+      const nw = getNetworkByChain(chain3)
+
       let ethBalance = await signer.getBalance();
       ethBalance = ethers.utils.formatUnits(ethBalance)
       ethBalance = Number(Math.round(ethBalance * 1e4) / 1e4)
       setETHWalletBalance(ethBalance)
   
+      const USDC = new ethers.Contract(nw.USDCaddress, ERC20, signer)
       let usdcBalance = await USDC.balanceOf(account)
       console.log("got USDC balance", usdcBalance)
       setUSDCWalletBalance(Number(ethers.utils.formatUnits(usdcBalance, 6)))
       console.log("set USDC balance", USDCWalletBalance)
 
-      // Only do other stables if we are not on test networks
-      if (nw.chainID === 1 || nw.chainID === 137) {
+      // Only do other stables if we are on networks where they are configured
+      if (nw.chainID === 1 || nw.chainID === 137 || nw.chainID === 80001) {
+        console.log('getting USDT balance from: ', nw.USDTaddress)
         const USDT = new ethers.Contract(nw.USDTaddress, ERC20, signer)
-        const DAI = new ethers.Contract(nw.DAIaddress, ERC20, signer)
         const usdtBalance = await USDT.balanceOf(account)
         setUSDTWalletBalance(Number(ethers.utils.formatUnits(usdtBalance, 6)))
+        console.log('got usdt balance', usdtBalance)
+        const DAI = new ethers.Contract(nw.DAIaddress, ERC20, signer)
         let daiBalance = await DAI.balanceOf(account)
         daiBalance = ethers.utils.formatUnits(daiBalance, 18)
         daiBalance = Math.round(daiBalance * 1e4) / 1e4
         setDAIWalletBalance(daiBalance)
+      } else {
+        setUSDTWalletBalance(0)
+        setDAIWalletBalance(0)
       }
     } catch (e) {
       console.log(e)
@@ -188,40 +198,46 @@ export default function Reservation({ story }) {
     }
     const nw = getNetworkByChain(chain3)
     const hdaoEscrowContract = new ethers.Contract(nw.hdaoEscrowCntractAddress, hDAOEscrow.abi, signer3)
-    alert('going to deposit: ' + depositAmount)
-    alert('which stable coin: ' + selectedStableCoin.name32)
     const stableContract = new ethers.Contract(selectedStableCoin.contractAddress, ERC20, signer3)
     stableContract.connect(signer3).approve(nw.hdaoEscrowCntractAddress, depositAmount)
       .then((tr) => {
         setInProgress(true)
+        resetStatus()
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
         tr.wait().then((receipt)=>{
           console.log("transfer receipt",receipt)
           setInProgress(false)
+          setStatusMessage({ type: 'success', message: 'You successfully allowed the smart contract to recieve your selected coin. Next you need to confirm the actual transaction.' })
           // Approval is done so we can do the actual deposit
           hdaoEscrowContract.connect(signer3).depositTokens(depositAmount, usdc32)
             .then((tr) => {
               setInProgress(true)
+              resetStatus()
               console.log(`TransactionResponse TX hash: ${tr.hash}`)
               tr.wait().then(async (receipt) => {
                 console.log("deposit transfer receipt",receipt)
                 depositInputRef.current.value = ''
-                await queryEscrowBalance(signer3)
-                await queryTokenBalance(signer3, address3)
+                window.setTimeout(async () => {
+                  await queryEscrowBalance(signer3)
+                  await queryTokenBalance(signer3, address3)
+                }, 1000)
                 payload.reservation.action = 'deposit'
                 await registerReservation(payload)
                 setInProgress(false)
+                setStatusMessage({ type: 'success', message: 'Congratulations! Your funds were successfully deposited to our escrow contract.' })
               })
             })
             .catch((e)=> {
               console.log(e)
               setInProgress(false)
+              setStatusMessage({ type: 'error' })
             })
         })
       })
     .catch((e)=> {
       console.log(e)
       setInProgress(false)
+      setStatusMessage({ type: 'error' })
     })
   }
 
@@ -249,24 +265,31 @@ export default function Reservation({ story }) {
     hdaoEscrowContract.connect(signer3).withdrawTokens(withdrawAmount, selectedStableCoin.name32)
       .then((tr) => {
         setInProgress(true)
+        resetStatus()
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
         tr.wait().then(async (receipt)=> {
           withdrawInputRef.current.value = ''
-          await queryTokenBalance(signer3, address3)
-          await queryEscrowBalance(signer3)
+          window.setTimeout(async () => {
+            await queryEscrowBalance(signer3)
+            await queryTokenBalance(signer3, address3)
+          }, 1000)
           console.log("withdrawal transfer receipt",receipt)
           payload.reservation.action = 'withdrawal'
           await registerReservation(payload)
           setInProgress(false)
+          setStatusMessage({ type: 'success', message: 'Your funds were successfully withdrawn from our escrow contract.' })
         })
       })
       .catch((e)=> {
         console.log(e)
         setInProgress(false)
+        setStatusMessage({ type: 'error' })
       })      
   }
 
-  setNetwork(getNetworkByChain(1))
+  useEffect(async () => {
+    setNetwork(getNetworkByChain(1))
+  }, [])
 
   useEffect(async () => {
     console.log('signer', signer3)
@@ -276,6 +299,7 @@ export default function Reservation({ story }) {
       setNetwork(getNetworkByChain(chain3))
       await queryTokenBalance(signer3, address3)
       await queryEscrowBalance(signer3)
+      setIsNetworkAllowed(([5, 80001].includes(chain3)))
       console.log('before calling change stable function - what is usdc: ', USDCWalletBalance)
       // changeSelectedStableCoin(selectedStableCoin.name)
     }
@@ -290,12 +314,12 @@ export default function Reservation({ story }) {
   }, [chain3])
 
   const handleChange = (value, method) => {
-    console.log(value)
+    // console.log(value)
     if(!isNaN(parseFloat(value))) {
       var amount = 0
       if (['USDC','USDT'].includes(selectedStableCoin.name)) {
         amount = (parseFloat(value) * 1e6).toString()
-        console.log('amount to withdraw/deposit: ', amount)
+        // console.log('amount to withdraw/deposit: ', amount)
       } else if(selectedStableCoin.name === 'DAI') {
         amount = (parseFloat(value) * 1e18).toString()
       }
@@ -483,6 +507,13 @@ export default function Reservation({ story }) {
                   </Link>
                 </li> */}
                 <li>
+                  {(address3 && !isNetworkAllowed) && (
+                    <div className="cursor-pointer text-white bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
+                      Wrong Network!
+                    </div>
+                  )}
+                </li>
+                <li>
                   {!address3 && (
                     <div className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" onClick={connectWithMetamask}>
                       Connect
@@ -490,7 +521,7 @@ export default function Reservation({ story }) {
                   )}
                 </li>
                 <li>
-                  {chain3 && (
+                  {(chain3 && isNetworkAllowed) && (
                     <div>
                       <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">{network?.name}</div>
                       <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
@@ -513,11 +544,14 @@ export default function Reservation({ story }) {
           </div>
         </nav>
 
-        <section className="px-5 py-10 lg:pt-48 lg:pb-24">
+        <section className="px-5 py-10 lg:pt-24 lg:pb-24">
           <div className="mx-auto w-full max-w-[1050px]">
             <h1 className="mb-6 font-primary text-4xl font-extrabold  text-primary sm:text-5xl md:text-6xl">Make your reservation</h1>
             <p className="font-medium leading-7  text-black/60 sm:text-xl lg:text-2xl">
-              Connect your wallet and make a deposit of $3,333 using USDC, USDT or DAI to secure an NFT. You are welcome to deposit using multiple stablecoins. You are free to make several smaller deposits. Once you reach $3,333 you will have reserved one PA NFT.
+              Connect your wallet to either Mumbai or Goerli testnet and make a deposit of $3,333 using USDC, USDT or DAI to secure a Pocket Assistant NFT.</p>
+            <p>You are welcome to deposit using multiple stablecoins and you are free to make several smaller deposits. Once you reach at total of $3,333 you will have reserved one PA NFT. You are welcome to reserve multiple NFTs.
+            </p>
+            <p>
               You are free to withdraw your deposited funds at any time until we announce the date and time of the mint (which will be done shortly after we reach 400 reservations).
             </p>
 
@@ -628,6 +662,28 @@ export default function Reservation({ story }) {
                 <div className="my-2 text-amber-600">Transaction in progress. Please wait.</div>
               </div>
               ) : null }
+              {statusMessage.type === 'success' ? (
+                <div className="mb-10 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                  <strong className="font-bold">Success!</strong>
+                  <span className="block sm:inline">{ statusMessage.message }</span>
+                  <span 
+                    onClick={resetStatus}
+                    className="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg className="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                  </span>
+                </div>
+              ) : null}
+              {statusMessage.type === 'error' ? (
+                <div className="mb-10 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                  <strong className="font-bold">Transaction failed!</strong>
+                  <span className="block sm:inline">The transaction failed. Try again later if this is an error at out end.</span>
+                  <span 
+                    onClick={resetStatus}
+                    className="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                  </span>
+                </div>
+              ) : null}
               <div className="mb-10 grid grid-cols-1 items-end gap-11 sm:grid-cols-[1fr_max-content]">
                 <div>
                   <label htmlFor="deposit" className="mb-5 block font-medium text-black lg:text-xl">
@@ -639,14 +695,14 @@ export default function Reservation({ story }) {
                   </span>
                   <input
                     ref={depositInputRef}
-                    disabled={inProgress}
+                    disabled={inProgress || !isNetworkAllowed}
                     onChange={(evt) => handleChange(evt.target.value, setDepositAmount)}
                     type="number" id="deposit" step="0.01" placeholder="0.0" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
                 </div>
 
                 <button 
                   onClick={depositFunds}
-                  disabled={inProgress}
+                  disabled={inProgress || !isNetworkAllowed}
                   className="mx-auto block w-40 rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl">Deposit</button>
               </div>
 
@@ -662,7 +718,7 @@ export default function Reservation({ story }) {
                     </span>
                     <input 
                       ref={withdrawInputRef}
-                      disabled={inProgress}
+                      disabled={inProgress || !isNetworkAllowed}
                       onChange={(evt) => handleChange(evt.target.value, setWithdrawAmount)}
                       type="number" step="0.01" id="withdraw" placeholder="0.0" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
                   </div>
@@ -670,7 +726,7 @@ export default function Reservation({ story }) {
 
                 <button 
                   onClick={withdrawFunds}
-                  disabled={inProgress}
+                  disabled={inProgress || !isNetworkAllowed}
                   className="mx-auto block w-40 rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-4 md:text-xl">Withdraw</button>
               </div>
             </div>
