@@ -180,7 +180,7 @@ export default function Reservation({ story }) {
                   right to extend the genesis batch (by a few hundred) to more than 400 before mint.{" "}
                 </p>
                 <p className="pt-4">
-                  BTW, the "3" in mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA.{" "}
+                  BTW, the &#34;3&#34; in mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA.{" "}
                   <a className="underline hover:text-blue-400" href="https://forms.gle/D96hyhNDh9DDJAXa8" target="_blank" rel="noreferrer">
                     Join the waitlist.
                   </a>
