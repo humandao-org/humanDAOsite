@@ -173,21 +173,15 @@ export default function Reservation({ story }) {
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
-                <p>Remember PANFT is a membership and service, not a PFP project. We cannot mint 10k at low/no cost. Since there are no ongoing costs to holders we need to ensure sustainability of the program.</p>
-                <p className="pt-4">
-                  We will be utilizing a reservation smart contract that will allow you to reserve a PANFT by committing the full mint price, $3,333.{" "}
-                  <span className="font-bold">You can withdraw your funds and give up your spot in line anytime prior to mint. The funds are in escrow contract.</span>
+                <p>
+                  Remember PANFT is a membership and service, not a PFP project. We cannot mint 10k at low/no cost. Since there are no ongoing costs to holders we need to ensure sustainability of the program. We will be utilizing a reservation smart
+                  contract system that will allow you to reserve a PANFT by committing the full mint price, $3,333.
                 </p>
                 <p className="pt-4">
-                  Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. If there is large demand and we have enough PAs onboarded, we reserve the
-                  right to extend the genesis batch (by a few hundred) to more than 400 before mint.{" "}
+                  Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter.{" "}
+                  <span className="font-bold">You can withdraw your funds and give up your spot in line anytime prior to mint. </span>The funds are in escrow contract.
                 </p>
-                <p className="pt-4">
-                  BTW, the "3" in mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA.{" "}
-                  <a className="underline hover:text-blue-400" href="https://forms.gle/D96hyhNDh9DDJAXa8" target="_blank" rel="noreferrer">
-                    Join the waitlist.
-                  </a>
-                </p>
+                <p className="pt-4">Threes in mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA.</p>{" "}
               </div>
             </div>
 
@@ -201,7 +195,7 @@ export default function Reservation({ story }) {
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>
                   PANFT will be very limited. Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. From that point on there will be a daily
-                  auction for a single PANFT. If there is large demand and we have enough PAs onboarded, we reserve the right to extend the genesis batch (by a few hundred) to more than 400 before mint.
+                  auction for a single PANFT.
                 </p>
                 <p className="pt-4">
                   <span className="font-bold">The genesis mint is the only time there will be a set fee for PANFTs. </span>The daily auctions will start at the genesis mint price ($3,333) and demand will dictate the winning bid.
@@ -244,8 +238,7 @@ export default function Reservation({ story }) {
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>
-                  Activating the NFT by holding or staking HDAO helps us forecast demand for the PAs and ensure enough resources are available to complete tasks quickly. Remember, you must hodl or be staking at least 10,000 HDAO from the same address
-                  as the PANFT.
+                  Activating the NFT by holding or staking HDAO helps us forecast demand for the PAs and ensure enough resources are available to complete tasks quickly. Remember, you must hodl or be staking HDAO from the same address as the PANFT.
                 </p>
                 <p className="pt-4">Holding and using HDAO benefits the underserved communities making up the humanDAO, grants staking rewards (get more $HDAO), and you can participate in governance as a true DAO member.</p>
                 <p className="pt-4">From the genesis mint we will test and improve the application and service before scaling up and offering more NFTs in batch auctions. </p>
@@ -258,35 +251,6 @@ export default function Reservation({ story }) {
                   <a className="underline hover:text-blue-500" href="https://app.humandao.org/dashboard" target="_blank" rel="noreferrer">
                     Visit our Dashboard for DAO metrics
                   </a>
-                </p>
-              </div>
-            </div>
-
-            <div className="faq-box group" open>
-              <button className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl">
-                <span>What is the design/art for the NFT?</span>
-                <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#111827" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
-                <p>
-                  Keep in mind this is not a PFP or Avatar project. It is a membership NFT granting the holder use of a service (among other beneficial tokenomics). So while the artwork doesn't convey identity we have something wonderful planned.
-                </p>
-                <p className="pt-4">
-                  The art will be determined in a major web3 design competition hDAO will be holding very soon. We have dedicated $20k in prizes, so if you are an artist or designer make sure to follow our{" "}
-                  <a className="underline hover:text-blue-500" href="https://twitter.com/humanDAO" target="_blank" rel="noreferrer">
-                    Twitter
-                  </a>
-                  , subscribe to our{" "}
-                  <a className="underline hover:text-blue-500" href="https://medium.com/@TheHumanDAO" target="_blank" rel="noreferrer">
-                    blog
-                  </a>
-                  , or join our{" "}
-                  <a className="underline hover:text-blue-500" href="https:/discord.com/invite/humandao" target="_blank" rel="noreferrer">
-                    Discord
-                  </a>{" "}
-                  for the kickoff.
                 </p>
               </div>
             </div>
