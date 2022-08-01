@@ -1,13 +1,9 @@
-
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   safelist: [
-    'md:gap-8',
+    "md:gap-8",
     {
       pattern: /bg-(red|green|blue)-(100|200|300)/,
     },
@@ -19,31 +15,32 @@ module.exports = {
     },
     {
       pattern: /p-\d+/,
-      variants: ['sm', 'lg', 'md'],
+      variants: ["sm", "lg", "md"],
+      fill: ["hover", "focus"],
     },
     {
       pattern: /w-.+/,
     },
     {
       pattern: /py-\d+/,
-      variants: ['sm', 'lg', 'md'],
+      variants: ["sm", "lg", "md"],
     },
     {
       pattern: /pt-\d+/,
-      variants: ['sm', 'lg', 'md'],
+      variants: ["sm", "lg", "md"],
     },
     {
       pattern: /pb-\d+/,
-      variants: ['sm', 'lg', 'md'],
+      variants: ["sm", "lg", "md"],
     },
-    { 
+    {
       pattern: /grid-cols-.+/,
-      variants: ['lg', 'md'],
+      variants: ["lg", "md"],
     },
-    { 
+    {
       pattern: /gap-.+/,
-      variants: ['lg', 'md'],
-    }
+      variants: ["lg", "md"],
+    },
   ],
   theme: {
     extend: {
@@ -71,9 +68,9 @@ module.exports = {
       },
 
       fontFamily: {
-        'press-start': ['"Press Start 2P"', 'cursive'],
-        'bungee': ['"Bungee"'],
-        'play': ['"Play"'],
+        "press-start": ['"Press Start 2P"', "cursive"],
+        bungee: ['"Bungee"'],
+        play: ['"Play"'],
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
         serif: ["Inter", ...defaultTheme.fontFamily.sans],
         body: ["Inter", ...defaultTheme.fontFamily.sans],
@@ -106,10 +103,9 @@ module.exports = {
       },
 
       letterSpacing: {
-        'default': "0.54px",
-      }
-
+        default: "0.54px",
+      },
     },
   },
   plugins: [],
-}
+};
