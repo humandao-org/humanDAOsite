@@ -9,12 +9,15 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import ERC20 from '../contracts/erc20.json'
 import hDAOEscrow from '../contracts/hDAOEscrow.json'
 import { useAddress, useSigner, useAccount, useDisconnect, useMetamask, useWalletConnect, useChainId } from '@thirdweb-dev/react';
+import SuccessModal from "../components/SuccessModal"
 
 import { affiliateState } from "../state/atom";
 import { registerReservation } from "../lib/affiliate";
 // Infura endpoint
 const INFURA_ID = "1dc03bb35a274a3c918f23a0646bcd23";
 const jsonRpcEndpoint = `https://mainnet.infura.io/v3/${INFURA_ID}`;
+
+const reservationAmount = 20 // 3333 // Price that it costs to reserve an NFT
 
 export default function Reservation({ story }) {
   const affiliate = useRecoilValue(affiliateState)
@@ -34,9 +37,12 @@ export default function Reservation({ story }) {
   const [USDCEscrowBalance, setUSDCEscrowBalance] = useState(0)
   const [DAIEscrowBalance, setDAIEscrowBalance] = useState(0)
   const [USDTEscrowBalance, setUSDTEscrowBalance] = useState(0)
-  const [escrowTokenAndBalance, setEscrowTokenAndBalance] = useState()
+  const [maxDepositAmount, setMaxDepositAmount] = useState(0)
+  const [maxWithdrawalAmount, setMaxWithdrawalAmount] = useState(0)
   const [isNetworkAllowed, setIsNetworkAllowed] = useState(true)
   const [statusMessage, setStatusMessage] = useState({ type: 'none', message: '' })
+  const [reservedNoNFTs, setReservedNoNFTs] = useState(0)
+
   const networks = [
     {
       chainID: 1,
@@ -78,7 +84,7 @@ export default function Reservation({ story }) {
   ]
 
   const resetStatus = () => {
-    setStatusMessage({ type: 'none', message : '' })
+    setStatusMessage({ type: 'none', message : '', reason: '' })
   }
 
   const getNetworkByChain = (chainID) => {
@@ -97,6 +103,7 @@ export default function Reservation({ story }) {
   const dai32 = ethers.utils.formatBytes32String("DAI");
   const usdt32 = ethers.utils.formatBytes32String("USDT");
   const [selectedStableCoin, setSelectedStableCoin] = useState({ name: 'USDC', escrowBalance: 0, walletBalance: 0, name32: usdc32, contractAddress: '' })
+  const [showModal, setShowModal] = useState(false);
 
   const depositInputRef = useRef(null)
   const withdrawInputRef = useRef(null)
@@ -175,20 +182,23 @@ export default function Reservation({ story }) {
   async function depositFunds(event) {
     event.preventDefault()
     if(!signer3 || !chain3) return    
-    if (depositAmount <= 0) return
+    if (!(depositAmount > 0)) return
     // const provider = new ethers.providers.Web3Provider(window.ethereum)
     // const signer = provider.getSigner()
     // const erc20:Contract = new ethers.Contract(addressContract, abi, signer)
 
     // const hDAOEscrow = await ethers.getContractFactory('hDAOEscrow');
     // const hdaoescrow = await hDAOEscrow.attach(contractAddress);
+    var reservedNoNFTs = depositInputRef.current.value
+
     const payload = {
       reservation: {
         action: 'deposit_attempt',
         affiliate_id: affiliate.affiliateId,
         currency: selectedStableCoin.name,
         amount: depositAmount,
-        wallet: address3
+        wallet: address3,
+        no_nfts: reservedNoNFTs
       }
     }
     let result = await registerReservation(payload)
@@ -207,7 +217,7 @@ export default function Reservation({ story }) {
         tr.wait().then((receipt)=>{
           console.log("transfer receipt",receipt)
           setInProgress(false)
-          setStatusMessage({ type: 'success', message: 'You successfully allowed the smart contract to recieve your selected coin. Next you need to confirm the actual transaction.' })
+          setStatusMessage({ type: 'success', message: 'You successfully allowed the smart contract to deposit your selected amount. Please, confirm the actual transaction next.' })
           // Approval is done so we can do the actual deposit
           hdaoEscrowContract.connect(signer3).depositTokens(depositAmount, selectedStableCoin.name32)
             .then((tr) => {
@@ -223,21 +233,31 @@ export default function Reservation({ story }) {
                 }, 1000)
                 payload.reservation.action = 'deposit'
                 await registerReservation(payload)
+                setReservedNoNFTs(reservedNoNFTs)
                 setInProgress(false)
-                setStatusMessage({ type: 'success', message: 'Congratulations! Your funds were successfully deposited to our escrow contract.' })
+                setShowModal(true)
+                // setStatusMessage({ type: 'success', message: 'Congratulations! Your funds were successfully deposited to our escrow contract.' })
               })
             })
             .catch((e)=> {
               console.log(e)
               setInProgress(false)
-              setStatusMessage({ type: 'error' })
+              if (e.code === 4001) {
+                setStatusMessage({ type: 'error', reason: 'The tranaction was cancelled because the transaction signature was denied' })
+              } else {
+                setStatusMessage({ type: 'error' })
+              }
             })
         })
       })
     .catch((e)=> {
       console.log(e)
       setInProgress(false)
-      setStatusMessage({ type: 'error' })
+      if (e.code === 4001) {
+        setStatusMessage({ type: 'error', reason: 'The tranaction was cancelled because the transaction signature was denied' })
+      } else {
+        setStatusMessage({ type: 'error' })
+      }
     })
   }
 
@@ -312,16 +332,17 @@ export default function Reservation({ story }) {
     console.log("isNetworkAllowed should now become: ", [5, 80001].includes(chain3))
   }, [chain3])
 
-  const handleChange = (value, method) => {
-    // console.log(value)
+  const handleChange = (value, method, _stableCoin) => {
+    var stableCoin = _stableCoin || selectedStableCoin.name
+    console.log('on change value:', value)
     if(!isNaN(parseFloat(value))) {
       var amount = 0
-      if (['USDC','USDT'].includes(selectedStableCoin.name)) {
+      if (['USDC','USDT'].includes(stableCoin)) {
         amount = (parseFloat(value) * 1e6).toString()
-        // console.log('amount to withdraw/deposit: ', amount)
-      } else if(selectedStableCoin.name === 'DAI') {
+      } else if(stableCoin === 'DAI') {
         amount = (parseFloat(value) * 1e18).toString()
       }
+      console.log('amount to withdraw/deposit: ', amount)
       method(amount)
     }
   }
@@ -350,10 +371,18 @@ export default function Reservation({ story }) {
       contractAddress = network.DAIaddress
     }
     console.log("changing selected stablecoin", { name: stableCoin, escrowBalance, walletBalance })
-
     setSelectedStableCoin({ name: stableCoin, escrowBalance, walletBalance, name32, contractAddress })
+    calculateMaxNFTs(walletBalance, escrowBalance)
+    handleChange(depositInputRef.current.value * reservationAmount, setDepositAmount, stableCoin) // Update the amount to deposit since it will differ from coin to coin due to difference in decimals
   }
 
+  const calculateMaxNFTs = (walletBalance, escrowBalance) => {
+    let maxDepositAmount = Math.floor(walletBalance / reservationAmount)
+    console.log("max deposit amount", maxDepositAmount)
+    setMaxDepositAmount(maxDepositAmount)
+    let maxWithdrawalAmount = Math.floor(escrowBalance / reservationAmount)
+    setMaxWithdrawalAmount(maxWithdrawalAmount)
+  }
 
   // Assume mainnet
   /*
@@ -505,30 +534,30 @@ export default function Reservation({ story }) {
                     <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6  text-secondary">Reserve your NFT</a>
                   </Link>
                 </li> */}
+                {(address3 && !isNetworkAllowed) && (
                 <li>
-                  {(address3 && !isNetworkAllowed) && (
-                    <div className="cursor-pointer text-white bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
-                      Wrong Network!
-                    </div>
-                  )}
+                  <div className="cursor-pointer text-white bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
+                    Wrong Network!
+                  </div>
                 </li>
-                <li>
-                  {!address3 && (
+                )}
+                {!address3 && (
+                  <li>
                     <div className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" onClick={connectWithMetamask}>
                       Connect
                     </div>
-                  )}
-                </li>
+                  </li>
+                )}
+                {(chain3 && isNetworkAllowed) && (
                 <li>
-                  {(chain3 && isNetworkAllowed) && (
-                    <div>
+                  <div>
                       <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">{network?.name}</div>
                       <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
                         { address3 ? address3.substring(0, 4) + "..." + address3.substring(address3.length - 4) : "No wallet connected"}
                       </div>
                     </div>
-                  )}
                 </li>
+                )}
               </ul>
             </div>
 
@@ -653,7 +682,7 @@ export default function Reservation({ story }) {
                 </div>
               </div>
               { inProgress ? (
-              <div role="status" className="text-center">
+              <div role="status" className="text-center my-8">
                 <svg className="inline mr-2 w-10 h-10 text-gray-200 animate-spin dark:text-gray-600 fill-yellow-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
@@ -675,7 +704,7 @@ export default function Reservation({ story }) {
               {statusMessage.type === 'error' ? (
                 <div className="mb-10 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                   <strong className="font-bold">Transaction failed!</strong>
-                  <span className="block sm:inline">The transaction failed. Try again later if this is an error at out end.</span>
+                  <span className="block sm:inline">{ statusMessage.reason ? statusMessage.reason : 'The transaction failed. Try again later if this seems like an error at out end. Please contact us if the problem does not resolve.' }</span>
                   <span 
                     onClick={resetStatus}
                     className="absolute top-0 bottom-0 right-0 px-4 py-3">
@@ -686,51 +715,84 @@ export default function Reservation({ story }) {
               <div className="mb-10 grid grid-cols-1 items-end gap-11 sm:grid-cols-[1fr_max-content]">
                 <div>
                   <label htmlFor="deposit" className="mb-5 block font-medium text-black lg:text-xl">
-                    Deposit Amount
+                    Make deposit for Pocket Assistant NFTs
                   </label>
                   <span className="flex">
                     <p className="text-xs font-medium text-black/50">account balance:&nbsp;</p>
-                    <p className="text-xs font-medium text-black/50">{ selectedStableCoin.walletBalance + ' ' + selectedStableCoin.name }</p>
+                    <p className="text-xs font-medium text-black/50">{ selectedStableCoin.walletBalance + ' ' + selectedStableCoin.name } - can reserve up to { maxDepositAmount } NFT{maxDepositAmount !== 1 && 's'}</p>
                   </span>
-                  <input
+                  <select className="form-select form-select-lg border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 appearance-none block w-full bg-white bg-clip-padding bg-no-repeat border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none" aria-label="select number of NFTs to reserve"
                     ref={depositInputRef}
-                    disabled={inProgress || !isNetworkAllowed}
-                    onChange={(evt) => handleChange(evt.target.value, setDepositAmount)}
-                    type="number" id="deposit" step="0.01" placeholder="0.0" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
+                    onChange={(evt) =>  handleChange(evt.target.value * reservationAmount, setDepositAmount)}
+                    disabled={inProgress || !isNetworkAllowed}                    
+                  >
+                    <option defaultValue={0} value="0">Number of NFTs to reserve</option>
+                    { Array.from({length: maxDepositAmount}).fill('a').map((item, index) => (
+                      <option key={index} value={index + 1}>Reserve {index + 1} PA NFT{ index > 0 && 's'}</option>
+                    ))}
+                  </select>
                 </div>
 
                 <button 
                   onClick={depositFunds}
-                  disabled={inProgress || !isNetworkAllowed}
-                  className="mx-auto block w-40 rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl">Deposit</button>
+                  disabled={inProgress || !isNetworkAllowed || !(depositAmount > 0)}
+                  className="mx-auto block w-40 rounded-full bg-accent-purple px-8 py-3 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl">Deposit</button>
               </div>
 
               <div className="grid grid-cols-1 items-end gap-11 sm:grid-cols-[1fr_max-content]">
                 <div>
                   <label htmlFor="withdraw" className="mb-5 block font-medium text-black lg:text-xl">
-                    Withdraw Amount
+                    Withdraw deposit for Pocket Assistant NFTs
                   </label>
                   <div>
                     <span className="flex">
                       <p className="text-xs font-medium text-black/50">escrow balance:&nbsp;</p>
-                      <p className="text-xs font-medium text-black/50">{ selectedStableCoin.escrowBalance + ' ' + selectedStableCoin.name }</p>
+                      <p className="text-xs font-medium text-black/50">{ selectedStableCoin.escrowBalance + ' ' + selectedStableCoin.name } - { maxWithdrawalAmount } NFT{maxWithdrawalAmount !== 1 && 's'} reserved</p>
                     </span>
-                    <input 
+                    <select className="form-select form-select-lg border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 appearance-none block w-full bg-white bg-clip-padding bg-no-repeat border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:outline-none" aria-label="select number of NFT deposits to withdraw"
+                      ref={withdrawInputRef}
+                      onChange={(evt) =>  handleChange(evt.target.value * reservationAmount, setWithdrawAmount)}
+                      disabled={inProgress || !isNetworkAllowed}
+                    >
+                      <option defaultValue={0} value="0">Number of NFTs to withdraw</option>
+                      { Array.from({length: maxWithdrawalAmount}).fill('a').map((item, index) => (
+                        <option key={index} value={index + 1}>Withdraw deposit for {index + 1} PA NFT{ index > 0 && 's'}</option>
+                      ))}
+                    </select>
+                    {/*<input 
                       ref={withdrawInputRef}
                       disabled={inProgress || !isNetworkAllowed}
                       onChange={(evt) => handleChange(evt.target.value, setWithdrawAmount)}
                       type="number" step="0.01" id="withdraw" placeholder="0.0" className="peer block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4" />
+                    */}
                   </div>
                 </div>
 
                 <button 
                   onClick={withdrawFunds}
-                  disabled={inProgress || !isNetworkAllowed}
-                  className="mx-auto block w-40 rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-4 md:text-xl">Withdraw</button>
+                  disabled={inProgress || !isNetworkAllowed || !(withdrawAmount > 0)}
+                  className="mx-auto block w-40 rounded-full bg-accent-purple px-8 py-3 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-4 md:text-xl">Withdraw</button>
               </div>
             </div>
           </div>
         </section>
+        {/* 
+        <div className="flex flex-col items-center justify-center h-60">
+          <h1 className="text-2xl font-bold">
+              Click on the button to open the modal.
+          </h1>
+          <button
+            className="px-4 py-2 text-purple-100 bg-purple-600 rounded-md"
+            type="button"
+            onClick={() => {
+                setShowModal(true);
+            }}
+          >
+              Open Modal
+          </button>
+          {showModal && <SuccessModal setOpenModal={setShowModal} details={{ wallet: address3, amount: reservedNoNFTs }} />}
+        </div>
+        */}
       </div>
     </div>
   );
