@@ -776,13 +776,12 @@ export default function Reservation({ story }) {
             </div>
           </div>
         </section>
-        {/* 
         <div className="flex flex-col items-center justify-center h-60">
           <h1 className="text-2xl font-bold">
-              Click on the button to open the modal.
+              Testing only: click on the button to open the success-modal.
           </h1>
           <button
-            className="px-4 py-2 text-purple-100 bg-purple-600 rounded-md"
+            className="px-4 py-2 text-purple-100 bg-accent-purple rounded-md"
             type="button"
             onClick={() => {
                 setShowModal(true);
@@ -792,7 +791,6 @@ export default function Reservation({ story }) {
           </button>
           {showModal && <SuccessModal setOpenModal={setShowModal} details={{ wallet: address3, amount: reservedNoNFTs }} />}
         </div>
-        */}
       </div>
     </div>
   );
