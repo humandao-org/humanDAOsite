@@ -510,9 +510,11 @@ export default function Reservation({ story }) {
             <div className="nav-list">
               <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
                 <li>
-                  <a href="#" className="text-[15px] font-medium text-black hover:underline">
-                    Home
-                  </a>
+                  <Link href="/" className="text-[15px] font-medium">
+                    <a className="text-[15px] font-medium text-black hover:underline">
+                      Home
+                    </a>
+                  </Link>`
                 </li>
                 <li>
                   <a href="https://nft.humandao.org" className="text-[15px] font-medium text-black hover:underline">
@@ -520,7 +522,7 @@ export default function Reservation({ story }) {
                   </a>
                 </li>
                 <li>
-                  <Link href="#faqs" className="text-[15px] font-medium">
+                  <Link href="/#faqs" className="text-[15px] font-medium">
                     <a className="text-black hover:underline">FAQs</a>
                   </Link>
                 </li>
