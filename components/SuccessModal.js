@@ -39,6 +39,11 @@ export default function SuccessModal({ setOpenModal, details }) {
                                     <span className="font-medium text-dark">{details.amount}</span>
                                 </li>
                             </ul>
+                            <div className="mt-8">
+                                <Link href="/">
+                                    <a className="hover:underline font-bold hover:text-blue-400">Return to homepage</a>
+                                </Link>
+                            </div>
                         </div>
                         <div className="order-first w-full max-w-[400px] sm:order-none">
                             <img src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659339164/hdao-nft/123_kzuttx.png" alt="Checked" className="h-auto max-w-xs w-80 mx-auto object-contain" />
