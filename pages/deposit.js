@@ -496,7 +496,35 @@ export default function Reservation({ story }) {
   return (
     <div className="bg-[#F8F3F3]">
       <div className="relative z-10 mx-auto w-full">
-        <SiteMenu></SiteMenu>
+        <SiteMenu>
+        {(address3 && !isNetworkAllowed) && (
+        <li>
+          <div className="cursor-pointer text-white bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
+            Wrong Network!
+          </div>
+        </li>
+        )}
+        {!address3 && (
+          <li>
+            <div
+              className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
+              onClick={() => setShowModalWallet(true) }
+            >
+              Connect
+            </div>
+          </li>
+        )}
+        {(chain3 && isNetworkAllowed) && (
+        <li>
+          <div>
+              <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">{network?.name}</div>
+              <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
+                { address3 ? address3.substring(0, 4) + "..." + address3.substring(address3.length - 4) : "No wallet connected"}
+              </div>
+            </div>
+        </li>
+        )}          
+        </SiteMenu>
         <section className="px-5 py-10 lg:pt-24 lg:pb-24">
           <div className="mx-auto w-full max-w-[1050px]">
             <h1 className="mb-6 font-primary text-4xl font-extrabold  text-primary sm:text-5xl md:text-6xl">Make your reservation</h1>

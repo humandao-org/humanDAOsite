@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 
-export default function SiteMenu() {
+export default function SiteMenu({ children }) {
 
   const toggleMobileMenu = function() {
     navList.current.toggleAttribute('open')
@@ -56,11 +56,7 @@ export default function SiteMenu() {
               <a className="text-black hover:underline">Contact</a>
             </Link>
           </li>
-          <li className="mx-auto md:mx-0">
-            <Link href="/deposit">
-              <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Reserve PANFT</a>
-            </Link>
-          </li>
+          {children}
         </ul>
       </div>
 

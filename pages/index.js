@@ -26,7 +26,13 @@ export default function Reservation({ story }) {
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
       </Head>
       <div className="relative z-10 mx-auto w-full">
-        <SiteMenu></SiteMenu>
+        <SiteMenu>          
+          <li className="mx-auto md:mx-0">
+            <Link href="/deposit">
+              <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Reserve PANFT</a>
+            </Link>
+          </li>
+        </SiteMenu>
         <header className="py-32 px-5 lg:pt-52 lg:pb-80">
           <div className="mx-auto flex w-full max-w-[1100px] flex-col items-center justify-between gap-16 lg:flex-row lg:gap-5">
             <div className="w-full max-w-[548px] text-center lg:text-left">
