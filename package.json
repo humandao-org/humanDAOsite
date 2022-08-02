@@ -27,6 +27,7 @@
     "recoil": "^0.7.4",
     "storyblok-js-client": "^4.1.6",
     "storyblok-rich-text-react-renderer": "^2.5.2",
+    "styled-components": "^5.3.5",
     "tailwindcss-animatecss": "^1.0.7",
     "tw-elements": "^1.0.0-alpha12",
     "web3modal": "^1.9.7"

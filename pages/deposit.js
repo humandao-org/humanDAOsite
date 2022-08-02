@@ -1,21 +1,23 @@
-import Head from "next/head";
-import { useEffect, useState, useRef } from "react";
+import Head from "next/head"
+import { useEffect, useState, useRef } from "react"
 //import { useRouter } from "next/router";
-import Link from "next/link";
-import { useRecoilValue } from "recoil";
-import { ethers, Contract } from "ethers";
-import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import Link from "next/link"
+import { useRecoilValue } from "recoil"
+import { ethers, Contract } from "ethers"
+// import Web3Modal from "web3modal";
+///import WalletConnectProvider from "@walletconnect/web3-provider"
 import ERC20 from '../contracts/erc20.json'
 import hDAOEscrow from '../contracts/hDAOEscrow.json'
-import { useAddress, useSigner, useAccount, useDisconnect, useMetamask, useWalletConnect, useChainId } from '@thirdweb-dev/react';
+import { useAddress, useSigner, useAccount, useDisconnect, useMetamask, useWalletConnect, useChainId } from '@thirdweb-dev/react'
 import SuccessModal from "../components/SuccessModal"
+import WalletConnectModal from "../components/WalletConnectModal"
 
-import { affiliateState } from "../state/atom";
-import { registerReservation } from "../lib/affiliate";
+import { affiliateState } from "../state/atom"
+import { registerReservation } from "../lib/affiliate"
+import SiteMenu from "../components/SiteMenu"
 // Infura endpoint
-const INFURA_ID = "1dc03bb35a274a3c918f23a0646bcd23";
-const jsonRpcEndpoint = `https://mainnet.infura.io/v3/${INFURA_ID}`;
+const INFURA_ID = "1dc03bb35a274a3c918f23a0646bcd23"
+const jsonRpcEndpoint = `https://mainnet.infura.io/v3/${INFURA_ID}`
 
 const reservationAmount = 20 // 3333 // Price that it costs to reserve an NFT
 
@@ -104,6 +106,7 @@ export default function Reservation({ story }) {
   const usdt32 = ethers.utils.formatBytes32String("USDT");
   const [selectedStableCoin, setSelectedStableCoin] = useState({ name: 'USDC', escrowBalance: 0, walletBalance: 0, name32: usdc32, contractAddress: '' })
   const [showModal, setShowModal] = useState(false);
+  const [showModalWallet, setShowModalWallet] = useState(false);
 
   const depositInputRef = useRef(null)
   const withdrawInputRef = useRef(null)
@@ -112,7 +115,6 @@ export default function Reservation({ story }) {
 
     // const provider = new ethers.providers.Web3Provider(window.ethereum)
     // const erc20:Contract = new ethers.Contract(addressContract, abi, provider);
-    console.log('erc20', ERC20)
     // await USDC.connect(signer).approve(hdaoEscrowCntractAddress, 500);
     try {
       const nw = getNetworkByChain(chain3)
@@ -124,17 +126,17 @@ export default function Reservation({ story }) {
   
       const USDC = new ethers.Contract(nw.USDCaddress, ERC20, signer)
       let usdcBalance = await USDC.balanceOf(account)
-      console.log("got USDC balance", usdcBalance)
+      // console.log("got USDC balance", usdcBalance)
       setUSDCWalletBalance(Number(ethers.utils.formatUnits(usdcBalance, 6)))
-      console.log("set USDC balance", USDCWalletBalance)
+      // console.log("set USDC balance", USDCWalletBalance)
 
       // Only do other stables if we are on networks where they are configured
       if (nw.chainID === 1 || nw.chainID === 137 || nw.chainID === 80001) {
-        console.log('getting USDT balance from: ', nw.USDTaddress)
+        // console.log('getting USDT balance from: ', nw.USDTaddress)
         const USDT = new ethers.Contract(nw.USDTaddress, ERC20, signer)
         const usdtBalance = await USDT.balanceOf(account)
         setUSDTWalletBalance(Number(ethers.utils.formatUnits(usdtBalance, 6)))
-        console.log('got usdt balance', usdtBalance)
+        // console.log('got usdt balance', usdtBalance)
         const DAI = new ethers.Contract(nw.DAIaddress, ERC20, signer)
         let daiBalance = await DAI.balanceOf(account)
         daiBalance = ethers.utils.formatUnits(daiBalance, 18)
@@ -152,25 +154,20 @@ export default function Reservation({ story }) {
   async function queryEscrowBalance(signer, network){
     // const provider = new ethers.providers.Web3Provider(window.ethereum)
     const nw = getNetworkByChain(chain3)
-    console.log('query escrow balance - next line is network')
-    console.log('network', nw)
     if (nw?.hdaoEscrowCntractAddress) {
       const hdaoEscrowCntract = new ethers.Contract(nw.hdaoEscrowCntractAddress, hDAOEscrow.abi, signer)
   
       // const signer = provider.getSigner()
   
       let usdcBalance = await hdaoEscrowCntract.accountBalances(signer.getAddress(), usdc32)
-      console.log('escrow balance in USDC', usdcBalance)
       setUSDCEscrowBalance(Number(ethers.utils.formatUnits(usdcBalance, 6)))
 
       let usdtBalance = await hdaoEscrowCntract.accountBalances(signer.getAddress(), usdt32)
-      console.log('escrow balance in USDT', usdtBalance)
       setUSDTEscrowBalance(Number(ethers.utils.formatUnits(usdtBalance, 6)))
 
       let daiBalance = await hdaoEscrowCntract.accountBalances(signer.getAddress(), dai32)
       daiBalance = ethers.utils.formatUnits(daiBalance, 18)
       daiBalance = Math.round(daiBalance * 1e4) / 1e4
-      console.log('escrow balance in DAI', daiBalance)
       setDAIEscrowBalance (daiBalance)
     } else {
       setUSDCEscrowBalance(0)
@@ -499,81 +496,7 @@ export default function Reservation({ story }) {
   return (
     <div className="bg-[#F8F3F3]">
       <div className="relative z-10 mx-auto w-full">
-        <nav className="sticky z-20 top-0 px-6 py-6 bg-[#F8F3F3]">
-          <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between gap-5">
-            <a className="block w-full max-w-[250px] lg:max-w-[300px]">
-              <object type="image/svg+xml" data="assets/images/logo-main.svg" alt="Logo main" className="w-full h-auto object-contain">
-                svg-animation
-              </object>
-            </a>
-
-            <div className="nav-list">
-              <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
-                <li>
-                  <Link href="/" className="text-[15px] font-medium">
-                    <a className="text-[15px] font-medium text-black hover:underline">
-                      Home
-                    </a>
-                  </Link>`
-                </li>
-                <li>
-                  <a href="https://nft.humandao.org" className="text-[15px] font-medium text-black hover:underline">
-                    PANFT site
-                  </a>
-                </li>
-                <li>
-                  <Link href="/#faqs" className="text-[15px] font-medium">
-                    <a className="text-black hover:underline">FAQs</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="mailto:hdao.helpdesk@gmail.com" className="text-[15px] font-medium">
-                    <a className="text-black hover:underline">Contact</a>
-                  </Link>
-                </li>
-                {/* <li className="mx-auto md:mx-0">
-                  <Link href="/deposit">
-                    <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6  text-secondary">Reserve your NFT</a>
-                  </Link>
-                </li> */}
-                {(address3 && !isNetworkAllowed) && (
-                <li>
-                  <div className="cursor-pointer text-white bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
-                    Wrong Network!
-                  </div>
-                </li>
-                )}
-                {!address3 && (
-                  <li>
-                    <div className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" onClick={connectWithMetamask}>
-                      Connect
-                    </div>
-                  </li>
-                )}
-                {(chain3 && isNetworkAllowed) && (
-                <li>
-                  <div>
-                      <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">{network?.name}</div>
-                      <div className="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
-                        { address3 ? address3.substring(0, 4) + "..." + address3.substring(address3.length - 4) : "No wallet connected"}
-                      </div>
-                    </div>
-                </li>
-                )}
-              </ul>
-            </div>
-
-            <button className="btn-nav group md:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className="h-7 w-7 fill-current group-open:hidden">
-                <path d="M0 88C0 74.75 10.75 64 24 64H424C437.3 64 448 74.75 448 88C448 101.3 437.3 112 424 112H24C10.75 112 0 101.3 0 88zM0 248C0 234.7 10.75 224 24 224H424C437.3 224 448 234.7 448 248C448 261.3 437.3 272 424 272H24C10.75 272 0 261.3 0 248zM424 432H24C10.75 432 0 421.3 0 408C0 394.7 10.75 384 24 384H424C437.3 384 448 394.7 448 408C448 421.3 437.3 432 424 432z" />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className="hidden h-7 w-7 fill-current group-open:block">
-                <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
-              </svg>
-            </button>
-          </div>
-        </nav>
-
+        <SiteMenu></SiteMenu>
         <section className="px-5 py-10 lg:pt-24 lg:pb-24">
           <div className="mx-auto w-full max-w-[1050px]">
             <h1 className="mb-6 font-primary text-4xl font-extrabold  text-primary sm:text-5xl md:text-6xl">Make your reservation</h1>
@@ -786,12 +709,13 @@ export default function Reservation({ story }) {
             className="px-4 py-2 text-purple-100 bg-accent-purple rounded-md"
             type="button"
             onClick={() => {
-                setShowModal(true);
+              setShowModal(true);
             }}
           >
-              Open Modal
+            Open Modal
           </button>
           {showModal && <SuccessModal setOpenModal={setShowModal} details={{ wallet: address3, amount: reservedNoNFTs }} />}
+          {showModalWallet && <WalletConnectModal setOpenModal={setShowModalWallet} connectMetaMask={connectWithMetamask} connectWalletConnect={connectWithWalletConnect} />}
         </div>
       </div>
     </div>
