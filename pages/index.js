@@ -26,7 +26,7 @@ export default function Reservation({ story }) {
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
       </Head>
       <div className="relative z-10 mx-auto w-full">
-        <SiteMenu>          
+        <SiteMenu>
           <li className="mx-auto md:mx-0">
             <Link href="/deposit">
               <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Reserve PANFT</a>
@@ -123,9 +123,11 @@ export default function Reservation({ story }) {
 
           <div className="mx-auto w-full max-w-[870px] space-y-12 md:space-y-20">
             <div className="faq-box group">
-              <button 
+              <button
                 className="faq-btn cursor-pointer grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl"
-                onClick={(evt) => { evt.target.parentNode.parentNode.toggleAttribute('open') }}
+                onClick={(evt) => {
+                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                }}
               >
                 <span>What will it cost to mint?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,19 +144,16 @@ export default function Reservation({ story }) {
                   Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. If there is large demand and we have enough PAs onboarded, we reserve the
                   right to extend the genesis batch (by a few hundred) to more than 400 before mint.{" "}
                 </p>
-                <p className="pt-4">
-                  BTW, the &#34;3&#34; in mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA.{" "}
-                  <a className="underline hover:text-blue-400" href="https://forms.gle/D96hyhNDh9DDJAXa8" target="_blank" rel="noreferrer">
-                    Join the waitlist.
-                  </a>
-                </p>
+                <p className="pt-4">BTW, the &#34;3&#34; in mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA. </p>
               </div>
             </div>
 
             <div className="faq-box group">
-              <button 
+              <button
                 className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl"
-                onClick={(evt) => { evt.target.parentNode.parentNode.toggleAttribute('open') }}
+                onClick={(evt) => {
+                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                }}
               >
                 <span>How many NFTs are available?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -174,9 +173,11 @@ export default function Reservation({ story }) {
             </div>
 
             <div className="faq-box group">
-              <button 
+              <button
                 className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl"
-                onClick={(evt) => { evt.target.parentNode.parentNode.toggleAttribute('open') }}
+                onClick={(evt) => {
+                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                }}
               >
                 <span>What are the features and benefits of the NFT?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -202,9 +203,11 @@ export default function Reservation({ story }) {
             </div>
 
             <div className="faq-box group">
-              <button 
+              <button
                 className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl"
-                onClick={(evt) => { evt.target.parentNode.parentNode.toggleAttribute('open') }}
+                onClick={(evt) => {
+                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                }}
               >
                 <span>Why do we have to hodl or stake HDAO?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -232,9 +235,11 @@ export default function Reservation({ story }) {
             </div>
 
             <div className="faq-box group">
-              <button 
+              <button
                 className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl"
-                onClick={(evt) => { evt.target.parentNode.parentNode.toggleAttribute('open') }}
+                onClick={(evt) => {
+                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                }}
               >
                 <span>What is the design/art for the NFT?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
