@@ -53,7 +53,7 @@ export default function SuccessModal({ setOpenModal, details }) {
               </Link>
               <Link
                 data-size="large"
-                href="http://twitter.com/share?text=I've reserved a Pocket Assistant NFT from @humandao. Let's get this web3 gig economy started!%0a%0aGet one soon before they're gone at&url=https://reserve.humandao.org - get your time back and benefit underserved communities 🤝%0A%0A&hashtags=PANFT"
+                href="http://twitter.com/share?text=I've reserved a Pocket Assistant NFT from @humandao. Let's get this web3 gig economy started!%0a%0aGet one soon before they're gone at&url=https://reserve.humandao.org.%0a%0aHelp those in need and get your time back 🤝&hashtags=PANFT"
               >
                 <a
                   target="_blank"
