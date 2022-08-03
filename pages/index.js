@@ -70,7 +70,7 @@ export default function Reservation({ story }) {
                       />
                     </svg>
                   </span>
-                  <span>Prepare 3,333 USDC, USDT, or DAI for the escrow smart contract</span>
+                  <span>Prepare 3,333 USDC, USDT, or DAI for the escrow smart contract on either Polygon chain or Ethereum mainnet</span>
                 </li>
                 <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-dark md:gap-6 md:text-2xl md:leading-9">
                   <span>
@@ -269,13 +269,14 @@ export default function Reservation({ story }) {
             </div>
           </div>
         </section>
-        ;
+
         <section className="contact pb-12">
           <div className="mx-auto flex w-full max-w-[900px] flex-wrap px-5">
             <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
-              <h3 className="mb-2 text-3.5xl font-bold leading-none text-black">Got questions about PA NFTs?</h3>
-              <Link href="mailto:hdao.helpdesk@gmail.com" target="_blank" rel="noreferrer">
-                <a className="mx-auto mt-12 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Contact us</a>
+              <h3 className="mb-2 text-3.5xl font-bold leading-none text-black">Stay updated on PANFT</h3>
+              <input placeholder="jdoe@email.com" className=" bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4"></input>
+              <Link href="#">
+                <a className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Notify me</a>
               </Link>
             </div>
           </div>
