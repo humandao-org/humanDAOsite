@@ -594,7 +594,7 @@ export default function Reservation({ story }) {
                     <span className="flex w-10 h-10 md:h-14 md:w-14 items-center justify-center rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
                       <img src="https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg?v=022" alt="usdt logo" className="w-10 h-10 object-contain"></img>
                     </span>
-                    <span className="text-xl md:text-5xl font-medium">{USDTEscrowBalance} USDT</span>
+                    <span className="text-xl md:text-5xl font-medium">{DAIEscrowBalance} DAI</span>
                   </li>) : null
                   }
                 </ul>
