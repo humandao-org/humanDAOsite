@@ -40,7 +40,7 @@ export default function Reservation({ story }) {
               <p className="mb-7 text-xl font-semibold tracking-normal text-dark md:text-2xl lg:mb-3">
                 Our NFTs will connect our helpful and enthusiastic community of assistants with busy people and DAOs big on vision but short on time. Make sure to read the FAQs.
               </p>
-              <Link href="/panft-reservation-deposit">
+              <Link href="/deposit">
                 <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">Reserve your NFT</a>
               </Link>
             </div>
@@ -274,7 +274,7 @@ export default function Reservation({ story }) {
           <div className="mx-auto flex w-full max-w-[900px] flex-wrap px-5">
             <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
               <h3 className="mb-2 text-3.5xl font-bold leading-none text-black">Stay updated on PANFT</h3>
-              <input placeholder="jdoe@email.com" className=" bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4"></input>
+              <input placeholder="jdoe@email.com" className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4"></input>
               <Link href="#">
                 <a className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Notify me</a>
               </Link>

@@ -529,12 +529,9 @@ export default function Reservation({ story }) {
           <div className="mx-auto w-full max-w-[1050px]">
             <h1 className="mb-6 font-primary text-4xl font-extrabold  text-primary sm:text-5xl md:text-6xl">Make your reservation</h1>
             <p className="font-medium leading-7  text-black/60 sm:text-xl lg:text-2xl">
-              Connect your wallet to either Mumbai or Goerli testnet and make a deposit of $3,333 using USDC, USDT or DAI to secure a Pocket Assistant NFT.</p>
-            <p>You are welcome to deposit using multiple stablecoins and you are free to make several smaller deposits. Once you reach at total of $3,333 you will have reserved one PA NFT. You are welcome to reserve multiple NFTs.
-            </p>
-            <p>
-              You are free to withdraw your deposited funds at any time until we announce the date and time of the mint (which will be done shortly after we reach 400 reservations).
-            </p>
+            Connect your wallet to either Mumbai or Goerli testnet and make a deposit of $3,333 using USDC, USDT or DAI to secure a Pocket Assistant NFT. You are welcome to reserve multiple NFTs.</p>
+            <p className="pt-4 font-medium leading-7  text-black/60 sm:text-xl lg:text-2xl">
+            You are free to withdraw your deposited funds any time until we officially announce the date and time of the mint (which will be  shortly after achieving 400 reservations).</p>
 
             <div className="mt-11 mb-10 grid w-full gap-7 lg:grid-cols-2 lg:gap-12">
               <div className="rounded-[10px] bg-white px-7 pt-6 pb-8 shadow-account">
