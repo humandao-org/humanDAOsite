@@ -67,7 +67,7 @@ export default function SuccessModal({ setOpenModal, details }) {
               <div className="mx-auto flex w-full flex-wrap">
                 <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
                   <h3 className="text-2xl font-bold leading-none text-black">Stay updated on PANFT</h3>
-                  <input className=" bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-2 py-2"></input>
+                  <input placeholder="jdoe@email.com" className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-2 py-2"></input>
                   <Link href="#">
                     <a className="mx-auto mt-6 block w-fit rounded-full bg-accent-purple px-4 py-2 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-sm">Notify me</a>
                   </Link>
