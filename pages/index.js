@@ -66,7 +66,7 @@ export default function Reservation({ story }) {
               </Link>
             </div>
             <div className="w-full max-w-[552px]">
-              <img src="assets/images/reservation-banner.png" alt="Banner" className="h-auto w-full origin-left object-contain lg:scale-125 lg:transform" />
+              <img src="assets/images/reservation-banner.png" alt="Banner" className="h-auto w-full origin-left object-contain lg:scale-100 lg:transform" />
             </div>
           </div>
         </header>
