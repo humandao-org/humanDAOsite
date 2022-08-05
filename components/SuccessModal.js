@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import StatusDisplay from "./StatusMessage";
+import { registerEmail } from "../lib/affiliate";
 
 export default function SuccessModal({ setOpenModal, details }) {
+
+  const [statusMessage, setStatusMessage] = useState({ type: 'none', message: '' })
+  const [email, setEmail] = useState('')
+
+  const handleEmailSubmit = async (event) => {
+    // setError({ success: true, emailMmessage: "" }); // Resetting a previous error if any
+    event.preventDefault();
+    let payload = {
+      mailing: {
+        email: email,
+        category: 'panft',
+      },
+    };
+    let result = await registerEmail(payload);
+    if (result.success) {
+      setStatusMessage({ type: 'success', message: 'Your email address was sucessfully submitted.' })
+    } else {
+      setStatusMessage({ type: 'error', message: 'A technical problem occurred when submitting your email. Please, try again later!' })
+    }
+    console.log(result);
+  }
+
   return (
     <div className="fixed inset-0 z-20 overflow-y-auto">
       <div className="fixed inset-0 w-full h-full bg-black opacity-40" onClick={() => setOpenModal(false)}></div>
@@ -67,10 +91,23 @@ export default function SuccessModal({ setOpenModal, details }) {
               <div className="mx-auto flex w-full flex-wrap">
                 <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
                   <h3 className="text-2xl font-bold leading-none text-black">Stay updated on PANFT</h3>
-                  <input placeholder="jdoe@email.com" className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-2 py-2"></input>
-                  <Link href="#">
-                    <a className="mx-auto mt-6 block w-fit rounded-full bg-accent-purple px-4 py-2 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-sm">Notify me</a>
-                  </Link>
+                  <form
+                    onSubmit={handleEmailSubmit}
+                  >
+                    <input 
+                      required
+                      type="email"
+                      placeholder="Email address" 
+                      className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-2 py-2"
+                      onChange={(event) => setEmail(event.target.value)}
+                    ></input>
+                    <button
+                      type="submit"
+                      className="mx-auto mt-6 block w-fit rounded-full bg-accent-purple px-4 py-2 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-sm"
+                    >Notify me
+                    </button>
+                  </form>
+                  <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: 'none', message: '' })}></StatusDisplay>
                 </div>
               </div>
             </section>
