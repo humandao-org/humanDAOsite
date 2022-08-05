@@ -1,16 +1,37 @@
 import Head from "next/head";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { affiliateState } from "../state/atom";
 import SiteMenu from "../components/SiteMenu";
+import { registerEmail } from "../lib/affiliate";
+import StatusDisplay from "../components/StatusMessage";
 
 export default function Reservation({ story }) {
   // const { query } = useRouter();
   const affiliate = useRecoilValue(affiliateState);
   const setAffiliate = useSetRecoilState(affiliateState);
-  // var mobileMenuOpen = false
+  const [email, setEmail] = useState('')
+  const [statusMessage, setStatusMessage] = useState({ type: 'none', message: '' })
+
+  const handleEmailSubmit = async (event) => {
+    // setError({ success: true, emailMmessage: "" }); // Resetting a previous error if any
+    event.preventDefault();
+    let payload = {
+      mailing: {
+        email: email,
+        category: 'panft',
+      },
+    };
+    let result = await registerEmail(payload);
+    if (result.success) {
+      setStatusMessage({ type: 'success', message: 'Your email address was sucessfully submitted.' })
+    } else {
+      setStatusMessage({ type: 'error', message: 'A technical problem occurred when submitting your email. Please, try again later!' })
+    }
+    console.log(result);
+  }
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -274,10 +295,18 @@ export default function Reservation({ story }) {
           <div className="mx-auto flex w-full max-w-[900px] flex-wrap px-5">
             <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
               <h3 className="mb-2 text-3.5xl font-bold leading-none text-black">Stay updated on PANFT</h3>
-              <input placeholder="jdoe@email.com" className=" bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4"></input>
-              <Link href="#">
-                <a className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Notify me</a>
-              </Link>
+              <input 
+                required
+                placeholder="Email address" 
+                type="email"
+                className=" bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4"
+                onChange={(event) => setEmail(event.target.value)}
+              ></input>
+              <button
+                className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl"
+                onClick={handleEmailSubmit}
+              >Notify me</button>
+              <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: 'none', message: '' })}></StatusDisplay>
             </div>
           </div>
         </section>
