@@ -295,18 +295,21 @@ export default function Reservation({ story }) {
           <div className="mx-auto flex w-full max-w-[900px] flex-wrap px-5">
             <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
               <h3 className="mb-2 text-3.5xl font-bold leading-none text-black">Stay updated on PANFT</h3>
-              <input 
-                required
-                placeholder="Email address" 
-                type="email"
-                className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4"
-                onChange={(event) => setEmail(event.target.value)}
-              ></input>
-              <button
-                className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl"
-                onClick={handleEmailSubmit}
-              >Notify me</button>
-              <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: 'none', message: '' })}></StatusDisplay>
+              <form
+                  onSubmit={handleEmailSubmit}
+                >
+                <input 
+                  required
+                  placeholder="Email address" 
+                  type="email"
+                  className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4"
+                  onChange={(event) => setEmail(event.target.value)}
+                ></input>
+                <button
+                  className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl"
+                >Notify me</button>
+                <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: 'none', message: '' })}></StatusDisplay>
+              </form>
             </div>
           </div>
         </section>
