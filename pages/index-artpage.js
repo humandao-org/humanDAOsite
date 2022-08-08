@@ -12,9 +12,9 @@ export default function Artpage({ story }) {
         <meta property="og:title" content="The biggest art contest in Web3" />
         <meta property="og:site_name" content="humanDAO" />
         <meta property="og:image" content="https://res.cloudinary.com/daljbo1q0/image/upload/v1659948101/hdao%20art%20contest/Screen_Shot_2022-08-08_at_4.22.07_PM_dlnubs.png" />
-        <meta name="description" content="Craft human-centric service for humanDAO's Pocket Assistant NFTs." />
+        <meta name="description" content="Craft human-centric service for Pocket Assistant NFTs." />
         <meta name="twitter:image" content="https://res.cloudinary.com/daljbo1q0/image/upload/v1659948101/hdao%20art%20contest/Screen_Shot_2022-08-08_at_4.22.07_PM_dlnubs.png" />
-        <meta name="twitter:description" content="Craft human-centric service for humanDAO's Pocket Assistant NFTs." />
+        <meta name="twitter:description" content="Craft human-centric service for Pocket Assistant NFTs." />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="theme-color" content="#c5bcff" />
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
@@ -58,10 +58,10 @@ export default function Artpage({ story }) {
         <div className="grid min-h-full place-items-center -space-y-20 text-center">
           <div className="max-w-[1000px] px-2">
             <p className="lg:text-7.5xl pt-12 text-4xl font-extrabold text-rose-400 drop-shadow-xl sm:px-20 sm:text-5xl md:text-7xl">The Biggest Art Contest In Web3</p>
-            <p className="mt-2 px-2 md:px-36 text-black lg:text-xl">Craft human-centric service for humanDAO's Pocket Assistant NFTs</p>
+            <p className="mt-2 px-2 md:px-36 text-black lg:text-xl">Craft human-centric service for humanDAO&#39;s Pocket Assistant NFTs</p>
             <p className="mt-2 px-2 md:px-36 text-black lg:text-xl">Ends midnight UTC on Sunday July 24th</p>
             <div className="mt-8 text-center">
-              <a href="https://nft.humandao.org" target="_blank" rel="noreferrer" className="w-12 rounded-full bg-white px-8 py-4 font-semibold text-black hover:bg-red-400 hover:text-white">
+              <a href="https://nft.humandao.org" target="_blank" rel="noreferrer noopener" className="w-12 rounded-full bg-white px-8 py-4 font-semibold text-black hover:bg-red-400 hover:text-white">
                 {" "}
                 Enter Contest{" "}
               </a>
@@ -99,7 +99,7 @@ export default function Artpage({ story }) {
             </div>
             <div className="px-4 text-left flex items-center flex-col space-y-[12px] md:pt-12 lg:pt-32">
               <p className="text-xl md:text-2xl font-normal">Your art style can spotlight Pocket Assistants, who are people in underserved communities with the opportunities enabled by crypto and web3.</p>
-              <p className="text-xl md:text-2xl font-normal">Whether it's a PFP, video, or an object design, your goal is to make art that is desirable to hold for aesthetics and functionality.</p>
+              <p className="text-xl md:text-2xl font-normal">Whether it&#39;s a PFP, video, or an object design, your goal is to make art that is desirable to hold for aesthetics and functionality.</p>
             </div>
           </div>
         </div>
@@ -148,20 +148,20 @@ export default function Artpage({ story }) {
               </li>
               <li>
                 Further reading: The details, motivations and impact of the project are explored in a series of Medium posts:{" "}
-                <span className="underline hover:text-blue-400">
-                  <a href="https://medium.com/@TheHumanDAO/a-truly-human-nft-6efb92e5d47a" target="_blank">
+                <span className="underline hover:text-blue-600">
+                  <a href="https://medium.com/@TheHumanDAO/a-truly-human-nft-6efb92e5d47a" target="_blank" rel="noreferrer noopener">
                     Project Overview
                   </a>
                 </span>
                 ,{" "}
-                <span className="underline hover:text-blue-400">
-                  <a href="https://mirror.xyz/adamdawson.eth/BTE1Iea9AiMkMD3vAM8DS4SfFGORxiT8jUf2cK9ASSk" target="_blank">
+                <span className="underline hover:text-blue-600">
+                  <a href="https://mirror.xyz/adamdawson.eth/BTE1Iea9AiMkMD3vAM8DS4SfFGORxiT8jUf2cK9ASSk" target="_blank" rel="noreferrer noopener">
                     Project Motivation
                   </a>
                 </span>
                 ,{" "}
-                <span className="underline hover:text-blue-400">
-                  <a href="https://medium.com/@TheHumanDAO/a-web3-reimagining-of-the-gig-economy-88c90c7e3524" target="_blank">
+                <span className="underline hover:text-blue-600">
+                  <a href="https://medium.com/@TheHumanDAO/a-web3-reimagining-of-the-gig-economy-88c90c7e3524" target="_blank" rel="noreferrer noopener">
                     Project Outcomes
                   </a>
                 </span>
@@ -170,8 +170,8 @@ export default function Artpage({ story }) {
             </ul>
             <p className="text-xl md:text-2xl mx-auto font-normal">
               Participants are also encouraged to{" "}
-              <span className="underline hover:text-blue-400">
-                <a href="https://discord.gg/humandao" target="_blank">
+              <span className="underline hover:text-blue-600">
+                <a href="https://discord.gg/humandao" target="_blank" rel="noreferrer noopener">
                   {" "}
                   join us on Discord
                 </a>
@@ -243,7 +243,7 @@ export default function Artpage({ story }) {
         <div className="mx-auto flex w-full max-w-[900px] flex-wrap px-5">
           <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center bg-red-100/80">
             <h3 className="mb-12 text-3.5xl font-bold leading-none text-black">Make art for PANFT and win rewards</h3>
-            <a href="https://nft.humandao.org" target="_blank" rel="noreferrer" className="w-12 rounded-full bg-white px-8 py-4 font-semibold text-black hover:bg-red-400 hover:text-white">
+            <a href="https://nft.humandao.org" target="_blank" rel="noreferrer noopener" className="w-12 rounded-full bg-white px-8 py-4 font-semibold text-black hover:bg-red-400 hover:text-white">
               {" "}
               Enter Contest{" "}
             </a>
