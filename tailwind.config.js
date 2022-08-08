@@ -90,6 +90,7 @@ module.exports = {
       // [BACKGROUNDS]
       backgroundImage: {
         card: "url('/assets/images/balance-info.png')",
+        heroimg: "url('https://res.cloudinary.com/daljbo1q0/image/upload/v1659684071/hdao%20art%20contest/banner_upside_qchpfp.png')",
       },
 
       // [FONT SIZES]
