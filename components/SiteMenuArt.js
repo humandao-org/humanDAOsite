@@ -1,24 +1,24 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 
-export default function SiteMenu({ children }) {
+export default function SiteMenuArt({ children }) {
 
   const toggleMobileMenu = function() {
-    navList.current.toggleAttribute('open')
+    navListArt.current.toggleAttribute('open')
     burgerMenu.current.toggleAttribute('open')
     let mobileMenuOpen = burgerMenu.current.getAttribute('open') === ''
-    let navListHeight = navList.current.scrollHeight + 60;
+    let navListArtHeight = navListArt.current.scrollHeight + 60;
     if (!mobileMenuOpen) {
-      navList.current.style.height = `0px`;
+      navListArt.current.style.height = `0px`;
       mobileMenuOpen = false
     } else {
-      navList.current.style.height = `${navListHeight}px`;
+      navListArt.current.style.height = `${navListArtHeight}px`;
       mobileMenuOpen = true
     }
   }
 
   const burgerMenu = useRef(null)
-  const navList = useRef(null)
+  const navListArt = useRef(null)
   
   return (
   <nav className="sticky z-20 top-0 px-6 py-6 bg-[#F8F3F3]">
@@ -30,8 +30,8 @@ export default function SiteMenu({ children }) {
       </a>
 
       <div 
-        className="nav-list"
-        ref={navList}
+        className="nav-listArt"
+        ref={navListArtArt}
       >
         <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
           <li>
@@ -47,13 +47,18 @@ export default function SiteMenu({ children }) {
             </a>
           </li>
           <li>
+            <Link href="/#criteria" className="text-[15px] font-medium">
+              <a className="text-black hover:underline">Criteria</a>
+            </Link>
+          </li>
+          <li>
             <Link href="/#faqs" className="text-[15px] font-medium">
               <a className="text-black hover:underline">FAQs</a>
             </Link>
           </li>
           <li>
-            <Link href="mailto:hdao.helpdesk@gmail.com" className="text-[15px] font-medium">
-              <a className="text-black hover:underline">Contact</a>
+            <Link href="mailto:admin@humandao.org?subject=hDAO Art Contest" className="text-[15px] font-medium">
+              <a target="_blank" rel="noreferrer noopener" className="text-black hover:underline">Contact</a>
             </Link>
           </li>
           {children}
