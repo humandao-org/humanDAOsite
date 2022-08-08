@@ -1,10 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
-import SiteMenu from "../components/SiteMenu";
-import { useRouter } from "next/router";
+import Image from 'next/image'
 
 export default function Artpage({ story }) {
-  const { query } = useRouter();
 
   return (
     <div className="">
