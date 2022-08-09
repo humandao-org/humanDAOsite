@@ -56,6 +56,10 @@ module.exports = {
         accent: {
           purple: "#806AD2",
         },
+        moonbirdf: "#1c1e63",
+        moonbirdt: "#174b80",
+        moonbirdg: "#d7f0d3",
+        moonbirdbox: "#c4dfbf",
 
         // [FOR SOCIAL ICONS]
         social: {

@@ -1,39 +1,37 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 
-export default function SiteMenu({ children }) {
+export default function SiteMenuArt({ children }) {
 
   const toggleMobileMenu = function() {
-    navList.current.toggleAttribute('open')
+    navListArt.current.toggleAttribute('open')
     burgerMenu.current.toggleAttribute('open')
     let mobileMenuOpen = burgerMenu.current.getAttribute('open') === ''
-    let navListHeight = navList.current.scrollHeight + 60;
+    let navListArtHeight = navListArt.current.scrollHeight + 60;
     if (!mobileMenuOpen) {
-      navList.current.style.height = `0px`;
+      navListArt.current.style.height = `0px`;
       mobileMenuOpen = false
     } else {
-      navList.current.style.height = `${navListHeight}px`;
+      navListArt.current.style.height = `${navListArtHeight}px`;
       mobileMenuOpen = true
     }
   }
 
   const burgerMenu = useRef(null)
-  const navList = useRef(null)
+  const navListArt = useRef(null)
   
   return (
   <nav className="sticky z-20 top-0 px-6 py-6 bg-[#F8F3F3]">
     <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between gap-5">
-      <a className="hidden md:block w-full max-w-[250px] lg:max-w-[300px]">
+      <a className="block w-full max-w-[250px] lg:max-w-[300px]">
         <object type="image/svg+xml" data="assets/images/logo-main.svg" alt="Logo main" className="w-full h-auto object-contain">
           svg-animation
         </object>
       </a>
-      <ul className="md:hidden flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
-      {children}
-      </ul>
+
       <div 
-        className="nav-list"
-        ref={navList}
+        className="nav-listArt"
+        ref={navListArtArt}
       >
         <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
           <li>
@@ -49,18 +47,21 @@ export default function SiteMenu({ children }) {
             </a>
           </li>
           <li>
+            <Link href="/#criteria" className="text-[15px] font-medium">
+              <a className="text-black hover:underline">Criteria</a>
+            </Link>
+          </li>
+          <li>
             <Link href="/#faqs" className="text-[15px] font-medium">
               <a className="text-black hover:underline">FAQs</a>
             </Link>
           </li>
           <li>
-            <Link href="mailto:hdao.helpdesk@gmail.com" className="text-[15px] font-medium">
-              <a className="text-black hover:underline">Contact</a>
+            <Link href="mailto:admin@humandao.org?subject=hDAO Art Contest" className="text-[15px] font-medium">
+              <a target="_blank" rel="noreferrer noopener" className="text-black hover:underline">Contact</a>
             </Link>
           </li>
-          <span className="hidden md:block">
           {children}
-          </span>
         </ul>
       </div>
 
