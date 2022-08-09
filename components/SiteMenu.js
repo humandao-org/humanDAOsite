@@ -23,12 +23,14 @@ export default function SiteMenu({ children }) {
   return (
   <nav className="sticky z-20 top-0 px-6 py-6 bg-[#F8F3F3]">
     <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between gap-5">
-      <a className="block w-full max-w-[250px] lg:max-w-[300px]">
+      <a className="hidden md:block w-full max-w-[250px] lg:max-w-[300px]">
         <object type="image/svg+xml" data="assets/images/logo-main.svg" alt="Logo main" className="w-full h-auto object-contain">
           svg-animation
         </object>
       </a>
-
+      <ul className="md:hidden flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
+      {children}
+      </ul>
       <div 
         className="nav-list"
         ref={navList}
@@ -56,7 +58,9 @@ export default function SiteMenu({ children }) {
               <a className="text-black hover:underline">Contact</a>
             </Link>
           </li>
+          <span className="hidden md:block">
           {children}
+          </span>
         </ul>
       </div>
 

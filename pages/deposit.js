@@ -98,6 +98,7 @@ export default function Reservation({ story }) {
   const account3 = useAccount()
   const signer3 = useSigner()
   const chain3 = useChainId()
+  const disconnect = useDisconnect()
   const connectWithMetamask = useMetamask()
   const connectWithWalletConnect = useWalletConnect()
   const disconnectWallet = useDisconnect()
@@ -113,9 +114,6 @@ export default function Reservation({ story }) {
 
   async function queryTokenBalance(signer, account){
 
-    // const provider = new ethers.providers.Web3Provider(window.ethereum)
-    // const erc20:Contract = new ethers.Contract(addressContract, abi, provider);
-    // await USDC.connect(signer).approve(hdaoEscrowCntractAddress, 500);
     try {
       const nw = getNetworkByChain(chain3)
 
@@ -126,17 +124,13 @@ export default function Reservation({ story }) {
   
       const USDC = new ethers.Contract(nw.USDCaddress, ERC20, signer)
       let usdcBalance = await USDC.balanceOf(account)
-      // console.log("got USDC balance", usdcBalance)
       setUSDCWalletBalance(Number(ethers.utils.formatUnits(usdcBalance, 6)))
-      // console.log("set USDC balance", USDCWalletBalance)
 
       // Only do other stables if we are on networks where they are configured
       if (nw.chainID === 1 || nw.chainID === 137 || nw.chainID === 80001) {
-        // console.log('getting USDT balance from: ', nw.USDTaddress)
         const USDT = new ethers.Contract(nw.USDTaddress, ERC20, signer)
         const usdtBalance = await USDT.balanceOf(account)
         setUSDTWalletBalance(Number(ethers.utils.formatUnits(usdtBalance, 6)))
-        // console.log('got usdt balance', usdtBalance)
         const DAI = new ethers.Contract(nw.DAIaddress, ERC20, signer)
         let daiBalance = await DAI.balanceOf(account)
         daiBalance = ethers.utils.formatUnits(daiBalance, 18)
@@ -152,12 +146,9 @@ export default function Reservation({ story }) {
   }
   
   async function queryEscrowBalance(signer, network){
-    // const provider = new ethers.providers.Web3Provider(window.ethereum)
     const nw = getNetworkByChain(chain3)
     if (nw?.hdaoEscrowCntractAddress) {
       const hdaoEscrowCntract = new ethers.Contract(nw.hdaoEscrowCntractAddress, hDAOEscrow.abi, signer)
-  
-      // const signer = provider.getSigner()
   
       let usdcBalance = await hdaoEscrowCntract.accountBalances(signer.getAddress(), usdc32)
       setUSDCEscrowBalance(Number(ethers.utils.formatUnits(usdcBalance, 6)))
@@ -176,16 +167,41 @@ export default function Reservation({ story }) {
     }
   }
 
+  async function handleTransaction(tx) {
+    try {
+      let receipt = await tx.wait() // waiting until one block is mined
+      return { success: true, receipt }
+    } catch(e) {
+      console.log(e)
+      return await handleFailedTransaction(e)
+    }
+  }
+
+  async function handleFailedTransaction(e) {
+    if (e.code === 'TRANSACTION_REPLACED') {
+      // No need to react because the 'error' is that the transaction 'failed' as it was replaced with a new one to increase the gas
+      // .. that is what I assume here at least - could be replaced for other reasons but result will be the same that we just have to assume that the new transaction is what we need to wait for
+      console.log('transaction was replaced')
+      try {
+        let result = await handleTransaction(e.replacement)
+        return result
+      } catch(e2) {
+        console.log('replacement transaction failed')
+        console.log(e2)
+        return { success: false, message: 'replacement transaction failed' }
+      }
+    } else if (e.code === 4001) {
+      return { success: false, reason: 'The tranaction was cancelled because the transaction signature was denied' }
+    } else {
+      return { success: false, message: 'transaction failed' }
+    }
+  }
+
+
   async function depositFunds(event) {
     event.preventDefault()
     if(!signer3 || !chain3) return    
     if (!(depositAmount > 0)) return
-    // const provider = new ethers.providers.Web3Provider(window.ethereum)
-    // const signer = provider.getSigner()
-    // const erc20:Contract = new ethers.Contract(addressContract, abi, signer)
-
-    // const hDAOEscrow = await ethers.getContractFactory('hDAOEscrow');
-    // const hdaoescrow = await hDAOEscrow.attach(contractAddress);
     var reservedNoNFTs = depositInputRef.current.value
 
     const payload = {
@@ -206,47 +222,117 @@ export default function Reservation({ story }) {
     const nw = getNetworkByChain(chain3)
     const hdaoEscrowContract = new ethers.Contract(nw.hdaoEscrowCntractAddress, hDAOEscrow.abi, signer3)
     const stableContract = new ethers.Contract(selectedStableCoin.contractAddress, ERC20, signer3)
-    stableContract.connect(signer3).approve(nw.hdaoEscrowCntractAddress, depositAmount)
-      .then((tr) => {
-        setInProgress(true)
-        resetStatus()
-        console.log(`TransactionResponse TX hash: ${tr.hash}`)
-        tr.wait().then((receipt)=>{
-          console.log("transfer receipt",receipt)
-          setInProgress(false)
-          setStatusMessage({ type: 'success', message: 'You successfully allowed the smart contract to deposit your selected amount. Please, confirm the actual transaction next.' })
-          // Approval is done so we can do the actual deposit
-          hdaoEscrowContract.connect(signer3).depositTokens(depositAmount, selectedStableCoin.name32)
-            .then((tr) => {
-              setInProgress(true)
-              resetStatus()
-              console.log(`TransactionResponse TX hash: ${tr.hash}`)
-              tr.wait().then(async (receipt) => {
-                console.log("deposit transfer receipt",receipt)
-                depositInputRef.current.value = ''
-                window.setTimeout(async () => {
-                  await queryEscrowBalance(signer3)
-                  await queryTokenBalance(signer3, address3)
-                }, 1000)
-                payload.reservation.action = 'deposit'
-                await registerReservation(payload)
-                setReservedNoNFTs(reservedNoNFTs)
-                setInProgress(false)
-                setShowModal(true)
-                // setStatusMessage({ type: 'success', message: 'Congratulations! Your funds were successfully deposited to our escrow contract.' })
-              })
+
+    hdaoEscrowContract.on('DepositEvent', async (message, event) => {
+      depositInputRef.current.value = ''
+      window.setTimeout(async () => {
+        await queryEscrowBalance(signer3)
+        await queryTokenBalance(signer3, address3)
+      }, 1000)
+      payload.reservation.action = 'deposit'
+      await registerReservation(payload)
+      setReservedNoNFTs(reservedNoNFTs)
+      setInProgress(false)
+      setShowModal(true)
+    })
+
+    try {
+      resetStatus()
+      let tx = await stableContract.connect(signer3).approve(nw.hdaoEscrowCntractAddress, depositAmount)
+      setInProgress(true)
+      let result = await handleTransaction(tx)
+      setInProgress(false)
+      if (result.success) {
+        setStatusMessage({ type: 'success', message: 'You successfully allowed the smart contract to deposit your selected amount. Please, confirm the actual transaction next.' })
+      } else {
+        setStatusMessage({ type: 'error', reason: result.reason })
+      }
+      let tx2 = await hdaoEscrowContract.connect(signer3).depositTokens(depositAmount, selectedStableCoin.name32)
+      setInProgress(true)
+      resetStatus()
+      let result2 = await handleTransaction(tx2)
+      if (result2.success) {
+        window.setTimeout(async () => {
+          await queryEscrowBalance(signer3)
+          await queryTokenBalance(signer3, address3)
+        }, 1000)
+      } else {
+        setInProgress(false)
+        setStatusMessage({ type: 'error', reason: result.reason })
+      }
+    } catch (e) {
+      let result = await handleFailedTransaction(e)
+      setInProgress(false)
+      setStatusMessage({ type: 'error', reason: result.reason })
+    }
+
+    /*
+    .then((tr) => {
+      setInProgress(true)
+      resetStatus()
+      console.log(`TransactionResponse TX hash: ${tr.hash}`)
+      tr.wait().then((receipt)=>{
+        console.log("transfer receipt",receipt)
+        setInProgress(false)
+        setStatusMessage({ type: 'success', message: 'You successfully allowed the smart contract to deposit your selected amount. Please, confirm the actual transaction next.' })
+        // Approval is done so we can do the actual deposit
+
+        hdaoEscrowContract.connect(signer3).depositTokens(depositAmount, selectedStableCoin.name32)
+          .then((tr) => {
+            setInProgress(true)
+            resetStatus()
+            console.log(`TransactionResponse TX hash: ${tr.hash}`)
+            tr.wait().then(async (receipt) => {
+              console.log("deposit transfer receipt",receipt)
+              // setStatusMessage({ type: 'success', message: 'Congratulations! Your funds were successfully deposited to our escrow contract.' })
+              window.setTimeout(async () => {
+                await queryEscrowBalance(signer3)
+                await queryTokenBalance(signer3, address3)
+              }, 1000)
             })
             .catch((e)=> {
               console.log(e)
-              setInProgress(false)
-              if (e.code === 4001) {
-                setStatusMessage({ type: 'error', reason: 'The tranaction was cancelled because the transaction signature was denied' })
+              if(e.code === 'TRANSACTION_REPLACED') {
+                // No need to react because the 'error' is that one transaction 'failed' as it was replaced to increase gas
+                console.log('transaction was replaced')
               } else {
+                setInProgress(false)
+                console.log('caught in the wait cycle (deposit)')
                 setStatusMessage({ type: 'error' })
               }
-            })
-        })
+            })      
+          })
+          .catch((e)=> {
+            console.log(e)
+            setInProgress(false)
+            if (e.code === 4001) {
+              setStatusMessage({ type: 'error', reason: 'The tranaction was cancelled because the transaction signature was denied' })
+            } else {
+              setStatusMessage({ type: 'error' })
+            }
+          })
       })
+      .catch(async (e)=> {
+        console.log(e)
+        if(e.code === 'TRANSACTION_REPLACED') {
+          // No need to react because the 'error' is that one transaction 'failed' as it was replaced to increase gas
+          console.log('transaction was replaced')
+          try {
+            await e.replacement.wait()
+            setInProgress(false)
+            setStatusMessage({ type: 'success', message: 'You successfully allowed the smart contract to deposit your selected amount. Please, confirm the actual transaction next.' })
+            console.log("NB must refactor to using await so I can call the deposit method from here")
+          } catch(e2) {
+            console.log('replacement transaction failed')
+            console.log(e2)
+          }
+        } else {
+          setInProgress(false)
+          console.log('caught in the wait cycle (approval)')
+          setStatusMessage({ type: 'error' })
+        }
+      })      
+    })
     .catch((e)=> {
       console.log(e)
       setInProgress(false)
@@ -256,6 +342,7 @@ export default function Reservation({ story }) {
         setStatusMessage({ type: 'error' })
       }
     })
+    */
   }
 
   async function withdrawFunds(event) {
@@ -263,11 +350,8 @@ export default function Reservation({ story }) {
     if(!signer3 || !chain3) return    
     if (withdrawAmount <= 0) return
 
-    //const provider = new ethers.providers.Web3Provider(window.ethereum)
-    // const signer = provider.getSigner()
     const nw = getNetworkByChain(chain3)
     const hdaoEscrowContract = new ethers.Contract(nw.hdaoEscrowCntractAddress, hDAOEscrow.abi, signer3)
-    // const USDC: Contract = new ethers.Contract(USDCaddress, ERC20, signer)
     const payload = {
       reservation: {
         action: 'withdrawal_attempt',
@@ -279,29 +363,68 @@ export default function Reservation({ story }) {
     }
     await registerReservation(payload)
 
-    hdaoEscrowContract.connect(signer3).withdrawTokens(withdrawAmount, selectedStableCoin.name32)
+    hdaoEscrowContract.on('WithdrawalEvent', async (message, event) => {
+      withdrawInputRef.current.value = ''
+      window.setTimeout(async () => {
+        await queryEscrowBalance(signer3)
+        await queryTokenBalance(signer3, address3)
+      }, 1000)
+      payload.reservation.action = 'withdrawal'
+      await registerReservation(payload)
+      setInProgress(false)
+      setStatusMessage({ type: 'success', message: 'Your funds were successfully withdrawn from our escrow contract.' })
+    })
+
+    try {
+      resetStatus()
+      let tx = await hdaoEscrowContract.connect(signer3).withdrawTokens(withdrawAmount, selectedStableCoin.name32)
+      setInProgress(true)
+      let result = await handleTransaction(tx)
+      if (result.success) {
+        window.setTimeout(async () => {
+          await queryEscrowBalance(signer3)
+          await queryTokenBalance(signer3, address3)
+        }, 1000)
+      } else {
+        setInProgress(false)
+        setStatusMessage({ type: 'error', reason: result.reason })
+      }
+    } catch(e) {
+      let result = await handleFailedTransaction(e)
+      setInProgress(false)
+      setStatusMessage({ type: 'error', reason: result.reason })
+    }
+
+    /*
       .then((tr) => {
         setInProgress(true)
         resetStatus()
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
         tr.wait().then(async (receipt)=> {
-          withdrawInputRef.current.value = ''
           window.setTimeout(async () => {
             await queryEscrowBalance(signer3)
             await queryTokenBalance(signer3, address3)
           }, 1000)
-          console.log("withdrawal transfer receipt",receipt)
-          payload.reservation.action = 'withdrawal'
-          await registerReservation(payload)
-          setInProgress(false)
-          setStatusMessage({ type: 'success', message: 'Your funds were successfully withdrawn from our escrow contract.' })
+          console.log("withdrawal transfer receipt ", receipt)
         })
+        .catch((e)=> {
+          console.log(e)
+          if(e.code === 'TRANSACTION_REPLACED') {
+            // No need to react because the 'error' is that one transaction 'failed' as it was replaced to increase gas
+            console.log('transaction was replaced')
+          } else {
+            setInProgress(false)
+            console.log('caught in the wait cycle (withdrawal)')
+            setStatusMessage({ type: 'error' })
+          }
+        })      
       })
       .catch((e)=> {
         console.log(e)
         setInProgress(false)
         setStatusMessage({ type: 'error' })
       })      
+    */
   }
 
   useEffect(async () => {
@@ -309,29 +432,27 @@ export default function Reservation({ story }) {
   }, [])
 
   useEffect(async () => {
-    console.log('signer has changed', signer3)
-    console.log('account', account3)
-    console.log('addres', address3)
     if (signer3 && address3 && chain3) {
       await queryTokenBalance(signer3, address3)
       await queryEscrowBalance(signer3)
     }
   }, [signer3])
 
+  useEffect(async () => {
+
+  }, [disconnect])
+
   useEffect(() => {
     changeSelectedStableCoin(selectedStableCoin.name)
   }, [USDTWalletBalance, USDCWalletBalance, DAIWalletBalance, USDTEscrowBalance, USDCEscrowBalance, DAIEscrowBalance])
 
   useEffect(() => {
-    console.log('chain id changed', chain3)
     setNetwork(getNetworkByChain(chain3))
     setIsNetworkAllowed(([5, 80001].includes(chain3)))
-    console.log("isNetworkAllowed should now become: ", [5, 80001].includes(chain3))
   }, [chain3])
 
   const handleChange = (value, method, _stableCoin) => {
     var stableCoin = _stableCoin || selectedStableCoin.name
-    console.log('on change value:', value)
     if(!isNaN(parseFloat(value))) {
       var amount = 0
       if (['USDC','USDT'].includes(stableCoin)) {
@@ -339,7 +460,6 @@ export default function Reservation({ story }) {
       } else if(stableCoin === 'DAI') {
         amount = (parseFloat(value) * 1e18).toString()
       }
-      console.log('amount to withdraw/deposit: ', amount)
       method(amount)
     }
   }
@@ -367,7 +487,6 @@ export default function Reservation({ story }) {
       name32 = dai32
       contractAddress = network.DAIaddress
     }
-    console.log("changing selected stablecoin", { name: stableCoin, escrowBalance, walletBalance })
     setSelectedStableCoin({ name: stableCoin, escrowBalance, walletBalance, name32, contractAddress })
     calculateMaxNFTs(walletBalance, escrowBalance)
     handleChange(depositInputRef.current.value * reservationAmount, setDepositAmount, stableCoin) // Update the amount to deposit since it will differ from coin to coin due to difference in decimals
@@ -375,7 +494,6 @@ export default function Reservation({ story }) {
 
   const calculateMaxNFTs = (walletBalance, escrowBalance) => {
     let maxDepositAmount = Math.floor(walletBalance / reservationAmount)
-    console.log("max deposit amount", maxDepositAmount)
     setMaxDepositAmount(maxDepositAmount)
     let maxWithdrawalAmount = Math.floor(escrowBalance / reservationAmount)
     setMaxWithdrawalAmount(maxWithdrawalAmount)
@@ -725,23 +843,29 @@ export default function Reservation({ story }) {
               </div>
             </div>
           </div>
-        </section>
-        <div className="flex flex-col items-center justify-center h-60">
-          <h1 className="text-2xl font-bold">
-              Testing only: click on the button to open the success-modal.
-          </h1>
-          <button
-            className="px-4 py-2 text-purple-100 bg-accent-purple rounded-md"
-            type="button"
-            onClick={() => {
-              setShowModal(true);
-            }}
-          >
-            Open Modal
-          </button>
-          {showModal && <SuccessModal setOpenModal={setShowModal} details={{ wallet: address3, amount: reservedNoNFTs }} />}
-          {showModalWallet && <WalletConnectModal setOpenModal={setShowModalWallet} connectMetaMask={connectWithMetamask} connectWalletConnect={connectWithWalletConnect} />}
-        </div>
+          <div className="flex flex-col items-center justify-center mt-10">
+            {address3 && (
+            <div
+              className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
+              onClick={disconnect}
+            >Disconnect wallet</div>
+            )}
+            <h1 className="text-2xl font-bold mt-8">
+                Testing only: click on the button to open the success-modal.
+            </h1>
+            <button
+              className="px-4 py-2 mb-6 text-purple-100 bg-accent-purple rounded-md"
+              type="button"
+              onClick={() => {
+                setShowModal(true);
+              }}
+            >
+              Open Modal
+            </button>
+            {showModal && <SuccessModal setOpenModal={setShowModal} details={{ wallet: address3, amount: reservedNoNFTs }} />}
+            {showModalWallet && <WalletConnectModal setOpenModal={setShowModalWallet} connectMetaMask={connectWithMetamask} connectWalletConnect={connectWithWalletConnect} />}
+          </div>
+          </section>
       </div>
     </div>
   );
