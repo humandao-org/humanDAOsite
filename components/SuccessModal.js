@@ -58,7 +58,7 @@ export default function SuccessModal({ setOpenModal, details }) {
             </div>
 
             <div className="w-full max-w-[400px] sm:order-none">
-              <img src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659339164/hdao-nft/123_kzuttx.png" alt="Checked" className="h-auto max-w-xs w-80 mx-auto object-contain" />
+              <img src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659339164/hdao-nft/123_kzuttx.png" alt="Checked" className="h-auto max-w-[200px] lg:max-w-[300px] mx-auto object-contain" />
 
               <div className="mx-auto grid grid-row-2 text-center">
                 <Link href="https://ambassador.humandao.org">
