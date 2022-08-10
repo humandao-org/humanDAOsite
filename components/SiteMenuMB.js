@@ -38,17 +38,12 @@ export default function SiteMenuMB({ children }) {
               </Link>
             </li>
             <li>
-              <a href="https:/reserve.humandao.org/moonbirds" className="text-[15px] font-medium text-black hover:underline">
+              <a href="/moonbirds" className="text-[15px] font-medium text-black hover:underline">
                 PANFT
               </a>
             </li>
             <li>
-              <Link href="/#criteria" className="text-[15px] font-medium">
-                <a className="text-black hover:underline">Criteria</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="https:/reserve.humandao.org/moonbirds#faqs" className="text-[15px] font-medium">
+              <Link href="/moonbirds#faqs" className="text-[15px] font-medium">
                 <a className="text-black hover:underline">FAQs</a>
               </Link>
             </li>
