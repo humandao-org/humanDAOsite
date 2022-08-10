@@ -38,9 +38,9 @@ export default function SiteMenuMB({ children }) {
               </Link>
             </li>
             <li>
-              <a href="/moonbirds" className="text-[15px] font-medium text-black hover:underline">
-                PANFT
-              </a>
+              <Link href="/moonbirds">
+                <a className="text-[15px] font-medium text-black hover:underline">PANFT</a>
+              </Link>
             </li>
             <li>
               <Link href="/moonbirds#faqs" className="text-[15px] font-medium">
