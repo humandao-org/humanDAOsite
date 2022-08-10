@@ -88,7 +88,7 @@ export default function SuccessModal({ setOpenModal, details }) {
           <div className="text-center mt-12 space-y-8">
             <div className="border-t border-slate-300"></div>
             <section className="contact pb-6">
-              <div className="mx-auto flex w-full flex-wrap">
+              <div className="mx-auto flex w-full flex-wrap max-w-[400px] sm:max-w-[600px]">
                 <div className="min-w-[250px] flex-1 rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
                   <h3 className="text-2xl font-bold leading-none text-black">Stay updated on PANFT</h3>
                   <form
@@ -98,7 +98,7 @@ export default function SuccessModal({ setOpenModal, details }) {
                       required
                       type="email"
                       placeholder="Email address" 
-                      className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-2 py-2"
+                      className=" text-center bg-slate-50 rounded-md shadow-sm max-w-full mt-4 px-2 py-2"
                       onChange={(event) => setEmail(event.target.value)}
                     ></input>
                     <button

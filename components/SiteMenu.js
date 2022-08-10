@@ -44,7 +44,7 @@ export default function SiteMenu({ children }) {
             </Link>
           </li>
           <li>
-            <a href="https://nft.humandao.org" className="text-[15px] font-medium text-black hover:underline">
+            <a href="/" className="text-[15px] font-medium text-black hover:underline">
               PANFT
             </a>
           </li>
