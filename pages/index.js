@@ -91,7 +91,7 @@ export default function Reservation({ story }) {
                       />
                     </svg>
                   </span>
-                  <span>Prepare 3,333 USDC, USDT, or DAI for the escrow smart contract on either Polygon chain or Ethereum mainnet</span>
+                  <span>3,333 USDC, USDT, or DAI for the escrow smart contract on either Polygon chain or Ethereum mainnet</span>
                 </li>
                 <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-dark md:gap-6 md:text-2xl md:leading-9">
                   <span>
