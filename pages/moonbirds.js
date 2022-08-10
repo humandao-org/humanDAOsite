@@ -145,7 +145,7 @@ export default function Moonbirds({ story }) {
                       />
                     </svg>
                   </span>
-                  <span className="text-white"> Remember PANFT won't mint until 400 reservations are taken. Any time prior to 400, you can withdraw your funds and give up your reservation spot.</span>
+                  <span className="text-white"> Remember PANFT won&#39;t mint until 400 reservations are taken. Any time prior to 400, you can withdraw your funds and give up your reservation spot.</span>
                 </li>
                 <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
