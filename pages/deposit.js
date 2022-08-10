@@ -1,7 +1,6 @@
-import Head from "next/head"
 import { useEffect, useState, useRef } from "react"
 //import { useRouter } from "next/router";
-import Link from "next/link"
+import { useRouter } from "next/router"
 import { useRecoilValue } from "recoil"
 import { ethers, Contract } from "ethers"
 // import Web3Modal from "web3modal";
@@ -15,19 +14,18 @@ import WalletConnectModal from "../components/WalletConnectModal"
 import { affiliateState } from "../state/atom"
 import { registerReservation } from "../lib/affiliate"
 import SiteMenu from "../components/SiteMenu"
-// Infura endpoint
-const INFURA_ID = "1dc03bb35a274a3c918f23a0646bcd23"
-const jsonRpcEndpoint = `https://mainnet.infura.io/v3/${INFURA_ID}`
 
 const reservationAmount = 20 // 3333 // Price that it costs to reserve an NFT
 
 export default function Reservation({ story }) {
+  const { query } = useRouter();
   const affiliate = useRecoilValue(affiliateState)
-  const [provider, setProvider] = useState()
-  const [library, setLibrary] = useState()
-  const [chainId, setChainId] = useState()
+  const [community, setCommunity] = useState()
+  // const [provider, setProvider] = useState()
+  // const [library, setLibrary] = useState()
+  // const [chainId, setChainId] = useState()
   const [network, setNetwork] = useState()
-  const [account, setAccount] = useState()
+  // const [account, setAccount] = useState()
   const [inProgress, setInProgress] = useState(false)
   // const [web3modal, setWeb3Modal] = useState();
   const [USDCWalletBalance, setUSDCWalletBalance] = useState(0)
@@ -44,6 +42,7 @@ export default function Reservation({ story }) {
   const [isNetworkAllowed, setIsNetworkAllowed] = useState(true)
   const [statusMessage, setStatusMessage] = useState({ type: 'none', message: '' })
   const [reservedNoNFTs, setReservedNoNFTs] = useState(0)
+  const [benefitOption, setBenefitOption] = useState('')
 
   const networks = [
     {
@@ -208,10 +207,12 @@ export default function Reservation({ story }) {
       reservation: {
         action: 'deposit_attempt',
         affiliate_id: affiliate.affiliateId,
+        community,
         currency: selectedStableCoin.name,
         amount: depositAmount,
         wallet: address3,
-        no_nfts: reservedNoNFTs
+        no_nfts: reservedNoNFTs,
+        benefit_choice: benefitOption 
       }
     }
     let result = await registerReservation(payload)
@@ -428,6 +429,14 @@ export default function Reservation({ story }) {
   }
 
   useEffect(async () => {
+    if (query) {
+      setCommunity(query.community)
+    } else {
+      setCommunity('')
+    }
+  }, [query])
+
+  useEffect(async () => {
     setNetwork(getNetworkByChain(1))
   }, [])
 
@@ -499,118 +508,6 @@ export default function Reservation({ story }) {
     setMaxWithdrawalAmount(maxWithdrawalAmount)
   }
 
-  // Assume mainnet
-  /*
-  const connect = async () => {
-    const providerOptions = {
-      injected: {
-        display: {
-          name: "Injected",
-          description: "Connect with the provider in your Browser",
-        },
-        package: null,
-      },
-
-      walletconnect: {
-        package: WalletConnectProvider,
-        options: {
-          infuraId: INFURA_ID, // required
-          rpc: {
-            1: `https://mainnet.infura.io/v3/${INFURA_ID}`,
-            5: `https://goerli.prylabs.net`,
-            137: "https://polygon-rpc.com",
-            80001: `https://polygon-mumbai.infura.io/v3/${INFURA_ID}`,
-          },
-        },
-      },
-    };
-
-    const web3Modal = new Web3Modal({
-      // network: "mainnet", // optional
-      cacheProvider: true, // optional
-      providerOptions, // required
-    });
-    setWeb3Modal(web3Modal);
-
-    const provider = await web3Modal.connect();
-    const library = new ethers.providers.Web3Provider(provider);
-    const accounts = await library.listAccounts();
-    const network = await library.getNetwork();
-
-    console.log('setting provider', provider)
-    setProvider(provider);
-    setLibrary(library);
-    console.log('setting library', library)
-
-    if (accounts) setAccount(accounts[0]);
-    setChainId(network.chainId);
-
-    console.log("this is run once?");
-
-    // const signer = library.getSigner();
-  };
-
-  useEffect(() => {
-    console.log("connect use effect");
-    if (web3modal && web3modal.cachedProvider) {
-      console.log("and here");
-      connect();
-    }
-  }, []);
-
-
-  useEffect(() => {
-    console.log("chain id is: ", chainId)
-    if (account && library) {
-      console.log('both are set')
-      queryTokenBalance(library, account)
-    }
-  }, [account, library, chainId])
-
-  useEffect(() => {
-    console.log("refresh use effect");
-    const refreshState = () => {
-      setAccount();
-      setChainId();
-      setNetwork("");
-      // setMessage("");
-      // setSignature("");
-      // setVerified(undefined);
-    };
-
-    if (provider?.on) {
-      console.log('events attached')
-      const handleAccountsChanged = (accounts) => {
-        console.log("accountsChanged", accounts);
-        if (accounts) setAccount(accounts[0]);
-      };
-
-      const handleChainChanged = (_hexChainId) => {
-        console.log("chains changed", account);
-        setChainId(parseInt(_hexChainId));
-      };
-
-      const handleDisconnect = (error) => {
-        web3modal.clearCachedProvider();
-        refreshState();
-      };
-
-      provider.on("accountsChanged", handleAccountsChanged);
-      provider.on("chainChanged", handleChainChanged);
-      provider.on("disconnect", handleDisconnect);
-
-      return () => {
-        if (provider.removeListener) {
-          provider.removeListener("accountsChanged", handleAccountsChanged);
-          provider.removeListener("chainChanged", handleChainChanged);
-          provider.removeListener("disconnect", handleDisconnect);
-        }
-      };
-    }
-  }, [provider]);
-*/
-
-
   return (
     <div className="bg-[#F8F3F3]">
       <div className="relative z-10 mx-auto w-full">
@@ -626,7 +523,7 @@ export default function Reservation({ story }) {
           <li>
             <div
               className="cursor-pointer text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block" 
-              onClick={() => setShowModalWallet(true) }
+              onClick={ () => setShowModalWallet(true) }
             >
               Connect wallet
             </div>
@@ -643,14 +540,29 @@ export default function Reservation({ story }) {
         </li>
         )}          
         </SiteMenu>
-        <section className="px-5 py-10 lg:pt-24 lg:pb-24">
+
+        { community === 'moonbirds' && (
+        <section className="px-5 py-10 lg:pt-24 bg-gradient-to-b from-moonbirdf to-moonbirdt">
+          <div className="mx-auto w-full max-w-[1050px] text-center lg:text-left">
+            <h1 className="font-primary text-4xl font-extrabold tracking-[0.46px] text-yellow-500 sm:text-5xl md:text-6xl">Make your reservation Moonbird</h1>
+          </div>
+        </section>
+        )}
+        { community === '' && (
+        <section className="px-5 py-10 lg:pt-24">
+          <div className="mx-auto w-full max-w-[1050px] text-center lg:text-left">
+            <h1 className="font-primary text-4xl font-extrabold text-primary sm:text-5xl md:text-6xl">Make your reservation</h1>
+          </div>
+        </section>
+        )}
+        <section className="px-5 py-10 lg:pb-24">
           <div className="mx-auto w-full max-w-[1050px]">
-            <h1 className="mb-6 font-primary text-4xl font-extrabold  text-primary sm:text-5xl md:text-6xl">Make your reservation</h1>
             <p className="font-medium leading-7  text-black/60 sm:text-xl lg:text-2xl">
             Connect your wallet to either Mumbai or Goerli testnet and make a deposit of $3,333 using USDC, USDT or DAI to secure a Pocket Assistant NFT. You are welcome to reserve multiple NFTs.</p>
             <p className="pt-4 font-medium leading-7  text-black/60 sm:text-xl lg:text-2xl">
             You are free to withdraw your deposited funds any time until we officially announce the date and time of the mint (which will be  shortly after achieving 400 reservations).</p>
-
+          </div>
+          <div className="mx-auto w-full max-w-[1050px]">
             <div className="mt-11 mb-10 grid w-full gap-7 lg:grid-cols-2 lg:gap-12">
               <div className="rounded-[10px] bg-white px-7 pt-6 pb-8 shadow-account">
                 <h3 className="mb-10 font-primary text-lg font-extrabold  text-black lg:text-2xl">Your Account Balance</h3>
@@ -658,9 +570,9 @@ export default function Reservation({ story }) {
                 <div className="grid sm:grid-cols-2 sm:grid-row-4 sm:gap-x-1 gap-y-4 font-medium text-black lg:text-xl">
                   <div className="flex hover:bg-white/20 space-x-2 w-full space-y-1.5 lg:space-y-1 rounded-full">
                     <span className="flex h-10 w-10 rounded-full bg-[#f8f8f8] p-1 text-base shadow-icon">
-                      <img src={network?.logo} className="w-8 h-8 object-contain"></img>
+                      <img src={network?.logo || networks[0].logo } className="w-8 h-8 object-contain"></img>
                     </span>
-                    <span className="text-xl md:text-2xl">  {ETHWalletBalance} {network?.Currency}</span>
+                    <span className="text-xl md:text-2xl">  {ETHWalletBalance} {network?.Currency || networks[0].Currency }</span>
                   </div>
                   <div 
                     className="flex hover:bg-white/20 space-x-2 w-full space-y-1.5 lg:space-y-1 rounded-full"
@@ -719,6 +631,58 @@ export default function Reservation({ story }) {
             <div className="rounded-[10px] bg-white px-7 pt-6 pb-14 shadow-account">
               <h3 className="mb-10 font-primary text-lg font-extrabold  text-black lg:text-2xl">Reserve Your Spot</h3>
 
+              { community === 'moonbirds' && (
+              <div className="community-benefits pb-12">
+                <h2 className="mb-4 font-sans font-medium text-black lg:text-xl">Choose your Moonbirds community benefit</h2>
+                <form className="grid grid-cols-3 gap-2 w-full max-w-screen-sm">
+                  <div className="bg-gray-600 hover:bg-moonbirdf active:bg-moonbirdf text-white rounded-lg text-center">
+                    <input 
+                      className="" 
+                      id="radio_1" 
+                      type="radio" 
+                      name="benefit_radio" 
+                      value="rebate"
+                      checked={benefitOption === 'rebate'}
+                      onChange={(e) => setBenefitOption(e.target.value)}
+                    ></input>
+                    <label className="flex flex-col p-4 cursor-pointer" htmlFor="radio_1">
+                      <span className="text-xs font-semibold uppercase text-center">Rebate back 10% to me (post mint)</span>
+                      <img className="max-w-[100px] mx-auto" src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659977826/hdao-nft/65_zfluxq.png"></img>
+                    </label>
+                  </div>
+                  <div className="bg-gray-600 hover:bg-moonbirdf active:bg-moonbirdf text-white rounded-lg text-center">
+                    <input 
+                      className="" 
+                      id="radio_2" 
+                      type="radio" 
+                      name="benefit_radio" 
+                      value="kids"
+                      checked={benefitOption === 'kids'} 
+                      onChange={(e) => setBenefitOption(e.target.value)}
+                    ></input>
+                    <label className="flex flex-col p-4 cursor-pointer" htmlFor="radio_2">
+                      <span className="text-xs font-semibold uppercase text-center">Feed 650+ kids through Food for Life Global</span>
+                      <img className="max-w-[100px] mx-auto" src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659977827/hdao-nft/66_o5urnu.png"></img>
+                    </label>
+                  </div>
+                  <div className="bg-gray-600 hover:bg-moonbirdf active:bg-moonbirdf text-white rounded-lg text-center">
+                    <input 
+                      className="" 
+                      id="radio_3" 
+                      type="radio" 
+                      name="benefit_radio" 
+                      value="treasury"
+                      checked={benefitOption === 'treasury'} 
+                      onChange={(e) => setBenefitOption(e.target.value)}
+                    ></input>
+                    <label className="flex flex-col p-4 cursor-pointer" htmlFor="radio_3">
+                      <span className="text-xs font-semibold uppercase text-center">Send it to your community treasury</span>
+                      <img className="max-w-[100px] mx-auto" src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659977826/hdao-nft/67_aprqoc.png"></img>
+                    </label>
+                  </div>
+                </form>
+              </div>
+              )}
               <p className="mb-4 font-medium text-black lg:text-xl">Reserve using</p>
               <div className="cursor-pointer grid mb-10 grid-rows-1 grid-cols-3 w-full md:max-w-md rounded-full bg-gray-600 text-base font-bold text-white shadow-sm">
                 <div 
@@ -850,20 +814,24 @@ export default function Reservation({ story }) {
               onClick={disconnect}
             >Disconnect wallet</div>
             )}
-            <h1 className="text-2xl font-bold mt-8">
-                Testing only: click on the button to open the success-modal.
-            </h1>
-            <button
-              className="px-4 py-2 mb-6 text-purple-100 bg-accent-purple rounded-md"
-              type="button"
-              onClick={() => {
-                setShowModal(true);
-              }}
-            >
-              Open Modal
-            </button>
+            { community === '' && (
+            <div>
+              <h1 className="text-2xl font-bold mt-8">
+                  Testing only: click on the button to open the success-modal.
+              </h1>
+              <button
+                className="px-4 py-2 mb-6 text-purple-100 bg-accent-purple rounded-md"
+                type="button"
+                onClick={() => {
+                  setShowModal(true);
+                }}
+              >
+                Open Modal
+              </button>
+            </div>
+            )}
             {showModal && <SuccessModal setOpenModal={setShowModal} details={{ wallet: address3, amount: reservedNoNFTs }} />}
-            {showModalWallet && <WalletConnectModal setOpenModal={setShowModalWallet} connectMetaMask={connectWithMetamask} connectWalletConnect={connectWithWalletConnect} />}
+            {(community === '' && showModalWallet) && <WalletConnectModal setOpenModal={setShowModalWallet} connectMetaMask={connectWithMetamask} connectWalletConnect={connectWithWalletConnect} />}
           </div>
           </section>
       </div>
