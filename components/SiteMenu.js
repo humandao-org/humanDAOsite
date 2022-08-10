@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 
-export default function SiteMenu({ children }) {
+export default function SiteMenu({ children, community }) {
 
   const toggleMobileMenu = function() {
     navList.current.toggleAttribute('open')
@@ -44,14 +44,14 @@ export default function SiteMenu({ children }) {
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href={`https://nft.humandao.org/${community ? community : '' }`}>
             <a className="text-[15px] font-medium text-black hover:underline">
               PANFT
             </a>
             </Link>
           </li>
           <li>
-            <Link href="/#faqs">
+            <Link href={`/${community ? community : '' }#faqs`}>
               <a className="text-black hover:underline text-[15px] font-medium">FAQs</a>
             </Link>
           </li>

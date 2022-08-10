@@ -38,7 +38,7 @@ export default function SiteMenuMB({ children }) {
               </Link>
             </li>
             <li>
-              <Link href="/moonbirds">
+              <Link href="https://nft.humandao.org/moonbirds">
                 <a className="text-[15px] font-medium text-black hover:underline">PANFT</a>
               </Link>
             </li>

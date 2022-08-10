@@ -47,7 +47,7 @@ export default function Reservation({ story }) {
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
       </Head>
       <div className="relative z-10 mx-auto w-full">
-        <SiteMenu>
+        <SiteMenu community={''}>
           <li className="mx-auto md:mx-0">
             <Link href="/deposit">
               <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Reserve PANFT</a>

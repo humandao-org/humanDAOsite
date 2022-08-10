@@ -511,7 +511,7 @@ export default function Reservation({ story }) {
   return (
     <div className="bg-[#F8F3F3]">
       <div className="relative z-10 mx-auto w-full">
-        <SiteMenu>
+        <SiteMenu community={community}>
         {(address3 && !isNetworkAllowed) && (
         <li>
           <div className="cursor-pointer text-white bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 m-1 inline-block">
@@ -558,7 +558,7 @@ export default function Reservation({ story }) {
         <section className="px-5 py-10 lg:pb-24">
           <div className="mx-auto w-full max-w-[1050px]">
             <p className="font-medium leading-7  text-black/60 sm:text-xl lg:text-2xl">
-            Connect your wallet to either Mumbai or Goerli testnet and make a deposit of $3,333 using USDC, USDT or DAI to secure a Pocket Assistant NFT. You are welcome to reserve multiple NFTs.</p>
+            Connect your wallet to either { community === '' ? 'Mumbai or Goerli testnet' : 'Ethereum or Polygon' } and make a deposit of $3,333 using USDC, USDT or DAI to secure a Pocket Assistant NFT. You are welcome to reserve multiple NFTs.</p>
             <p className="pt-4 font-medium leading-7  text-black/60 sm:text-xl lg:text-2xl">
             You are free to withdraw your deposited funds any time until we officially announce the date and time of the mint (which will be  shortly after achieving 400 reservations).</p>
           </div>
