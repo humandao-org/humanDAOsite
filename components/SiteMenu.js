@@ -37,9 +37,9 @@ export default function SiteMenu({ children }) {
       >
         <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
           <li>
-            <Link href="/" className="text-[15px] font-medium">
+            <Link href="https://humandao.org" target="_blank" rel="noopener noreferrer" className="text-[15px] font-medium">
               <a className="text-[15px] font-medium text-black hover:underline">
-                Home
+                HDAO
               </a>
             </Link>
           </li>
@@ -54,7 +54,7 @@ export default function SiteMenu({ children }) {
             </Link>
           </li>
           <li>
-            <Link href="mailto:hdao.helpdesk@gmail.com" className="text-[15px] font-medium">
+            <Link href="mailto:hdao.helpdesk@gmail.com?subject=PANFT Reservation" className="text-[15px] font-medium">
               <a className="text-black hover:underline">Contact</a>
             </Link>
           </li>

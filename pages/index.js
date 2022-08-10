@@ -59,7 +59,7 @@ export default function Reservation({ story }) {
             <div className="w-full max-w-[548px] text-center lg:text-left">
               <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-primary sm:text-5xl md:text-6xl lg:mb-3">Transform your work with PANFT</h1>
               <p className="mb-7 text-xl font-semibold tracking-normal text-dark md:text-2xl lg:mb-3">
-                Our NFTs will connect our helpful and enthusiastic community of assistants with busy people and DAOs big on vision but short on time. Make sure to read the FAQs.
+              This mint will function differently from standard NFT drops due to the service attached. We are using a reservation system. Make sure to read the FAQs.
               </p>
               <Link href="/deposit">
                 <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">Reserve your NFT</a>

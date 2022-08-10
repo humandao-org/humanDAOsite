@@ -89,7 +89,7 @@ export default function SuccessModal({ setOpenModal, details }) {
             <div className="border-t border-slate-300"></div>
             <section className="contact pb-6">
               <div className="mx-auto flex w-full flex-wrap">
-                <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
+                <div className="min-w-[250px] flex-1 rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
                   <h3 className="text-2xl font-bold leading-none text-black">Stay updated on PANFT</h3>
                   <form
                     onSubmit={handleEmailSubmit}
