@@ -12,8 +12,8 @@ export default function Reservation({ story }) {
   // const { query } = useRouter();
   const affiliate = useRecoilValue(affiliateState);
   const setAffiliate = useSetRecoilState(affiliateState);
-  const [email, setEmail] = useState('')
-  const [statusMessage, setStatusMessage] = useState({ type: 'none', message: '' })
+  const [email, setEmail] = useState("");
+  const [statusMessage, setStatusMessage] = useState({ type: "none", message: "" });
 
   const handleEmailSubmit = async (event) => {
     // setError({ success: true, emailMmessage: "" }); // Resetting a previous error if any
@@ -21,17 +21,17 @@ export default function Reservation({ story }) {
     let payload = {
       mailing: {
         email: email,
-        category: 'panft',
+        category: "panft",
       },
     };
     let result = await registerEmail(payload);
     if (result.success) {
-      setStatusMessage({ type: 'success', message: 'Your email address was sucessfully submitted.' })
+      setStatusMessage({ type: "success", message: "Your email address was sucessfully submitted." });
     } else {
-      setStatusMessage({ type: 'error', message: 'A technical problem occurred when submitting your email. Please, try again later!' })
+      setStatusMessage({ type: "error", message: "A technical problem occurred when submitting your email. Please, try again later!" });
     }
     console.log(result);
-  }
+  };
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -57,9 +57,10 @@ export default function Reservation({ story }) {
         <header className="py-32 px-5 lg:pt-52 lg:pb-80">
           <div className="mx-auto flex w-full max-w-[1100px] flex-col items-center justify-between gap-16 lg:flex-row lg:gap-5">
             <div className="w-full max-w-[548px] text-center lg:text-left">
-              <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-primary sm:text-5xl md:text-6xl lg:mb-3">Transform your work with PANFT</h1>
+              <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-primary sm:text-5xl md:text-6xl lg:mb-3">Get Back Your Time With PANFT</h1>
               <p className="mb-7 text-xl font-semibold tracking-normal text-dark md:text-2xl lg:mb-3">
-              This mint will function differently from standard NFT drops due to the service attached. We are using a reservation system. Make sure to read the FAQs.
+                This mint will function differently from standard NFT drops due to the service attached. We are using a reservation system. The NFT will deploy and live on the Polygon chain but we are allowing reservations on mainnet as well. Make
+                sure to read the FAQs.
               </p>
               <Link href="/deposit">
                 <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">Reserve your NFT</a>
@@ -79,7 +80,7 @@ export default function Reservation({ story }) {
               <h2 className="mb-8 pb-1 text-3.5xl font-extrabold text-primary md:mb-16 md:text-5xl">What do I need to prepare for the reservation?</h2>
 
               <ul className="space-y-8">
-                <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-dark md:gap-6 md:text-2xl md:leading-9">
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
                     <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -91,9 +92,9 @@ export default function Reservation({ story }) {
                       />
                     </svg>
                   </span>
-                  <span>3,333 USDC, USDT, or DAI for the escrow smart contract on either Polygon chain or Ethereum mainnet</span>
+                  <span>3,333 USDC, USDT, or DAI for the reservation contract on either Polygon chain or Ethereum mainnet. Make sure you have some MATIC or ETH to pay for the gas.</span>
                 </li>
-                <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-dark md:gap-6 md:text-2xl md:leading-9">
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
                     <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -105,9 +106,9 @@ export default function Reservation({ story }) {
                       />
                     </svg>
                   </span>
-                  <span>Make sure you have some MATIC or ETH to pay for the gas transactions</span>
+                  <span>Keep in mind the NFT will be deployed on Polygon chain. Once minted it will be sent to the address used for the reservation ON POLYGON regardless if the reservation was made on Ethereum mainnet. More details in FAQ.</span>
                 </li>
-                <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-dark md:gap-6 md:text-2xl">
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
                     <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -119,9 +120,9 @@ export default function Reservation({ story }) {
                       />
                     </svg>
                   </span>
-                  <span>Remember PANFT won&#39;t mint until 400 reservations are taken</span>
+                  <span>Remember PANFT won't mint until 400 reservations are taken. Any time prior to 400, you can withdraw your funds and give up your reservation spot.</span>
                 </li>
-                <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-dark md:gap-6 md:text-2xl">
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
                     <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -150,6 +151,37 @@ export default function Reservation({ story }) {
                   evt.target.parentNode.parentNode.toggleAttribute("open");
                 }}
               >
+                <span>What chain will the PANFT use?</span>
+                <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#111827" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
+                <p>
+                  The NFT will be deployed on Polygon chain. The main reason for this is the utility of PANFT may require high gas fees for any sales, renting and minting if it were on Ethereum mainnet. To make things easier we have allowed people to
+                  reserve PANFT on either chain, Polygon or Ethereum mainnet.
+                </p>
+                <p className="pt-4">
+                  <strong>But once PANFT mints/launches it will be sent to the address used for the reservation -- ON POLYGON -- regardless if the reservation was made on Ethereum mainnet. </strong> As you have used that address on mainnet, the same
+                  address exists on Polygon as well and you have control of it. You only have to connect your wallet to Polygon chain to confirm and use your PANFT.
+                </p>
+                <p className="pt-4">
+                  If using Metamask,{" "}
+                  <a className="underline hover:text-blue-500" href="https://bit.ly/hdao-tokens" target="_blank" rel="noreferrer">
+                    here
+                  </a>{" "}
+                  is a tutorial on connecting to the Polygon chain.
+                </p>
+              </div>
+            </div>
+
+            <div className="faq-box group">
+              <button
+                className="faq-btn cursor-pointer grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl"
+                onClick={(evt) => {
+                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                }}
+              >
                 <span>What will it cost to mint?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#111827" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -159,7 +191,7 @@ export default function Reservation({ story }) {
                 <p>Remember PANFT is a membership and service, not a PFP project. We cannot mint 10k at low/no cost. Since there are no ongoing costs to holders we need to ensure sustainability of the program.</p>
                 <p className="pt-4">
                   We will be utilizing a reservation smart contract that will allow you to reserve a PANFT by committing the full mint price, $3,333.{" "}
-                  <span className="font-bold">You can withdraw your funds and give up your spot in line anytime prior to mint. The funds are in escrow contract.</span>
+                  <span className="font-bold">You can withdraw your funds and give up your spot in line anytime prior to mint. The funds are in reservation contract.</span>
                 </p>
                 <p className="pt-4">
                   Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. If there is large demand and we have enough PAs onboarded, we reserve the
@@ -295,20 +327,10 @@ export default function Reservation({ story }) {
           <div className="mx-auto flex w-full max-w-[900px] flex-wrap px-5">
             <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
               <h3 className="mb-2 text-3.5xl font-bold leading-none text-black">Stay updated on PANFT</h3>
-              <form
-                  onSubmit={handleEmailSubmit}
-                >
-                <input 
-                  required
-                  placeholder="Email address" 
-                  type="email"
-                  className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4"
-                  onChange={(event) => setEmail(event.target.value)}
-                ></input>
-                <button
-                  className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl"
-                >Notify me</button>
-                <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: 'none', message: '' })}></StatusDisplay>
+              <form onSubmit={handleEmailSubmit}>
+                <input required placeholder="Email address" type="email" className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4" onChange={(event) => setEmail(event.target.value)}></input>
+                <button className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Notify me</button>
+                <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: "none", message: "" })}></StatusDisplay>
               </form>
             </div>
           </div>

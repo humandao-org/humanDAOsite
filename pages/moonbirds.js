@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { affiliateState } from "../state/atom";
-import SiteMenu from "../components/SiteMenu";
+import SiteMenuMB from "../components/SiteMenuMB";
 import { registerEmail } from "../lib/affiliate";
 import StatusDisplay from "../components/StatusMessage";
 
@@ -12,8 +12,8 @@ export default function Moonbirds({ story }) {
   // const { query } = useRouter();
   const affiliate = useRecoilValue(affiliateState);
   const setAffiliate = useSetRecoilState(affiliateState);
-  const [email, setEmail] = useState('')
-  const [statusMessage, setStatusMessage] = useState({ type: 'none', message: '' })
+  const [email, setEmail] = useState("");
+  const [statusMessage, setStatusMessage] = useState({ type: "none", message: "" });
 
   const handleEmailSubmit = async (event) => {
     // setError({ success: true, emailMmessage: "" }); // Resetting a previous error if any
@@ -21,17 +21,17 @@ export default function Moonbirds({ story }) {
     let payload = {
       mailing: {
         email: email,
-        category: 'panft',
+        category: "panft",
       },
     };
     let result = await registerEmail(payload);
     if (result.success) {
-      setStatusMessage({ type: 'success', message: 'Your email address was sucessfully submitted.' })
+      setStatusMessage({ type: "success", message: "Your email address was sucessfully submitted." });
     } else {
-      setStatusMessage({ type: 'error', message: 'A technical problem occurred when submitting your email. Please, try again later!' })
+      setStatusMessage({ type: "error", message: "A technical problem occurred when submitting your email. Please, try again later!" });
     }
     console.log(result);
-  }
+  };
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -47,19 +47,20 @@ export default function Moonbirds({ story }) {
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
       </Head>
       <div className="relative z-10 mx-auto w-full">
-        <SiteMenu>
+        <SiteMenuMB>
           <li className="mx-auto md:mx-0">
             <Link href="/deposit">
               <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Reserve PANFT</a>
             </Link>
           </li>
-        </SiteMenu>
+        </SiteMenuMB>
         <header className="py-16 px-5 lg:pt-52 lg:pb-40">
           <div className="mx-auto flex w-full max-w-[1100px] flex-col items-center justify-between gap-16 lg:flex-row lg:gap-5">
             <div className="w-full max-w-[548px] text-center lg:text-left">
-              <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-yellow-500 sm:text-5xl md:text-6xl lg:mb-3">Moonbirds with humanDAO PANFT</h1>
+              <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-yellow-500 sm:text-5xl md:text-6xl lg:mb-3">Get Back Your Time With PANFT</h1>
               <p className="mb-7 text-xl font-semibold tracking-normal text-white md:text-2xl lg:mb-3">
-                This mint will function differently from standard NFT drops due to the service attached. We are using a reservation system. Make sure to read the FAQs.
+                This mint will function differently from standard NFT drops due to the service attached. We are using a reservation system. The NFT will deploy and live on the Polygon chain but we are allowing reservations on mainnet as well. Make
+                sure to read the FAQs.
               </p>
               <Link href="/deposit">
                 <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">Reserve your NFT</a>
@@ -72,28 +73,28 @@ export default function Moonbirds({ story }) {
         </header>
 
         <section id="benefit">
-        <div className="mx-auto max-w-[800px] space-y-[32px] px-2 py-16 lg:pb-40">
-          <h1 className="pt-12 px-8 text-center text-3xl font-bold text-yellow-500 font-primary sm:text-5xl">Community Benefits</h1>
-          <div className="px-4 text-left flex mx-a flex-col space-y-[12px] ">
-            <p className="text-xl max-w-[800px] md:text-2xl mx-auto text-white text-center font-normal">Because you&#39;re an awesome MoonBird or Oddity you get to make a choice with 10% ($333 USDC) of the mint price</p>
+          <div className="mx-auto max-w-[800px] space-y-[32px] px-2 py-16 lg:pb-40">
+            <h1 className="pt-12 px-8 text-center text-3xl font-bold text-yellow-500 font-primary sm:text-5xl">Community Benefits</h1>
+            <div className="px-4 text-left flex mx-a flex-col space-y-[12px] ">
+              <p className="text-xl max-w-[800px] md:text-2xl mx-auto text-white text-center font-normal">Because you&#39;re an awesome MoonBird or Oddity you get to make a choice with 10% ($333 USDC) of the mint price</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[32px] max-w-[300px] md:max-w-[800px] lg:max-w-[1200px] mx-auto shadow-xs rounded-lg px-12 py-8">
+              <div className="flex flex-col items-center space-y-[12px] text-center md:space-y-[24px]">
+                <img className="max-w-[200px] max-h-[150px]" src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659977826/hdao-nft/65_zfluxq.png"></img>
+                <p className="text-xl font-semibold text-white">Rebate it back to me (post mint)</p>
+              </div>
+              <div className="flex flex-col items-center space-y-[12px] text-center md:space-y-[24px]">
+                <img className="max-w-[200px] max-h-[150px]" src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659977827/hdao-nft/66_o5urnu.png"></img>
+                <p className="text-xl font-semibold text-white">Feed 650+ kids through Food For Life Global</p>
+              </div>
+              <div className="flex flex-col items-center space-y-[12px] text-center md:space-y-[24px]">
+                <img className="max-w-[200px] max-h-[150px]" src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659977826/hdao-nft/67_aprqoc.png"></img>
+                <p className="text-xl font-semibold text-white">Send it to your community treasury</p>
+              </div>
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[32px] max-w-[300px] md:max-w-[800px] lg:max-w-[1200px] mx-auto shadow-xs rounded-lg px-12 py-8">
-            <div className="flex flex-col items-center space-y-[12px] text-center md:space-y-[24px]">
-              <img className="max-w-[200px] max-h-[150px]" src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659977826/hdao-nft/65_zfluxq.png"></img>
-              <p className="text-xl font-semibold text-white">Rebate it back to me (post mint)</p>
-            </div>
-            <div className="flex flex-col items-center space-y-[12px] text-center md:space-y-[24px]">
-              <img className="max-w-[200px] max-h-[150px]" src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659977827/hdao-nft/66_o5urnu.png"></img>
-              <p className="text-xl font-semibold text-white">Feed 650+ kids through Food For Life Global</p>
-            </div>
-            <div className="flex flex-col items-center space-y-[12px] text-center md:space-y-[24px]">
-              <img className="max-w-[200px] max-h-[150px]" src="https://res.cloudinary.com/daljbo1q0/image/upload/v1659977826/hdao-nft/67_aprqoc.png"></img>
-              <p className="text-xl font-semibold text-white">Send it to your community treasury</p>
-            </div>
-          </div>
-        </div>
-      </section>
-        <section className="mb-40 px-5 md:mb-80">
+        </section>
+        <section className="mb-40 px-5 md:mb-80 ">
           <div className="mx-auto flex w-full max-w-[1100px] flex-col items-center justify-between gap-8 md:flex-row">
             <div className="order-last w-full max-w-[450px] md:order-none">
               <img src="assets/images/reservation-2.png" alt="image" className="h-auto w-full object-contain" />
@@ -102,61 +103,63 @@ export default function Moonbirds({ story }) {
               <h2 className="mb-8 pb-1 text-3.5xl font-extrabold text-yellow-500 md:mb-16 md:text-5xl">What do I need to prepare for the reservation?</h2>
 
               <ul className="space-y-8">
-                <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-white md:gap-6 md:text-2xl md:leading-9">
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
                     <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M14.75 21L18.9167 25.1667L27.25 16.8333M39.75 21C39.75 31.3553 31.3553 39.75 21 39.75C10.6447 39.75 2.25 31.3553 2.25 21C2.25 10.6447 10.6447 2.25 21 2.25C31.3553 2.25 39.75 10.6447 39.75 21Z"
-                        stroke="#ffffff"
+                        stroke="#FFFFFF"
                         strokeWidth="4"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
                   </span>
-                  <span>3,333 USDC, USDT, or DAI for the escrow smart contract on either Polygon chain or Ethereum mainnet</span>
+                  <span className="text-white">3,333 USDC, USDT, or DAI for the reservation contract on either Polygon chain or Ethereum mainnet. Make sure you have some MATIC or ETH to pay for the gas.</span>
                 </li>
-                <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-white md:gap-6 md:text-2xl md:leading-9">
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
                     <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M14.75 21L18.9167 25.1667L27.25 16.8333M39.75 21C39.75 31.3553 31.3553 39.75 21 39.75C10.6447 39.75 2.25 31.3553 2.25 21C2.25 10.6447 10.6447 2.25 21 2.25C31.3553 2.25 39.75 10.6447 39.75 21Z"
-                        stroke="#ffffff"
+                        stroke="#FFFFFF"
                         strokeWidth="4"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
                   </span>
-                  <span>Make sure you have some MATIC or ETH to pay for the gas transactions</span>
+                  <span className="text-white">
+                    Keep in mind the NFT will be deployed on Polygon chain. Once minted it will be sent to the address used for the reservation ON POLYGON regardless if the reservation was made on Ethereum mainnet. More details in FAQ.
+                  </span>
                 </li>
-                <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-white md:gap-6 md:text-2xl">
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
                     <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M14.75 21L18.9167 25.1667L27.25 16.8333M39.75 21C39.75 31.3553 31.3553 39.75 21 39.75C10.6447 39.75 2.25 31.3553 2.25 21C2.25 10.6447 10.6447 2.25 21 2.25C31.3553 2.25 39.75 10.6447 39.75 21Z"
-                        stroke="#ffffff"
+                        stroke="#FFFFFF"
                         strokeWidth="4"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
                   </span>
-                  <span>Remember PANFT won&#39;t mint until 400 reservations are taken</span>
+                  <span className="text-white"> Remember PANFT won't mint until 400 reservations are taken. Any time prior to 400, you can withdraw your funds and give up your reservation spot.</span>
                 </li>
-                <li className="grid grid-cols-[max-content_1fr] gap-3 text-base font-semibold text-white md:gap-6 md:text-2xl">
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
                     <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M14.75 21L18.9167 25.1667L27.25 16.8333M39.75 21C39.75 31.3553 31.3553 39.75 21 39.75C10.6447 39.75 2.25 31.3553 2.25 21C2.25 10.6447 10.6447 2.25 21 2.25C31.3553 2.25 39.75 10.6447 39.75 21Z"
-                        stroke="#ffffff"
+                        stroke="#FFFFFF"
                         strokeWidth="4"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
                   </span>
-                  <span>At any time prior to 400, you can withdraw your funds and give up your reservation spot</span>
+                  <span className="text-white">At any time prior to 400, you can withdraw your funds and give up your reservation spot</span>
                 </li>
               </ul>
             </div>
@@ -173,16 +176,47 @@ export default function Moonbirds({ story }) {
                   evt.target.parentNode.parentNode.toggleAttribute("open");
                 }}
               >
-                <span className="text-white">What will it cost to mint?</span>
+                <span>What chain will the PANFT use?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#ffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-white opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
+                <p>
+                  The NFT will be deployed on Polygon chain. The main reason for this is the utility of PANFT may require high gas fees for any sales, renting and minting if it were on Ethereum mainnet. To make things easier we have allowed people to
+                  reserve PANFT on either chain, Polygon or Ethereum mainnet.
+                </p>
+                <p className="pt-4">
+                  <strong>But once PANFT mints/launches it will be sent to the address used for the reservation -- ON POLYGON -- regardless if the reservation was made on Ethereum mainnet. </strong> As you have used that address on mainnet, the same
+                  address exists on Polygon as well and you have control of it. You only have to connect your wallet to Polygon chain to confirm and use your PANFT.
+                </p>
+                <p className="pt-4">
+                  If using Metamask,{" "}
+                  <a className="underline hover:text-blue-500" href="https://bit.ly/hdao-tokens" target="_blank" rel="noreferrer">
+                    here
+                  </a>{" "}
+                  is a tutorial on connecting to the Polygon chain.
+                </p>
+              </div>
+            </div>
+
+            <div className="faq-box group">
+              <button
+                className="faq-btn cursor-pointer grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-white md:text-3.5xl"
+                onClick={(evt) => {
+                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                }}
+              >
+                <span>What will it cost to mint?</span>
+                <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-white opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>Remember PANFT is a membership and service, not a PFP project. We cannot mint 10k at low/no cost. Since there are no ongoing costs to holders we need to ensure sustainability of the program.</p>
                 <p className="pt-4">
-                  We will be utilizing a reservation smart contract that will allow you to reserve a PANFT by committing the full mint price, $3,333 USDC.{" "}
-                  <span className="font-bold">You can withdraw your funds and give up your spot in line anytime prior to mint. The funds are in escrow contract.</span>
+                  We will be utilizing a reservation smart contract that will allow you to reserve a PANFT by committing the full mint price, $3,333.{" "}
+                  <span className="font-bold">You can withdraw your funds and give up your spot in line anytime prior to mint. The funds are in reservation contract.</span>
                 </p>
                 <p className="pt-4">
                   Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. If there is large demand and we have enough PAs onboarded, we reserve the
@@ -201,7 +235,7 @@ export default function Moonbirds({ story }) {
               >
                 <span>How many NFTs are available?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#ffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-white opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
@@ -210,7 +244,7 @@ export default function Moonbirds({ story }) {
                   auction for a single PANFT. If there is large demand and we have enough PAs onboarded, we reserve the right to extend the genesis batch (by a few hundred) to more than 400 before mint.
                 </p>
                 <p className="pt-4">
-                  <span className="font-bold">The genesis mint is the only time there will be a set fee for PANFTs. </span>The daily auctions will start at the genesis mint price ($3,333 USDC) and demand will dictate the winning bid.
+                  <span className="font-bold">The genesis mint is the only time there will be a set fee for PANFTs. </span>The daily auctions will start at the genesis mint price ($3,333) and demand will dictate the winning bid.
                 </p>
                 <p className="pt-4">From the genesis mint we will test and improve the application and service before scaling up and offering more NFTs in batch auctions. </p>
               </div>
@@ -225,7 +259,7 @@ export default function Moonbirds({ story }) {
               >
                 <span>What are the features and benefits of the NFT?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#ffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-white opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
@@ -255,7 +289,7 @@ export default function Moonbirds({ story }) {
               >
                 <span>Why do we have to hodl or stake HDAO?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#ffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-white opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
@@ -287,7 +321,7 @@ export default function Moonbirds({ story }) {
               >
                 <span>What is the design/art for the NFT?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#ffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-white opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
@@ -295,7 +329,7 @@ export default function Moonbirds({ story }) {
                   Keep in mind this is not a PFP or Avatar project. It is a membership NFT granting the holder use of a service (among other beneficial tokenomics). So while the artwork doesn&#39;t convey identity we have something wonderful planned.
                 </p>
                 <p className="pt-4">
-                  The art will be determined in a major web3 design competition hDAO will be holding very soon. We have dedicated $20k USDC in prizes, so if you are an artist or designer make sure to follow our{" "}
+                  The art will be determined in a major web3 design competition hDAO will be holding very soon. We have dedicated $20k in prizes, so if you are an artist or designer make sure to follow our{" "}
                   <a className="underline hover:text-blue-500" href="https://twitter.com/humanDAO" target="_blank" rel="noreferrer">
                     Twitter
                   </a>
@@ -318,20 +352,10 @@ export default function Moonbirds({ story }) {
           <div className="mx-auto flex w-full max-w-[900px] flex-wrap px-5">
             <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-b from-moonbirdt to-moonbirdg">
               <h3 className="mb-2 text-3.5xl font-bold leading-none text-white">Stay updated on PANFT</h3>
-              <form
-                  onSubmit={handleEmailSubmit}
-                >
-                <input 
-                  required
-                  placeholder="Email address" 
-                  type="email"
-                  className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4"
-                  onChange={(event) => setEmail(event.target.value)}
-                ></input>
-                <button
-                  className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl"
-                >Notify me</button>
-                <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: 'none', message: '' })}></StatusDisplay>
+              <form onSubmit={handleEmailSubmit}>
+                <input required placeholder="Email address" type="email" className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4" onChange={(event) => setEmail(event.target.value)}></input>
+                <button className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Notify me</button>
+                <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: "none", message: "" })}></StatusDisplay>
               </form>
             </div>
           </div>
