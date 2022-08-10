@@ -7,7 +7,7 @@ export default function StatusDisplay({ statusMessage, resetStatus }) {
       {statusMessage.type === 'success' ? (
         <div className="my-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
           <strong className="font-bold">Success!</strong>
-          <span className="block sm:inline">{ statusMessage.message }</span>
+          <span className="block sm:inline"> { statusMessage.message }</span>
           <span 
             onClick={resetStatus}
             className="absolute top-0 bottom-0 right-0 px-4 py-3">
@@ -18,7 +18,7 @@ export default function StatusDisplay({ statusMessage, resetStatus }) {
       {statusMessage.type === 'error' ? (
         <div className="my-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
           <strong className="font-bold">Something went wrong!</strong>
-          <span className="block sm:inline">{ statusMessage.message }</span>
+          <span className="block sm:inline"> { statusMessage.message }</span>
           <span 
             onClick={resetStatus}
             className="absolute top-0 bottom-0 right-0 px-4 py-3">
