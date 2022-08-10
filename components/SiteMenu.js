@@ -37,25 +37,27 @@ export default function SiteMenu({ children }) {
       >
         <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
           <li>
-            <Link href="https://humandao.org" target="_blank" rel="noopener noreferrer" className="text-[15px] font-medium">
-              <a className="text-[15px] font-medium text-black hover:underline">
+            <Link href="https://humandao.org">
+              <a target="_blank" rel="noopener noreferrer" className="text-[15px] font-medium text-black hover:underline">
                 HDAO
               </a>
             </Link>
           </li>
           <li>
-            <a href="/" className="text-[15px] font-medium text-black hover:underline">
+            <Link href="/">
+            <a className="text-[15px] font-medium text-black hover:underline">
               PANFT
             </a>
-          </li>
-          <li>
-            <Link href="/#faqs" className="text-[15px] font-medium">
-              <a className="text-black hover:underline">FAQs</a>
             </Link>
           </li>
           <li>
-            <Link href="mailto:hdao.helpdesk@gmail.com?subject=PANFT Reservation" className="text-[15px] font-medium">
-              <a className="text-black hover:underline">Contact</a>
+            <Link href="/#faqs">
+              <a className="text-black hover:underline text-[15px] font-medium">FAQs</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="mailto:hdao.helpdesk@gmail.com?subject=PANFT Reservation">
+              <a className="text-black hover:underline text-[15px] font-medium">Contact</a>
             </Link>
           </li>
           <span className="hidden md:block">
