@@ -62,7 +62,7 @@ export default function Moonbirds({ story }) {
                 This mint will function differently from standard NFT drops due to the service attached. We are using a reservation system. The NFT will deploy and live on the Polygon chain but we are allowing reservations on mainnet as well. Make
                 sure to read the FAQs.
               </p>
-              <Link href="/deposit">
+              <Link href="/deposit?community=moonbirds">
                 <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">Reserve your NFT</a>
               </Link>
             </div>
