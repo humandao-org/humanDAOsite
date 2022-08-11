@@ -18,9 +18,12 @@ import SiteMenu from "../components/SiteMenu"
 const reservationAmount = 20 // 3333 // Price that it costs to reserve an NFT
 
 export default function Reservation({ story }) {
-  const { query } = useRouter();
+  // const { query } = useRouter();
+  const router = useRouter()
+  console.log(router.query)
+
   const affiliate = useRecoilValue(affiliateState)
-  const [community, setCommunity] = useState()
+  const [community, setCommunity] = useState('none')
   // const [provider, setProvider] = useState()
   // const [library, setLibrary] = useState()
   // const [chainId, setChainId] = useState()
@@ -429,12 +432,14 @@ export default function Reservation({ story }) {
   }
 
   useEffect(async () => {
-    if (query) {
-      setCommunity(query.community)
+    if (router.query && router.query.community) {
+      // console.log('community is being set to: ', router.query.community)
+      setCommunity(router.query.community)
     } else {
+      // console.log('community is being set to: ', '')
       setCommunity('')
     }
-  }, [query])
+  }, [router])
 
   useEffect(async () => {
     setNetwork(getNetworkByChain(1))
