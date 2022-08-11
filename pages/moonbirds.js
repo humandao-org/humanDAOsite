@@ -45,7 +45,14 @@ export default function Moonbirds({ story }) {
   return (
     <div className="bg-gradient-to-b from-moonbirdf to-moonbirdt">
       <Head>
+        <meta property="og:title" content="Get Back Your Time With PANFT" />
+        <meta property="og:site_name" content="humanDAO" />
+        <meta property="og:image" content="https://res.cloudinary.com/daljbo1q0/image/upload/v1660185851/hdao-nft/hdao-moonbirds_thumbnail_xdzjxn.png" />
+        <meta name="twitter:image" content="https://res.cloudinary.com/daljbo1q0/image/upload/v1660185851/hdao-nft/hdao-moonbirds_thumbnail_xdzjxn.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="theme-color" content="#c5bcff" />
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
+        <title>Get Back Your Time With PANFT</title>
       </Head>
       <div className="relative z-10 mx-auto w-full">
         <SiteMenu community="moonbirds">
