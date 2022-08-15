@@ -1,20 +1,20 @@
-import Head from "next/head";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { affiliateState } from "../state/atom";
+import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { affiliateState } from '../state/atom';
 // import SiteMenuMB from "../components/SiteMenuMB";
-import SiteMenu from "../components/SiteMenu";
-import { registerEmail } from "../lib/affiliate";
-import StatusDisplay from "../components/StatusMessage";
+import SiteMenu from '../components/SiteMenu';
+import { registerEmail } from '../lib/affiliate';
+import StatusDisplay from '../components/StatusMessage';
 
 export default function Moonbirds({ story }) {
   // const { query } = useRouter();
   const affiliate = useRecoilValue(affiliateState);
   const setAffiliate = useSetRecoilState(affiliateState);
-  const [email, setEmail] = useState("");
-  const [statusMessage, setStatusMessage] = useState({ type: "none", message: "" });
+  const [email, setEmail] = useState('');
+  const [statusMessage, setStatusMessage] = useState({ type: 'none', message: '' });
 
   const handleEmailSubmit = async (event) => {
     // setError({ success: true, emailMmessage: "" }); // Resetting a previous error if any
@@ -22,21 +22,21 @@ export default function Moonbirds({ story }) {
     let payload = {
       mailing: {
         email: email,
-        category: "panft",
+        category: 'panft',
       },
     };
     let result = await registerEmail(payload);
     if (result.success) {
-      setStatusMessage({ type: "success", message: "Your email address was sucessfully submitted." });
+      setStatusMessage({ type: 'success', message: 'Your email address was sucessfully submitted.' });
     } else {
-      setStatusMessage({ type: "error", message: "A technical problem occurred when submitting your email. Please, try again later!" });
+      setStatusMessage({ type: 'error', message: 'A technical problem occurred when submitting your email. Please, try again later!' });
     }
     console.log(result);
   };
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
-    const affiliateID = urlSearchParams.get("affiliate");
+    const affiliateID = urlSearchParams.get('affiliate');
     setAffiliate((oldData) => ({
       affiliateId: affiliateID,
     }));
@@ -58,7 +58,7 @@ export default function Moonbirds({ story }) {
         <SiteMenu community="moonbirds">
           <li className="mx-auto md:mx-0">
             <Link href="/deposit?community=moonbirds">
-              <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Reserve PANFT</a>
+              <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Reserve Now</a>
             </Link>
           </li>
         </SiteMenu>
@@ -67,8 +67,8 @@ export default function Moonbirds({ story }) {
             <div className="w-full max-w-[548px] text-center lg:text-left">
               <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-yellow-500 sm:text-5xl md:text-6xl lg:mb-3">Get Back Your Time With PANFT</h1>
               <p className="mb-7 text-xl font-semibold tracking-normal text-white md:text-2xl lg:mb-3">
-                This mint will function differently from standard NFT drops due to the service attached. We are using a reservation system. The NFT will deploy and live on the Polygon chain but we are allowing reservations on mainnet as well. Make
-                sure to read the FAQs.
+                This mint functions differently from standard NFT drops due to the service attached. We will be using a reservation system and will only launch the service by achieving a certain amount of reservations. The NFT will live on the
+                Polygon chain but we are allowing reservations on mainnet as well. Make sure to read the FAQs.
               </p>
               <Link href="/deposit?community=moonbirds">
                 <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">Reserve your NFT</a>
@@ -181,7 +181,7 @@ export default function Moonbirds({ story }) {
               <button
                 className="faq-btn cursor-pointer grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-white md:text-3.5xl"
                 onClick={(evt) => {
-                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                  evt.target.parentNode.parentNode.toggleAttribute('open');
                 }}
               >
                 <span>What chain will the PANFT use?</span>
@@ -199,10 +199,10 @@ export default function Moonbirds({ story }) {
                   address exists on Polygon as well and you have control of it. You only have to connect your wallet to Polygon chain to confirm and use your PANFT.
                 </p>
                 <p className="pt-4">
-                  If using Metamask,{" "}
+                  If using Metamask,{' '}
                   <a className="underline hover:text-blue-500" href="https://bit.ly/hdao-tokens" target="_blank" rel="noreferrer">
                     here
-                  </a>{" "}
+                  </a>{' '}
                   is a tutorial on connecting to the Polygon chain.
                 </p>
               </div>
@@ -212,7 +212,7 @@ export default function Moonbirds({ story }) {
               <button
                 className="faq-btn cursor-pointer grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-white md:text-3.5xl"
                 onClick={(evt) => {
-                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                  evt.target.parentNode.parentNode.toggleAttribute('open');
                 }}
               >
                 <span>What will it cost to mint?</span>
@@ -223,12 +223,12 @@ export default function Moonbirds({ story }) {
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-white opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>Remember PANFT is a membership and service, not a PFP project. We cannot mint 10k at low/no cost. Since there are no ongoing costs to holders we need to ensure sustainability of the program.</p>
                 <p className="pt-4">
-                  We will be utilizing a reservation smart contract that will allow you to reserve a PANFT by committing the full mint price, $3,333.{" "}
+                  We will be utilizing a reservation smart contract that will allow you to reserve a PANFT by committing the full mint price, $3,333.{' '}
                   <span className="font-bold">You can withdraw your funds and give up your spot in line anytime prior to mint. The funds are in reservation contract.</span>
                 </p>
                 <p className="pt-4">
                   Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. If there is large demand and we have enough PAs onboarded, we reserve the
-                  right to extend the genesis batch (by a few hundred) to more than 400 before mint.{" "}
+                  right to extend the genesis batch (by a few hundred) to more than 400 before mint.{' '}
                 </p>
                 <p className="pt-4">BTW, the &#34;3&#34; in mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA. </p>
               </div>
@@ -238,7 +238,7 @@ export default function Moonbirds({ story }) {
               <button
                 className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-white md:text-3.5xl"
                 onClick={(evt) => {
-                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                  evt.target.parentNode.parentNode.toggleAttribute('open');
                 }}
               >
                 <span>How many NFTs are available?</span>
@@ -262,7 +262,7 @@ export default function Moonbirds({ story }) {
               <button
                 className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-white md:text-3.5xl"
                 onClick={(evt) => {
-                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                  evt.target.parentNode.parentNode.toggleAttribute('open');
                 }}
               >
                 <span>What are the features and benefits of the NFT?</span>
@@ -292,7 +292,7 @@ export default function Moonbirds({ story }) {
               <button
                 className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-white md:text-3.5xl"
                 onClick={(evt) => {
-                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                  evt.target.parentNode.parentNode.toggleAttribute('open');
                 }}
               >
                 <span>Why do we have to hodl or stake HDAO?</span>
@@ -324,7 +324,7 @@ export default function Moonbirds({ story }) {
               <button
                 className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-white md:text-3.5xl"
                 onClick={(evt) => {
-                  evt.target.parentNode.parentNode.toggleAttribute("open");
+                  evt.target.parentNode.parentNode.toggleAttribute('open');
                 }}
               >
                 <span>What is the design/art for the NFT?</span>
@@ -337,18 +337,18 @@ export default function Moonbirds({ story }) {
                   Keep in mind this is not a PFP or Avatar project. It is a membership NFT granting the holder use of a service (among other beneficial tokenomics). So while the artwork doesn&#39;t convey identity we have something wonderful planned.
                 </p>
                 <p className="pt-4">
-                  The art will be determined in a major web3 design competition hDAO will be holding very soon. We have dedicated $20k in prizes, so if you are an artist or designer make sure to follow our{" "}
+                  The art will be determined in a major web3 design competition hDAO will be holding very soon. We have dedicated $20k in prizes, so if you are an artist or designer make sure to follow our{' '}
                   <a className="underline hover:text-blue-500" href="https://twitter.com/humanDAO" target="_blank" rel="noreferrer">
                     Twitter
                   </a>
-                  , subscribe to our{" "}
+                  , subscribe to our{' '}
                   <a className="underline hover:text-blue-500" href="https://medium.com/@TheHumanDAO" target="_blank" rel="noreferrer">
                     blog
                   </a>
-                  , or join our{" "}
+                  , or join our{' '}
                   <a className="underline hover:text-blue-500" href="https:/discord.com/invite/humandao" target="_blank" rel="noreferrer">
                     Discord
-                  </a>{" "}
+                  </a>{' '}
                   for the kickoff.
                 </p>
               </div>
@@ -363,7 +363,7 @@ export default function Moonbirds({ story }) {
               <form onSubmit={handleEmailSubmit}>
                 <input required placeholder="Email address" type="email" className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4" onChange={(event) => setEmail(event.target.value)}></input>
                 <button className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Notify me</button>
-                <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: "none", message: "" })}></StatusDisplay>
+                <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: 'none', message: '' })}></StatusDisplay>
               </form>
             </div>
           </div>

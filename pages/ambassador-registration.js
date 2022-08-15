@@ -1,8 +1,8 @@
-import Head from "next/head";
-import { useState } from "react";
-import { registerAffiliate } from "../lib/affiliate";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import Head from 'next/head';
+import { useState } from 'react';
+import { registerAffiliate } from '../lib/affiliate';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 /*
 import {
@@ -31,13 +31,13 @@ export default function Ambassador({ story }) {
   */
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [organization, setorganization] = useState("");
-  const [name, setName] = useState("");
-  const [error, setError] = useState(() => ({ success: true, emailMmessage: "" }));
+  const [email, setEmail] = useState('');
+  const [organization, setorganization] = useState('');
+  const [name, setName] = useState('');
+  const [error, setError] = useState(() => ({ success: true, emailMmessage: '' }));
 
   const handleSubmit = async (event) => {
-    setError({ success: true, emailMmessage: "" }); // Resetting a previous error if any
+    setError({ success: true, emailMmessage: '' }); // Resetting a previous error if any
     event.preventDefault();
     let affiliate = {
       affiliate: {
@@ -50,8 +50,8 @@ export default function Ambassador({ story }) {
     if (!result.success) {
       setError({ success: false, emailMmessage: result.message });
     } else {
-      setError({ success: true, emailMmessage: "" });
-      const url = "/ambassador-link?id=" + result.id;
+      setError({ success: true, emailMmessage: '' });
+      const url = '/ambassador-link?id=' + result.id;
       console.log(url);
       router.push(url);
     }
@@ -72,29 +72,33 @@ export default function Ambassador({ story }) {
             <div className="nav-list">
               <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
                 <li>
-                  <a href="https://ambassador.humandao.org" className="text-[15px] font-medium text-black hover:underline">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="https://nft.humandao.org/" className="text-[15px] font-medium text-black hover:underline">
-                    PANFT site
-                  </a>
-                </li>
-                <li>
-                  <Link href="https://ambassador.humandao.org/#faqs" className="text-[15px] font-medium">
-                    <a className="text-black hover:underline">FAQS</a>
+                  <Link href="https://humandao.org">
+                    <a target="_blank" rel="noopener noreferrer" className="text-[15px] font-medium text-black hover:underline">
+                      HDAO
+                    </a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="mailto:hdao.helpdesk@gmail.com" className="text-[15px] font-medium">
+                  <Link href="https://nft.humandao.org">
+                    <a target="_blank" rel="noopener noreferrer" className="text-[15px] font-medium text-black hover:underline">
+                      PANFT
+                    </a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="https://ambassador.humandao.org/#faqs" className="text-[15px] font-medium">
+                    <a className="text-black hover:underline">FAQs</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="mailto:hdao.helpdesk@gmail.com?subject=PANFT Ambassadors" className="text-[15px] font-medium">
                     <a className="text-black hover:underline">Contact</a>
                   </Link>
                 </li>
                 {/* <li className="mx-auto md:mx-0">
-                  <a href="#" className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">
-                    Become an Ambassador
-                  </a>
+                  <Link href="/ambassador-registration">
+                    <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Become an Ambassador</a>
+                  </Link>
                 </li> */}
               </ul>
             </div>

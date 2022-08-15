@@ -1,8 +1,8 @@
-import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
 
-import { useStoryblokState, getStoryblokApi, StoryblokComponent } from "@storyblok/react";
+import { useStoryblokState, getStoryblokApi, StoryblokComponent } from '@storyblok/react';
 
 export default function Ambassador({ story }) {
   /*
@@ -48,14 +48,18 @@ export default function Ambassador({ story }) {
             <div className="nav-list">
               <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
                 <li>
-                  <a href="https://ambassador.humandao.org" className="text-[15px] font-medium text-black hover:underline">
-                    Home
-                  </a>
+                  <Link href="https://humandao.org">
+                    <a target="_blank" rel="noopener noreferrer" className="text-[15px] font-medium text-black hover:underline">
+                      HDAO
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="https://nft.humandao.org" className="text-[15px] font-medium text-black hover:underline">
-                    PANFT site
-                  </a>
+                  <Link href="https://nft.humandao.org">
+                    <a target="_blank" rel="noopener noreferrer" className="text-[15px] font-medium text-black hover:underline">
+                      PANFT
+                    </a>
+                  </Link>
                 </li>
                 <li>
                   <Link href="#faqs" className="text-[15px] font-medium">
@@ -63,7 +67,7 @@ export default function Ambassador({ story }) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="mailto:hdao.helpdesk@gmail.com" className="text-[15px] font-medium">
+                  <Link href="mailto:hdao.helpdesk@gmail.com?subject=PANFT Ambassadors" className="text-[15px] font-medium">
                     <a className="text-black hover:underline">Contact</a>
                   </Link>
                 </li>
@@ -157,7 +161,7 @@ export default function Ambassador({ story }) {
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>
                   The Ambassador shares their unique PANFT link with their community. Everyone that reserves AND ends up minting a PANFT will earn the Ambassador a % of the mint fee. REMEMBER, just because someone reserves a spot does NOT mean they
-                  ended up minting an NFT. People who place reservations can withdraw their funds and give up their spot in line any time before the 400th reservation and the subsequent mint.{" "}
+                  ended up minting an NFT. People who place reservations can withdraw their funds and give up their spot in line any time before the 400th reservation and the subsequent mint.{' '}
                   <b>PANFT will only launch and be minted after receiving 400 reservations.</b>
                 </p>
               </div>
