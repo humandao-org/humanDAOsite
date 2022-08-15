@@ -1,6 +1,6 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 /*
 import {
@@ -31,7 +31,7 @@ export default function Ambassador({ story }) {
 
   const copyURL = function () {
     /* Get the text field */
-    var copyText = document.getElementById("affiliateURL");
+    var copyText = document.getElementById('affiliateURL');
 
     /* Select the text field */
     copyText.select();
@@ -58,30 +58,34 @@ export default function Ambassador({ story }) {
             <div className="nav-list">
               <ul className="flex flex-col gap-4 md:flex-row md:items-center md:gap-12">
                 <li>
-                  <a href="https://ambassador.humandao.org" className="text-[15px] font-medium text-black hover:underline">
-                    Home
-                  </a>
+                  <Link href="https://humandao.org">
+                    <a target="_blank" rel="noopener noreferrer" className="text-[15px] font-medium text-black hover:underline">
+                      HDAO
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="https://nft.humandao.org/" className="text-[15px] font-medium text-black hover:underline">
-                    PANFT site
-                  </a>
+                  <Link href="https://nft.humandao.org">
+                    <a target="_blank" rel="noopener noreferrer" className="text-[15px] font-medium text-black hover:underline">
+                      PANFT
+                    </a>
+                  </Link>
                 </li>
                 <li>
                   <Link href="https://ambassador.humandao.org/#faqs" className="text-[15px] font-medium">
-                    <a className="text-black hover:underline">FAQS</a>
+                    <a className="text-black hover:underline">FAQs</a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="mailto:hdao.helpdesk@gmail.com" className="text-[15px] font-medium">
+                  <Link href="mailto:hdao.helpdesk@gmail.com?subject=PANFT Ambassadors" className="text-[15px] font-medium">
                     <a className="text-black hover:underline">Contact</a>
                   </Link>
                 </li>
-                {/* <li className="mx-auto md:mx-0">
-                  <a href="#" className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">
-                    Become an Ambassador
-                  </a>
-                </li> */}
+                <li className="mx-auto md:mx-0">
+                  <Link href="/ambassador-registration">
+                    <a className="block rounded bg-secondary/[0.04] py-2 px-3 text-[15px] font-medium leading-6 tracking-[0.46px] text-secondary">Become an Ambassador</a>
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -112,7 +116,7 @@ export default function Ambassador({ story }) {
                 <input
                   id="affiliateURL"
                   type="text"
-                  defaultValue={"https://nft.humandao.org/?ambassador=" + query.id}
+                  defaultValue={'https://nft.humandao.org/?ambassador=' + query.id}
                   readOnly
                   className="block w-full rounded border border-[#333] px-3 py-3 font-secondary text-base font-bold text-black/90 outline-none placeholder:font-normal sm:py-4"
                 />
