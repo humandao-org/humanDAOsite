@@ -67,8 +67,8 @@ export default function Moonbirds({ story }) {
             <div className="w-full max-w-[548px] text-center lg:text-left">
               <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-yellow-500 sm:text-5xl md:text-6xl lg:mb-3">Get Back Your Time With PANFT</h1>
               <p className="mb-7 text-xl font-semibold tracking-normal text-white md:text-2xl lg:mb-3">
-                This mint functions differently from standard NFT drops due to the service attached. We will be using a reservation system and will only launch the service by achieving a certain amount of reservations. The NFT will live on the
-                Polygon chain but we are allowing reservations on mainnet as well. Make sure to read the FAQs.
+                This mint functions differently from typical NFT drops due to the service attached. We will be using a reservation system and will only mint and launch the service by achieving a certain amount of reservations. Please make sure to
+                read the FAQs below.
               </p>
               <Link href="/deposit?community=moonbirds">
                 <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">Reserve your NFT</a>
@@ -105,15 +105,15 @@ export default function Moonbirds({ story }) {
         <section className="mb-40 px-5 md:mb-80 ">
           <div className="mx-auto flex w-full max-w-[1100px] flex-col items-center justify-between gap-8 md:flex-row">
             <div className="order-last w-full max-w-[450px] md:order-none">
-              <img src="assets/images/reservation-2.png" alt="image" className="h-auto w-full object-contain" />
+              <img src="https://res.cloudinary.com/daljbo1q0/image/upload/v1660622143/hdao-nft/coins_kvtpbr.png" alt="image" className="h-auto w-full object-contain" />
             </div>
             <div className="w-full max-w-[700px]">
-              <h2 className="mb-8 pb-1 text-3.5xl font-extrabold text-yellow-500 md:mb-16 md:text-5xl">What do I need to prepare for the reservation?</h2>
+              <h2 className="mb-8 pb-1 text-3.5xl font-extrabold text-yellow-500 md:mb-16 md:text-5xl">What do I need for the reservation?</h2>
 
               <ul className="space-y-8">
                 <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
-                    <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="mt-1 h-7 w-7 sm:mt-0" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M14.75 21L18.9167 25.1667L27.25 16.8333M39.75 21C39.75 31.3553 31.3553 39.75 21 39.75C10.6447 39.75 2.25 31.3553 2.25 21C2.25 10.6447 10.6447 2.25 21 2.25C31.3553 2.25 39.75 10.6447 39.75 21Z"
                         stroke="#FFFFFF"
@@ -123,11 +123,11 @@ export default function Moonbirds({ story }) {
                       />
                     </svg>
                   </span>
-                  <span className="text-white">3,333 USDC, USDT, or DAI for the reservation contract on either Polygon chain or Ethereum mainnet. Make sure you have some MATIC or ETH to pay for the gas.</span>
+                  <span className="text-white">You will need 3,333 USDC, USDT, or DAI.</span>
                 </li>
                 <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
-                    <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="mt-1 h-7 w-7 sm:mt-0" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M14.75 21L18.9167 25.1667L27.25 16.8333M39.75 21C39.75 31.3553 31.3553 39.75 21 39.75C10.6447 39.75 2.25 31.3553 2.25 21C2.25 10.6447 10.6447 2.25 21 2.25C31.3553 2.25 39.75 10.6447 39.75 21Z"
                         stroke="#FFFFFF"
@@ -137,13 +137,11 @@ export default function Moonbirds({ story }) {
                       />
                     </svg>
                   </span>
-                  <span className="text-white">
-                    Keep in mind the NFT will be deployed on Polygon chain. Once minted it will be sent to the address used for the reservation ON POLYGON regardless if the reservation was made on Ethereum mainnet. More details in FAQ.
-                  </span>
+                  <span className="text-white">You can reserve on Polygon chain or Ethereum mainnet.</span>
                 </li>
                 <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
                   <span>
-                    <svg className="mt-1 h-7 w-7 sm:mt-0 md:h-10 md:w-10" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="mt-1 h-7 w-7 sm:mt-0" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M14.75 21L18.9167 25.1667L27.25 16.8333M39.75 21C39.75 31.3553 31.3553 39.75 21 39.75C10.6447 39.75 2.25 31.3553 2.25 21C2.25 10.6447 10.6447 2.25 21 2.25C31.3553 2.25 39.75 10.6447 39.75 21Z"
                         stroke="#FFFFFF"
@@ -153,7 +151,49 @@ export default function Moonbirds({ story }) {
                       />
                     </svg>
                   </span>
-                  <span className="text-white"> Remember PANFT won&#39;t mint until 400 reservations are taken. Any time prior to 400, you can withdraw your funds and give up your reservation spot.</span>
+                  <span className="text-white">Have some MATIC or ETH to pay for gas.</span>
+                </li>
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
+                  <span>
+                    <svg className="mt-1 h-7 w-7 sm:mt-0" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M14.75 21L18.9167 25.1667L27.25 16.8333M39.75 21C39.75 31.3553 31.3553 39.75 21 39.75C10.6447 39.75 2.25 31.3553 2.25 21C2.25 10.6447 10.6447 2.25 21 2.25C31.3553 2.25 39.75 10.6447 39.75 21Z"
+                        stroke="#FFFFFF"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <span className="text-white">PANFT will NOT mint/launch until 400 reservations are received.</span>
+                </li>
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
+                  <span>
+                    <svg className="mt-1 h-7 w-7 sm:mt-0" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M14.75 21L18.9167 25.1667L27.25 16.8333M39.75 21C39.75 31.3553 31.3553 39.75 21 39.75C10.6447 39.75 2.25 31.3553 2.25 21C2.25 10.6447 10.6447 2.25 21 2.25C31.3553 2.25 39.75 10.6447 39.75 21Z"
+                        stroke="#FFFFFF"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <span className="text-white">Any time prior you can withdraw your funds/reservation and give up your spot.</span>
+                </li>
+                <li className="grid grid-cols-[max-content_1fr] gap-3 text-lg font-semibold text-dark md:gap-6">
+                  <span>
+                    <svg className="mt-1 h-7 w-7 sm:mt-0" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M14.75 21L18.9167 25.1667L27.25 16.8333M39.75 21C39.75 31.3553 31.3553 39.75 21 39.75C10.6447 39.75 2.25 31.3553 2.25 21C2.25 10.6447 10.6447 2.25 21 2.25C31.3553 2.25 39.75 10.6447 39.75 21Z"
+                        stroke="#FFFFFF"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <span className="text-white">PANFT mints on Polygon and will be sent to your reservation address ON POLYGON even if your reservation was made on Ethereum. Read FAQ for details. </span>
                 </li>
               </ul>
             </div>
@@ -177,12 +217,12 @@ export default function Moonbirds({ story }) {
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-white opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>
-                  The NFT will be deployed on Polygon chain. The main reason for this is the utility of PANFT may require high gas fees for any sales, renting and minting if it were on Ethereum mainnet. To make things easier we have allowed people to
+                  The NFT will be deployed on the Polygon chain. The main reason for this is the utility of PANFT. On Ethereum mainnet it may require high gas fees for sales, renting and minting. To make things easier we have allowed people to
                   reserve PANFT on either chain, Polygon or Ethereum mainnet.
                 </p>
                 <p className="pt-4">
-                  <strong>But once PANFT mints/launches it will be sent to the address used for the reservation -- ON POLYGON -- regardless if the reservation was made on Ethereum mainnet. </strong> As you have used that address on mainnet, the same
-                  address exists on Polygon as well and you have control of it. You only have to connect your wallet to Polygon chain to confirm and use your PANFT.
+                  <strong>But once PANFT mints/launches it will be sent to the address used for the reservation -- ON POLYGON -- regardless if the reservation was made on Ethereum mainnet.</strong> You have used that address on mainnet, therefore,
+                  the same address exists on Polygon as well and you have control of it too. You only have to connect your wallet to Polygon chain to see and use your PANFT.
                 </p>
                 <p className="pt-4">
                   If using Metamask,{' '}
@@ -207,16 +247,18 @@ export default function Moonbirds({ story }) {
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-white opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
-                <p>Remember PANFT is a membership and service, not a PFP project. We cannot mint 10k at low/no cost. Since there are no ongoing costs to holders we need to ensure sustainability of the program.</p>
+                <p>Remember PANFT is a membership and service, not a PFP project. Since there are no ongoing costs to the holders we need to ensure sustainability of the program. Therefore, we cannot mint 10k at low/no cost.</p>
                 <p className="pt-4">
-                  We will be utilizing a reservation smart contract that will allow you to reserve a PANFT by committing the full mint price, $3,333.{' '}
-                  <span className="font-bold">You can withdraw your funds and give up your spot in line anytime prior to mint. The funds are in reservation contract.</span>
+                  We will be utilizing a reservation smart contract that will allow you to reserve a PANFT by committing the full mint price, $3,333. The funds are in a escrow style smart contract and you can withdraw your funds and give up your spot
+                  in line anytime prior to mint.
                 </p>
                 <p className="pt-4">
-                  Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. If there is large demand and we have enough PAs onboarded, we reserve the
-                  right to extend the genesis batch (by a few hundred) to more than 400 before mint.{' '}
+                  <strong>
+                    Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. If there is large demand and we have enough PAs onboarded, we reserve
+                    the right to extend the genesis batch (by a few hundred) to more than 400 before mint.
+                  </strong>
                 </p>
-                <p className="pt-4">BTW, the &#34;3&#34; in mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA. </p>
+                <p className="pt-4">DYK the &#34;3&#39;s&#34; in the mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA.</p>
               </div>
             </div>
 
