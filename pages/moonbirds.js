@@ -271,7 +271,7 @@ export default function Moonbirds({ story }) {
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-white opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
-                <p>Remember, PANFT is a membership and service, not a PFP project. Since there are no ongoing costs to the holders, we must ensure the program's sustainability. Therefore, we cannot mint 10k at low/no cost.</p>
+                <p>Remember, PANFT is a membership and service, not a PFP project. Since there are no ongoing costs to the holders, we must ensure the program&#39;s sustainability. Therefore, we cannot mint 10k at low/no cost.</p>
                 <p className="pt-4">
                   <strong>
                     We will utilize a reservation smart contract that allows you to reserve a PANFT by committing the total mint price of $3,333. Your funds are in escrow, and you can withdraw them and give up your spot in line anytime before mint.
