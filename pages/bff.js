@@ -84,7 +84,9 @@ export default function BFFPage({ story }) {
           <div className="mx-auto max-w-[800px] space-y-[32px] px-2 py-16 lg:pb-40">
             <h1 className="pt-12 px-8 text-center text-3xl font-bold text-white font-primary sm:text-5xl">Community Benefits</h1>
             <div className="px-4 text-left flex mx-a flex-col space-y-[12px] ">
-              <p className="text-xl max-w-[800px] md:text-2xl mx-auto text-white text-center font-normal">Because you&#39;re an awesome MoonBird or Oddity you get to make a choice with 10% ($333 USDC) of the mint price</p>
+              <p className="text-xl max-w-[800px] md:text-2xl mx-auto text-white text-center font-normal">
+                Because you&#39;re an awesome BFF, not only do you get a branded NFC wristband to summon Pocket Assistants, you also get to make a choice with 10% ($333 USDC) of the mint price
+              </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[32px] max-w-[300px] md:max-w-[800px] lg:max-w-[1200px] mx-auto shadow-xs rounded-lg px-12 py-8">
               <div className="flex flex-col items-center space-y-[12px] text-center md:space-y-[24px]">
