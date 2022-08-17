@@ -294,7 +294,7 @@ export default function BFFPage({ story }) {
                   evt.target.parentNode.parentNode.toggleAttribute('open');
                 }}
               >
-                <span className="text-black">Where can I get a PANFT after the genesis mint?</span>
+                <span className="text-black">I missed the Genesis launch, where can I get a PANFT?</span>
                 <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#000000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
