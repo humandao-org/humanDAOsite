@@ -60,7 +60,7 @@ export default function Reservation({ story }) {
               <h1 className="mb-7 font-primary text-4xl font-extrabold tracking-[0.46px] text-primary sm:text-5xl md:text-6xl lg:mb-3">Get Back Your Time With PANFT</h1>
               <p className="mb-7 text-xl font-semibold tracking-normal text-dark md:text-2xl lg:mb-3">
                 This mint functions differently from typical NFT drops due to the service attached. We will be using a reservation system and will only mint and launch the service by achieving a certain amount of reservations. Please make sure to
-                read the FAQs below.
+                read the FAQ below.
               </p>
               <Link href="/deposit">
                 <a className="mx-auto block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none md:px-10 md:text-xl lg:mx-0">Reserve your NFT</a>
@@ -169,7 +169,7 @@ export default function Reservation({ story }) {
           </div>
         </section>
         <section id="faqs" className="px-5 pb-40">
-          <h2 className="mb-14 text-center text-3.5xl font-extrabold leading-none text-primary md:mb-28 md:text-5xl">FAQs</h2>
+          <h2 className="mb-14 text-center text-3.5xl font-extrabold leading-none text-primary md:mb-28 md:text-5xl">FAQ</h2>
 
           <div className="mx-auto w-full max-w-[870px] space-y-12 md:space-y-20">
             <div className="faq-box group">
@@ -205,34 +205,6 @@ export default function Reservation({ story }) {
 
             <div className="faq-box group">
               <button
-                className="faq-btn cursor-pointer grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl"
-                onClick={(evt) => {
-                  evt.target.parentNode.parentNode.toggleAttribute('open');
-                }}
-              >
-                <span>What will it cost to mint?</span>
-                <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#111827" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
-                <p>Remember PANFT is a membership and service, not a PFP project. Since there are no ongoing costs to the holders we need to ensure sustainability of the program. Therefore, we cannot mint 10k at low/no cost.</p>
-                <p className="pt-4">
-                  <strong>
-                    We will be utilizing a reservation smart contract that will allow you to reserve a PANFT by committing the full mint price, $3,333. The funds are in a escrow style smart contract and you can withdraw your funds and give up your
-                    spot in line anytime prior to mint.
-                  </strong>
-                </p>
-                <p className="pt-4">
-                  Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. If there is large demand and we have enough PAs to fulfill that demand, we
-                  reserve the right to extend the genesis batch (to more than 400) before minting.
-                </p>
-                <p className="pt-4">DYK the &#34;3&#39;s&#34; in the mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA.</p>
-              </div>
-            </div>
-
-            <div className="faq-box group">
-              <button
                 className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl"
                 onClick={(evt) => {
                   evt.target.parentNode.parentNode.toggleAttribute('open');
@@ -245,13 +217,64 @@ export default function Reservation({ story }) {
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>
-                  PANFT will be very limited. Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. From that point on there will be a daily
-                  auction for a single PANFT. If there is large demand and we have enough PAs onboarded, we reserve the right to extend the genesis batch (by a few hundred) to more than 400 before mint.
+                  PANFT will be very limited. Our benchmark for the genesis mint is 400 reservations. The genesis batch will only mint when meeting the minimum threshold for the viability of the PA project (400 reservations). Genesis is limited to
+                  ensure the app and service work as intended.
                 </p>
                 <p className="pt-4">
-                  <span className="font-bold">The genesis mint is the only time there will be a set fee for PANFTs. </span>The daily auctions will start at the genesis mint price ($3,333) and demand will dictate the winning bid.
+                  <strong>The genesis mint is the only time there will be a set fee for PANFTs.</strong>
                 </p>
-                <p className="pt-4">From the genesis mint we will test and improve the application and service before scaling up and offering more NFTs in batch auctions. </p>
+                <p className="pt-4">We will test and improve the application and service from the genesis mint before scaling up and offering more NFTs in batch auctions.</p>
+              </div>
+            </div>
+
+            <div className="faq-box group">
+              <button
+                className="faq-btn cursor-pointer grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl"
+                onClick={(evt) => {
+                  evt.target.parentNode.parentNode.toggleAttribute('open');
+                }}
+              >
+                <span>What will it cost to mint?</span>
+                <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#111827" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
+                <p>Remember, PANFT is a membership and service, not a PFP project. Since there are no ongoing costs to the holders, we must ensure the program's sustainability. Therefore, we cannot mint 10k at low/no cost.</p>
+                <p className="pt-4">
+                  <strong>
+                    We will utilize a reservation smart contract that allows you to reserve a PANFT by committing the total mint price of $3,333. Your funds are in escrow, and you can withdraw them and give up your spot in line anytime before mint.
+                  </strong>
+                </p>
+                <p className="pt-4">
+                  Our benchmark for the genesis mint is 400 reservations. Once 400 reservations are received, the NFTs can be minted and service will begin shortly thereafter. If there is large demand and we have enough PAs to fulfill that demand, we
+                  reserve the right to extend the genesis batch (to more than 400) before minting.
+                </p>
+                <p className="pt-4">DYK, the &#34;3&#39;s&#34; in the mint price represent the symbiotic relationship of the parties involved—the holder, DAO, and PA.</p>
+              </div>
+            </div>
+
+            <div className="faq-box group">
+              <button
+                className="faq-btn cursor-pointer grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl"
+                onClick={(evt) => {
+                  evt.target.parentNode.parentNode.toggleAttribute('open');
+                }}
+              >
+                <span>Where can I get a PANFT after the genesis mint?</span>
+                <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#111827" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
+                <p>
+                  Post-launch, there will be an ongoing daily auction on Rarible.com or through our marketplace, where you can buy on the secondary market or bid on the daily mint.{' '}
+                  <strong>Remember, the genesis launch is the only time PANFT will be at a set fee/cost. Market demand will dictate the prices of PANFT during auctions.</strong>
+                </p>
+                <p className="pt-4">
+                  But how will this benefit underserved communities if you only mint 400 and then auction 1 daily? Great question. We will hold periodic batch auctions when we onboard enough PAs to allow for growth and scale. But there will be no
+                  schedule or timeline for these batch auctions. Of course, we will make an announcement ahead of time.
+                </p>
               </div>
             </div>
 
@@ -330,11 +353,13 @@ export default function Reservation({ story }) {
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
-                <p>
-                  Keep in mind this is not a PFP or Avatar project. It is a membership NFT granting the holder use of a service (among other beneficial tokenomics). So while the artwork doesn&#39;t convey identity we have something wonderful planned.
-                </p>
+                <p>This is not a PFP or avatar NFT. It is a membership NFT granting the holder use of a service (among other tokenomics). So while the artwork may not convey identity or PFP, we have something wonderful planned.</p>
                 <p className="pt-4">
-                  The art will be determined in a major web3 design competition hDAO will be holding very soon. We have dedicated $20k in prizes, so if you are an artist or designer make sure to follow our{' '}
+                  The art will be determined in a major{' '}
+                  <a className="underline hover:text-blue-500" href="https://artcontest.humandao.org" target="_blank" rel="noreferrer">
+                    web3 design competition
+                  </a>{' '}
+                  hDAO will be holding. We have dedicated $30k in prizes, so if you are an artist or designer make sure to follow our{' '}
                   <a className="underline hover:text-blue-500" href="https://twitter.com/humanDAO" target="_blank" rel="noreferrer">
                     Twitter
                   </a>
@@ -358,7 +383,7 @@ export default function Reservation({ story }) {
             <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg px-5 pt-8 pb-8 text-center shadow-circle bg-gradient-to-br from-zinc-200 via-rose-100 to-purple-200">
               <h3 className="mb-2 text-3.5xl font-bold leading-none text-black">Stay updated on PANFT</h3>
               <form onSubmit={handleEmailSubmit}>
-                <input required placeholder="Email address" type="email" className=" text-center bg-slate-50 rounded-md shadow-sm w-2/4 mt-4 px-4 py-4" onChange={(event) => setEmail(event.target.value)}></input>
+                <input required placeholder="Email address" type="email" className=" text-center bg-slate-50 rounded-md shadow-sm w-2/3 mt-4 px-4 py-4" onChange={(event) => setEmail(event.target.value)}></input>
                 <button className="mx-auto mt-8 block w-fit rounded-full bg-accent-purple px-8 py-4 text-base font-bold text-white shadow-sm transition-all duration-200 hover:shadow-none sm:px-10 md:text-xl">Notify me</button>
                 <StatusDisplay statusMessage={statusMessage} resetStatus={() => setStatusMessage({ type: 'none', message: '' })}></StatusDisplay>
               </form>
