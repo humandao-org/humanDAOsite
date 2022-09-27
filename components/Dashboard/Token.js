@@ -57,10 +57,10 @@ class Token extends React.Component {
         }]
       },
       tokenHolders : { 
-        labels: ['Jan 2022', 'Feb 2022', 'March 2022', 'April 2022', 'May 2022', 'June 2022', 'July 2022'],      
+        labels: ['Jan 2022', 'Feb 2022', 'March 2022', 'April 2022', 'May 2022', 'June 2022', 'July 2022', 'August 2022', 'September 2022'],
         datasets: [{
-          label: 'Number of holders - 7 months',
-          data: [987, 1284, 1397, 1412, 1350, 1331, 1310],
+          label: 'Number of holders - 9 months',
+          data: [987, 1284, 1397, 1412, 1350, 1331, 1310, 1389,1296],
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
         }]
