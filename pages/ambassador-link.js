@@ -77,8 +77,8 @@ export default function Ambassador({ story }) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="mailto:hdao.helpdesk@gmail.com?subject=PANFT Ambassadors" className="text-[15px] font-medium">
-                    <a className="text-black hover:underline">Contact</a>
+                  <Link href="mailto:admin@humandao.org?subject=PANFT Ambassadors" className="text-[15px] font-medium">
+                    <a className="text-black hover:underline">Contact us</a>
                   </Link>
                 </li>
                 <li className="mx-auto md:mx-0">
