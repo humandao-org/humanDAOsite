@@ -62,13 +62,13 @@ export default function Ambassador({ story }) {
                   </Link>
                 </li>
                 <li>
-                  <Link href="https://ambassador.humandao.org/#faqs" className="text-[15px] font-medium">
+                  <Link href="#faqs" className="text-[15px] font-medium">
                     <a className="text-black hover:underline">FAQs</a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="mailto:hdao.helpdesk@gmail.com?subject=PANFT Ambassadors" className="text-[15px] font-medium">
-                    <a className="text-black hover:underline">Contact</a>
+                  <Link href="mailto:admin@humandao.org?subject=PANFT Ambassadors" className="text-[15px] font-medium">
+                    <a className="text-black hover:underline">Contact us</a>
                   </Link>
                 </li>
                 <li className="mx-auto md:mx-0">
@@ -124,7 +124,7 @@ export default function Ambassador({ story }) {
             <div className="min-w-[250px] flex-1 overflow-hidden rounded-lg bg-card bg-cover px-5 pt-8 pb-14 text-center shadow-circle">
               <div className="mx-auto mb-6 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-[#ebebeb] text-3xl font-extrabold leading-none shadow-circle">💸</div>
               <h3 className="mb-6 text-3.5xl font-bold leading-none text-black">3. Earn and grow</h3>
-              <p className="mx-auto w-full max-w-[267px] text-xl font-medium text-black">Earn fees for every person using your link to mint a PANFT</p>
+              <p className="mx-auto w-full max-w-[267px] text-xl font-medium text-black">Earn fees for every person who uses your link to sign up and mint the PANFT</p>
             </div>
           </div>
           <Link href="/ambassador-registration">
@@ -160,9 +160,7 @@ export default function Ambassador({ story }) {
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>
-                  The Ambassador shares their unique PANFT link with their community. Everyone that reserves AND ends up minting a PANFT will earn the Ambassador a % of the mint fee. REMEMBER, just because someone reserves a spot does NOT mean they
-                  ended up minting an NFT. People who place reservations can withdraw their funds and give up their spot in line any time before the 400th reservation and the subsequent mint.{' '}
-                  <b>PANFT will only launch and be minted after receiving 400 reservations.</b>
+                The Ambassador shares their unique PANFT link with a community, DAO, or leaders. Everyone that signs up AND mints will earn the Ambassador a 10% fee.
                 </p>
               </div>
             </div>
@@ -176,8 +174,7 @@ export default function Ambassador({ story }) {
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
                 <p>
-                  For every reservation that ends up minting a PANFT through an Ambassador link, <b>the Ambassador will receive 10% of the mint fee in the underlying token.</b> For example, if the reservation/mint cost is 3,333 USDC, the referring
-                  Ambassadors will receive 333 USDC.
+                  For every successful signup that ends up minting a PANFT through an Ambassador link, <b>the Ambassador will receive 10% of the mint fee in the underlying token.</b> 
                 </p>
               </div>
             </div>
@@ -190,7 +187,7 @@ export default function Ambassador({ story }) {
                 </svg>
               </button>
               <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
-                <p>Keep in mind that we don&#39;t know when the mint and launch of PANFT will happen. It could be in 3 days, 3 weeks, or 3 months. It depends on reaching 400 reservations.</p>
+                <p>Keep in mind that we don&#39;t know when the mint and launch of PANFT will happen. It could be in 3 days, 3 weeks, or 3 months. It depends on reaching the optimal number of mints.</p>
               </div>
             </div>
           </div>
