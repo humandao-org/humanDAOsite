@@ -178,18 +178,6 @@ export default function Ambassador({ story }) {
                 </p>
               </div>
             </div>
-
-            <div className="faq-box group" open>
-              <button className="faq-btn grid w-full grid-cols-[1fr_max-content] gap-2 text-left text-base font-bold leading-none text-black md:text-3.5xl">
-                <span>When does an Ambassador get paid?</span>
-                <svg className="block h-6 w-6 transform transition-all duration-200 group-open:rotate-180 md:h-8 md:w-8" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.75 9.677L15 17.2036L6.25 9.677" stroke="#111827" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              <div className="pointer-events-none invisible max-h-0 text-sm font-medium leading-[30px] text-black opacity-0 transition-all duration-300 group-only:opacity-100 group-open:pointer-events-auto group-open:visible group-open:mt-4 group-open:max-h-[1080px] group-open:opacity-100 md:text-xl md:group-open:mt-9">
-                <p>Keep in mind that we don&#39;t know when the mint and launch of PANFT will happen. It could be in 3 days, 3 weeks, or 3 months. It depends on reaching the optimal number of mints.</p>
-              </div>
-            </div>
           </div>
         </section>
 
