@@ -18,7 +18,8 @@ export default function Dashboard({ story }) {
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
       </Head>
 
-      <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 text-white mb-8" {...storyblokEditable(story.content)}>humanDAO Dashboard V1</h1>
+      <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 text-white" {...storyblokEditable(story.content)}>humanDAO Dashboard V1.1</h1>
+      <div className="italic text-white mb-8 align-center">Last updated: {new Date(story.content.last_updated).toLocaleDateString()}</div>
       <StoryblokComponent blok={story.content} /> 
     </div>
   )
@@ -29,7 +30,8 @@ export async function getStaticProps({ preview = false }) {
   let slug = "dashboard";
   // load the published content outside of the preview mode
   let sbParams = {
-    version: "draft", // or 'published'
+    version: "published",
+    cv: Date.now() // Avoid the dashboard being cached
   };
  
   if (preview) {
