@@ -19,7 +19,7 @@ export default function Dashboard({ story }) {
       </Head>
 
       <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 text-white" {...storyblokEditable(story.content)}>humanDAO Dashboard V1.1</h1>
-      <div className="italic text-white mb-8 align-center">Last updated: {new Date(story.content.last_updated).toLocaleDateString()}</div>
+      <div className="italic text-white mb-8 text-center">Last updated: {new Date(story.content.last_updated).toLocaleDateString()}</div>
       <StoryblokComponent blok={story.content} /> 
     </div>
   )
