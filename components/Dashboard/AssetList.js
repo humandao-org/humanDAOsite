@@ -22,7 +22,7 @@ const AssetList = ({ blok }) => (
                 ? blok.entries.map((entry) => (
                   <tr key={entry._uid} className="text-left" {...storyblokEditable(entry)}>
                     <td className="px-2">{entry.label}</td>
-                    <td className="px-2">{Number(entry.value).toLocaleString()}</td>
+                    <td className="px-2">{entry.prefix}{Number(entry.value).toLocaleString()}</td>
                   </tr>
                 ))
               : null}
