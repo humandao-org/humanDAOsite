@@ -13,16 +13,18 @@ const AssetList = ({ blok }) => (
           <table className="bg-white w-full divide-y divide-gray-200 text-center">
             <thead className="">  
               <tr className="text-left">
-                <th className="px-2">Asset</th>
-                <th className="px-2">Amount</th>
+                <th className="px-4">{blok.header1}</th>
+                <th className="px-4" align="right">{blok.header2}</th>
+                {blok.header3 && <th className="px-4" align="right">{blok.header3}</th>}
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {blok.entries
                 ? blok.entries.map((entry) => (
                   <tr key={entry._uid} className="text-left" {...storyblokEditable(entry)}>
-                    <td className="px-2">{entry.label}</td>
-                    <td className="px-2">{entry.prefix}{Number(entry.value).toLocaleString()}</td>
+                    <td className="px-4">{entry.label}</td>
+                    <td className="px-4" align="right">{entry.amount_text ? entry.amount_text : Number(entry.amount).toLocaleString()}</td>
+                    {blok.header3 && <td className="px-4" align="right">{entry.prefix}{Number(entry.value).toLocaleString()}</td>}
                   </tr>
                 ))
               : null}
