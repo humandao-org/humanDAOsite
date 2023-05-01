@@ -31,7 +31,7 @@ export async function getStaticProps({ preview = false }) {
   // load the published content outside of the preview mode
   let sbParams = {
     version: "published",
-    cv: Date.now() // Avoid the dashboard being cached
+    cv: Date.now() // Attempt to Avoid the dashboard being cached but does not seem to have an affect
   };
  
   if (preview) {
