@@ -5,6 +5,8 @@ import Milestones from "../components/Dashboard/Milestones"
 import Page from "../components/Page"
 import Token from "../components/Dashboard/Token"
 import Section from "../components/General/Section"
+import Row from "../components/General/Row"
+import Image from "../components/General/Image"
 import AssetList from "../components/Dashboard/AssetList"
 import Question from "../components/Education/Question"
 import TeachingModule from "../components/Education/TeachingModule"
@@ -20,6 +22,8 @@ const components = {
   staking: Staking,
   asset_list: AssetList,
   section: Section,
+  row: Row,
+  image: Image,
   page: Page,
   question: Question,
   teaching_module: TeachingModule,

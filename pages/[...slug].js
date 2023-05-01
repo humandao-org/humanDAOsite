@@ -27,6 +27,10 @@ export default function Page({ story }) {
       <Head>
         <title>{story ? story.name : "My Site"}</title>
         <link rel="icon" href="/favicon.ico" />
+        <style>
+          {`body { font-family: ${story.content.font_body || 'Play' } }`}
+          {` h1, h2, h3, h4, h5 { font-family: ${story.content.font_headers || 'Bungee' } }`}
+        </style>
       </Head>
  
       <StoryblokComponent blok={story.content} />

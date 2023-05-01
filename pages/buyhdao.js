@@ -195,6 +195,10 @@ export default function BuyHDAO({ story }) {
       <Head>
         <title>{story.content.header}</title>
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
+        <style>
+          {`body { font-family: Play }`}
+          {` h1, h2, h3, h4, h5 { font-family: Bungee }`}
+        </style>
       </Head>
 
       <div className="m-6 -mt-6 md:mr-24 lg:mr-32 text-right">

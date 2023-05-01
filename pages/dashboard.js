@@ -16,6 +16,10 @@ export default function Dashboard({ story }) {
       <Head>
         <title>Dashboard - humanDAO</title>
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
+        <style>
+          {`body { font-family: Play }`}
+          {` h1, h2, h3, h4, h5 { font-family: Bungee }`}
+        </style>
       </Head>
 
       <h1 className="Title text-center font-press-start font-bold text-3xl lg:text-4xl mx-2 text-white" {...storyblokEditable(story.content)}>humanDAO Dashboard V1.1</h1>

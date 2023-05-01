@@ -38,12 +38,12 @@ class TextBlock extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
+    let Heading = "h2" // Use For other headers just use the ability of the text block to create headers
     return (
-      <div {...storyblokEditable(this.props.blok)}>
-        { this.props.blok.headline ? (<h2 className="font-bungee font-bold">{this.props.blok.headline}</h2>) : null }
-        <div className={`${styles.narrow_solve} pt-${this.props.blok.padding || '0'}`}>{render(this.props.blok.text)}</div>
+      <div {...storyblokEditable(this.props.blok)} className={this.props.blok.align ? `text-` + this.props.blok.align : ''}>
+        { this.props.blok.headline ? (<Heading className={`this.props.blok.size_header ? text-${this.props.blok.size_header} : ''`}>{this.props.blok.headline}</Heading>) : null }
+        <div className={`${styles.narrow_solve} pt-${this.props.blok.padding || '0'} text-${this.props.blok.size_text || 'base'}`}>{render(this.props.blok.text)}</div>
       </div>
     )
   }
