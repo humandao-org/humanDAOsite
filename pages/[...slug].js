@@ -23,13 +23,17 @@ export default function Page({ story }) {
   }
 
   return (
-    <div className="bg-fixed pt-20 pb-20" style={getStyle()}> 
+    <div style={getStyle()}> 
       <Head>
         <title>{story ? story.name : "My Site"}</title>
         <link rel="icon" href="/favicon.ico" />
         <style>
-          {`body { font-family: ${story.content.font_body || 'Play' } }`}
-          {` h1, h2, h3, h4, h5 { font-family: ${story.content.font_headers || 'Bungee' } }`}
+          {`body { font-family: ${story.content.font_body || 'Play' } !important } `}
+          {`h1, h2, h3, h4, h5 { font-family: ${story.content.font_headers || 'Bungee' } } `}
+          {story.content.h1_styles && `.rte-styles h1 { ${story.content.h1_styles} } ` }
+          {story.content.h2_styles && `.rte-styles h2 { ${story.content.h2_styles} } ` }
+          {story.content.h3_styles && `.rte-styles h3 { ${story.content.h3_styles} } ` }
+          {story.content.p_styles && `.rte-styles p:not(:last-of-type) { ${story.content.p_styles} } ` }
         </style>
       </Head>
  

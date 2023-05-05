@@ -1,4 +1,6 @@
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 @layer base {
   h1 {
     @apply text-2xl font-bold
@@ -25,9 +27,6 @@
     @apply list-decimal ml-6 my-2;
   }
 }
-@tailwind components;
-@tailwind utilities;
-
 input[type="radio"] + label span {
   transition: background .2s,
     transform .2s;

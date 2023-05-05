@@ -1,48 +1,51 @@
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   safelist: [
     {
       pattern: /bg-(red|green|blue)-(100|200|300)/,
     },
     {
+      pattern: /justify-[between|around|evently]/,
+    },
+    {
+      pattern:  /rounded(-[b|t|r|l])?-.*/
+    },
+    {
       pattern: /max-w-.+/,
     },
     {
-      pattern: /text-[left|right|center|justify]/,
+      pattern: /text-[sm|md|xl|left|right|center|justify]/,
     },
     {
-      pattern: /p-\d+/,
-      variants: ['sm', 'lg', 'md'],
+      pattern: /m([x|y|t|b|r|l])?-\d+/,
+      variants: ['2xl', 'xl', 'sm', 'lg', 'md'],
+    },
+    {
+      pattern: /text-\d+xl/,
+      variants: ['xl', 'sm', 'lg', 'md'],
     },
     {
       pattern: /gap-\d+/,
-      variants: ['sm', 'lg', 'md'],
+      variants: ['xl', 'sm', 'lg', 'md'],
     },
     {
       pattern: /w-.+/,
     },
     {
-      pattern: /py-\d+/,
-      variants: ['sm', 'lg', 'md'],
-    },
-    {
-      pattern: /pt-\d+/,
-      variants: ['sm', 'lg', 'md'],
-    },
-    {
-      pattern: /pb-\d+/,
-      variants: ['sm', 'lg', 'md'],
+      pattern: /p([x|y|b|t|l|r])?-\d+/,
+      variants: ['xl', 'sm', 'lg', 'md'],
     },
     { 
       pattern: /grid-cols-.+/,
-      variants: ['lg', 'md'],
+      variants: ['xl', 'lg', 'md', 'sm'],
     },
     { 
       pattern: /gap-.+/,
-      variants: ['lg', 'md'],
+      variants: ['xl', 'lg', 'md', 'sm'],
     }
   ],
   theme: {

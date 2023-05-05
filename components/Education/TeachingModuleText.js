@@ -18,7 +18,7 @@ class TeachingModuleText extends React.Component {
     return (
       <div {...storyblokEditable(this.props.blok)}>
         <h2 className="font-bungee font-bold mt-2 text-center md:text-left">{this.props.blok.headline}</h2>
-        <div className="pt-4 pb-8">{render(this.props.blok.text)}</div>
+        <div className="rte-styles pt-4 pb-8">{render(this.props.blok.text)}</div>
       </div>
     )
   }

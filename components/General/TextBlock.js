@@ -39,15 +39,22 @@ class TextBlock extends React.Component {
     super(props);
   }
   render() {
-    let Heading = "h2" // Use For other headers just use the ability of the text block to create headers
+    let Heading = 'h' + this.props.blok.importance || "h2"
     return (
-      <div {...storyblokEditable(this.props.blok)} className={this.props.blok.align ? `text-` + this.props.blok.align : ''}>
-        { this.props.blok.headline ? (<Heading className={`this.props.blok.size_header ? text-${this.props.blok.size_header} : ''`}>{this.props.blok.headline}</Heading>) : null }
-        <div className={`${styles.narrow_solve} pt-${this.props.blok.padding || '0'} text-${this.props.blok.size_text || 'base'}`}>{render(this.props.blok.text)}</div>
+      <div {...storyblokEditable(this.props.blok)} 
+        style={{...(this.props.blok.grid_column && { gridColumn: this.props.blok.grid_column })}}
+        className={this.props.blok.text_align ? `text-` + this.props.blok.text_align : ''}>
+        { this.props.blok.headline && 
+          (<Heading className={`font-bold ${this.props.blok.size_header ? 'text-' + this.props.blok.size_header : ''} ${this.props.blok.header_margins || ''}`} style={{color: this.props.blok.header_color || 'black' }}>{this.props.blok.headline}</Heading>)
+        }
+        <div 
+          className={`rte-styles ${styles.narrow_solve} ${this.props.blok.text_paddings || ''} text-${this.props.blok.size_text || 'base'}`} style={{color: this.props.blok.text_color || 'black' }}
+        >
+          {render(this.props.blok.text)}
+        </div>
       </div>
     )
   }
 }
 
 export default TextBlock
-
