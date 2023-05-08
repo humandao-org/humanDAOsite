@@ -22,11 +22,18 @@ const Header = ({ blok, parent, last }) => (
           )
         }))}
     </div>
-    <div id="button" className="flex items-center justify-center">
-      <div className="bg-[#8F47FFFF] py-2 px-3 md:text-sm text-xs text-center rounded-md text-white hover:cursor-pointer hover:opacity-90">
-          Get in Touch
+    {
+      blok.action_links && (
+      <div id="button" className="flex items-center justify-center">
+        <div 
+          className={`py-2 px-3 md:text-sm text-xs text-center rounded-md hover:cursor-pointer hover:opacity-90`}
+          style={{...(blok.action_links[0]?.bg_color && { backgroundColor: blok.action_links[0]?.bg_color}), ...(blok.action_links[0]?.text_color && { color: blok.action_links[0]?.text_color}) }}
+        >
+            { blok.action_links[0]?.name || 'button name' }
+        </div>
       </div>
-    </div>
+      )
+    }
   </header>
 );
  

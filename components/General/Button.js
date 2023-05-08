@@ -9,7 +9,10 @@ function Button({ blok }) {
 
   return (
     <div {...storyblokEditable(blok)}
-      style={{ backgroundColor: blok.bg_color, color: blok.text_color}} 
+      style={{ 
+        backgroundColor: blok.bg_color, color: blok.text_color, 
+        ...( blok.border_color && { borderColor: blok.border_color, borderStyle: 'solid', borderWidth: '1px' })
+      }} 
       className={`${blok.margins || ''} ${blok.display || 'inline'} text-${blok.text_size || 'md'} hover:cursor-pointer hover:opacity-80 m-auto px-4 truncate py-2 rounded-lg`}
       onClick={() => handleClick(blok.action_url.url)}  
     >

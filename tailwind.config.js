@@ -9,6 +9,10 @@ module.exports = {
       pattern: /bg-(red|green|blue)-(100|200|300)/,
     },
     {
+      pattern: /items-[start|center|end]/,
+      variants: ['sm', 'md', 'lg', 'xl'],
+    },
+        {
       pattern: /justify-[between|around|evently]/,
     },
     {

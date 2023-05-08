@@ -12,7 +12,13 @@ const Footer = ({ blok }) => {
   // console.log(result.filter)
   // let styles = { filter: filterResult.filter, ...(blok.image_height && { height: blok.image_height }), ...(blok.image_width && { width: blok.image_width }) }
   return (
-  <div className='border-solid border-[#565D6DFF] border-2 border-r-0 border-l-0 border-b-0' {...storyblokEditable(blok)}>
+  <div 
+    className='border-solid border-[#565D6DFF] border-2 border-r-0 border-l-0 border-b-0' {...storyblokEditable(blok)}
+    style={{ 
+      border: 'none',
+      ...( blok.divider && { border: blok.divider })
+    }} 
+>
   <div id="footer-container" className={`flex justify-between lg:flex-row flex-col ${blok.margins}`}>
     <div id="humandao-socials" className="flex items-center flex-col space-y-24 lg:mb-0 mb-6">
       <div id="hdao-logo" className="hover:opacity-90 hover:cursor-pointer mt-2">
@@ -49,13 +55,52 @@ const Footer = ({ blok }) => {
       }))}
     </div>
     <div id="subscriptions" className="flex flex-col space-y-7 items-center lg:mb-0 mb-12">
-      <div className="flex flex-col space-y-4">
-        <div className="flex flex-col">
-          <div className={`text-${blok.header_size || '2xl'} text-[#1BC5BDFF] font-bold mb-4`}>
-            Subscribe to Gamechat
-          </div>
-          <div className="text-[#9095A1FF] text-xs pb-1">A newsletter for gamers</div>
-          <div className="flex flex-row">
+      <div className="flex flex-col items-center lg:items-start">
+        <div 
+          style={{ 
+            ...( blok.subscribe_header_color && { color: blok.subscribe_header_color })
+          }}
+          className={`text-${blok.header_size || '2xl'} text-[#1BC5BDFF] font-bold mb-4`}
+        >
+          Subscribe to Gamechat
+        </div>
+        <div className="text-[#9095A1FF] text-xs pb-1">A newsletter gamers</div>
+        <div>
+
+        {
+          blok.buttons?.length > 1 ? (
+            <StoryblokComponent blok={blok.buttons[1]} key={blok.buttons[1]._uid} />
+          ) : null
+        }
+        </div>
+      </div>
+      <div className="flex flex-col items-center lg:items-start">
+        <div 
+          style={{ 
+            ...( blok.subscribe_header_color && { color: blok.subscribe_header_color })
+          }}
+          className={`text-${blok.header_size || '2xl'} text-[#1BC5BDFF] font-bold mb-4`}
+        >
+          Subscribe to humanDAO
+        </div>
+        <div className="text-[#9095A1FF] text-xs pb-1">A newsletter for nice people</div>
+        <div>
+        {
+          blok.buttons?.length > 1 ? (
+            <StoryblokComponent blok={blok.buttons[1]} key={blok.buttons[1]._uid} />
+          ) : null
+        }
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+)
+};
+ 
+export default Footer;
+/*
             <div className="relative">
               <input
                 placeholder="Input your email"
@@ -74,40 +119,19 @@ const Footer = ({ blok }) => {
             <button className="bg-[#8F47FFFF] hover:opacity-80 rounded-r-md px-4 text-white font-semibold">
               <div>Subscribe</div>
             </button>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <div className={`text-${blok.header_size || '2xl'} text-[#1BC5BDFF] font-bold mb-4`}>
-          Subscribe to humanDAO
-        </div>
-        <div className="text-[#9095A1FF] text-xs pb-1">A newsletter for nice people</div>
-        <div className="flex flex-row">
-          <div className="relative">
-            <input
-              placeholder="Input your email"
-              type="email"
-              className="flex flex-row appearance-none bg-[#323743FF] rounded-l-md w-[100%] p-2 pl-8 text-white text-sm"
-            />
-            <div className="absolute left-2 bottom-[0.6rem]">
-              <img
-                src="/images/email.svg"
-                alt=""
-                height="20px"
-                width="20px"
+            */
+            /*
+              <input
+                placeholder="Input your email"
+                type="email"
+                className="flex flex-row appearance-none bg-[#323743FF] rounded-l-md w-[100%] p-2 pl-8 text-white text-sm"
               />
-            </div>
-          </div>
-          <button className="bg-[#8F47FFFF] hover:opacity-80 rounded-r-md px-4 text-white font-semibold">
-            <div>Subscribe</div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-
-)
-};
- 
-export default Footer;
+              <div className="absolute left-2 bottom-[0.6rem]">
+                <img
+                  src="/images/email.svg"
+                  alt=""
+                  height="20px"
+                  width="20px"
+                />
+              </div>
+            */
