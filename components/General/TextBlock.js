@@ -43,7 +43,7 @@ class TextBlock extends React.Component {
     return (
       <div {...storyblokEditable(this.props.blok)} 
         style={{...(this.props.blok.grid_column && { gridColumn: this.props.blok.grid_column })}}
-        className={this.props.blok.text_align ? `text-` + this.props.blok.text_align : ''}>
+        className={`${this.props.blok.max_widths || ''} text-${this.props.blok.text_align || 'left'}`}>
         { this.props.blok.headline && 
           (<Heading className={`font-bold ${this.props.blok.size_header ? 'text-' + this.props.blok.size_header : ''} ${this.props.blok.header_margins || ''}`} style={{color: this.props.blok.header_color || 'black' }}>{this.props.blok.headline}</Heading>)
         }

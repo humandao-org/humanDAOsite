@@ -15,7 +15,7 @@ const IHT_Card = ({ blok }) => {
   let styles = { filter: hexToCSSFilter(blok.image_color || "#000").filter.replace(";",''),...(blok.image_height && { height: blok.image_height }),...(blok.image_width && { width: blok.image_width }) }
   return (
     <div className={`rounded-lg ${blok.margins} ${blok.paddings}`} style={{ ...(blok.bg_color && { backgroundColor: blok.bg_color }) }} {...storyblokEditable(blok)}>
-      <div className={`flex ${blok.distribution}`}>
+      <div className={`flex flex-row flex-wrap ${blok.distribution}`}>
         { blok.image.filename && 
           (<div className={`self-center ${blok.image_paddings}`}>
             <img suppressHydrationWarning src={blok.image.filename} alt={blok.image.alt} className='max-w-none' style={styles}/>
@@ -23,7 +23,7 @@ const IHT_Card = ({ blok }) => {
         }
         { blok.header && 
           (<div className='flex flex-wrap content-center'>
-            <h2 className={`m-0 text-${blok.text_align || 'left'} text-${blok.header_size || '3xl'}`} style={{color: blok.text_color || 'black' }}>{ blok.header }</h2>
+            <h2 className={`${blok.header_margins} text-${blok.text_align || 'left'} text-${blok.header_size || '3xl'}`} style={{color: blok.text_color || 'black' }}>{ blok.header }</h2>
           </div>)
         }
       </div>

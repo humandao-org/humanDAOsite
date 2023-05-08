@@ -2,7 +2,7 @@ import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 
 const FeatureCompareItem = ({ blok, parent, last }) => (
   <div className={`${parent.column_gaps} grid grid-cols-3`} id="grid-item" {...storyblokEditable(blok)}>
-    <div className="flex items-center">
+    <div className={`flex items-center ${parent.feature_paddings} ${parent.feature_sizes || 'text-xl'}`}>
       {blok.name}
     </div>
     <div className={`${parent.product_paddings} flex items-center justify-center`} style={{ ...(parent.product1_bg_color && { backgroundColor: parent.product1_bg_color  })}}>

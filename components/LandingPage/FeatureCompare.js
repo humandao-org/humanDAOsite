@@ -10,17 +10,17 @@ const FeatureCompare = ({ blok }) => (
         <div>&nbsp;</div>
         <h4 
           style={{ ...(blok.product1_bg_color && { backgroundColor: blok.product1_bg_color  })}} 
-          className={`text-${blok.product_size || 'lg'} ${blok.product_paddings} flex justify-center items-center font-bold uppercase text-center rounded-t-lg`}
+          className={`${blok.product_sizes || 'text-lg'} ${blok.product_paddings} flex justify-center items-center font-bold uppercase text-center rounded-t-lg`}
           dangerouslySetInnerHTML={{__html: blok.product1}}
         />
         <h4 
           style={{ ...(blok.product2_bg_color && { backgroundColor: blok.product2_bg_color  })}} 
-          className={`text-${blok.product_size || 'lg'} ${blok.product_paddings} flex justify-center items-center font-bold uppercase text-center rounded-t-lg`}
+          className={`${blok.product_sizes || 'text-lg'} ${blok.product_paddings} flex justify-center items-center font-bold uppercase text-center rounded-t-lg`}
           dangerouslySetInnerHTML={{__html: blok.product2}}
         />
     </div>
     <div className={`${blok.column_gaps} grid grid-cols-3 z-10`} id="sub-label">
-        <div className={`text-${blok.feature_size || 'xl'} font-bold grid-label-item`}>
+        <div className={`${blok.feature_sizes || 'text-lg'} font-bold grid-label-item`}>
             {blok.feature_header}
         </div>
         <div className="text-lg font-bold uppercase grid-item" style={{ ...(blok.product1_bg_color && { backgroundColor: blok.product1_bg_color  })}}>
