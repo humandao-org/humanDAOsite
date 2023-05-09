@@ -9,11 +9,16 @@ module.exports = {
       pattern: /bg-(red|green|blue)-(100|200|300)/,
     },
     {
-      pattern: /items-[start|center|end]/,
+      pattern: /^(block|inline(-block)?|flex|grid|hidden)/,
       variants: ['sm', 'md', 'lg', 'xl'],
     },
-        {
-      pattern: /justify-[between|around|evently]/,
+    {
+      pattern: /items-(start|center|end)/,
+      variants: ['sm', 'md', 'lg', 'xl'],
+    },
+    {
+      pattern: /justify-(between|around|evenly)/,
+      variants: ['sm', 'md', 'lg', 'xl'],
     },
     {
       pattern:  /rounded(-[b|t|r|l])?-.*/
@@ -22,10 +27,11 @@ module.exports = {
       pattern: /max-w-.+/,
     },
     {
-      pattern: /text-[sm|md|xl|left|right|center|justify]/,
+      pattern: /text-(sm|md|xl|left|right|center|justify)/,
+      variants: ['sm', 'md', 'lg', 'xl'],
     },
     {
-      pattern: /m([x|y|t|b|r|l])?-\d+/,
+      pattern: /m(x|y|t|b|r|l)?-\d+/,
       variants: ['2xl', 'xl', 'sm', 'lg', 'md'],
     },
     {

@@ -26,7 +26,7 @@ export default function Page({ story }) {
     <div style={getStyle()}> 
       <Head>
         <title>{story ? story.name : "My Site"}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
         <style>
           {`body { font-family: ${story.content.font_body || 'Play' } !important } `}
           {`h1, h2, h3, h4, h5 { font-family: ${story.content.font_headers || 'Bungee' } } `}
