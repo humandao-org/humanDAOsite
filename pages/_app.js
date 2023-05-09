@@ -22,6 +22,8 @@ import Footer from "../components/LandingPage/Footer"
 import Header from "../components/LandingPage/Header"
 import Button from "../components/General/Button"
 import Decorator from "../components/General/Decorator"
+import FAQSection from "../components/General/FAQ-Section"
+import FAQItem from "../components/General/FAQ-Item"
 
 const components = {
   collection: Collection,
@@ -45,7 +47,9 @@ const components = {
   footer: Footer,
   header: Header,
   button: Button,
-  decorator: Decorator
+  decorator: Decorator,
+  faq_section: FAQSection,
+  faq_item: FAQItem
 };
 
 storyblokInit({
