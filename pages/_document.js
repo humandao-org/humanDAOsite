@@ -11,7 +11,7 @@ class MyDocument extends Document {
             <link href='https://fonts.googleapis.com/css2?family=Bungee&family=Play:wght@400;700&display=swap' rel='stylesheet'/>
             <link href='https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap' rel="stylesheet"/>
             <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"/>
-            <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"/>
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet"/>
         </Head>
         <body>
           <Main />

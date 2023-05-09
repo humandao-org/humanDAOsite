@@ -23,14 +23,9 @@ const Header = ({ blok, parent, last }) => (
         }))}
     </div>
     {
-      blok.action_links && (
+      (blok.action_links?.length > 0) && (
       <div id="button" className="flex items-center justify-center">
-        <div 
-          className={`py-2 px-3 md:text-sm text-xs text-center rounded-md hover:cursor-pointer hover:opacity-90`}
-          style={{...(blok.action_links[0]?.bg_color && { backgroundColor: blok.action_links[0]?.bg_color}), ...(blok.action_links[0]?.text_color && { color: blok.action_links[0]?.text_color}) }}
-        >
-            { blok.action_links[0]?.name || 'button name' }
-        </div>
+        <StoryblokComponent blok={blok.action_links[0]} key={blok.action_links[0]._uid} />
       </div>
       )
     }

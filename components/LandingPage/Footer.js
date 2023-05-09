@@ -66,10 +66,9 @@ const Footer = ({ blok }) => {
           </div>
           <div className="text-[#9095A1FF] text-xs pb-1">A newsletter gamers</div>
           <div>
-
           {
-            blok.buttons?.length > 1 ? (
-              <StoryblokComponent blok={blok.buttons[1]} key={blok.buttons[1]._uid} />
+            blok.buttons?.length > 0 ? (
+              <StoryblokComponent blok={blok.buttons[0]} key={blok.buttons[0]._uid} />
             ) : null
           }
           </div>
