@@ -3,6 +3,15 @@ import { render } from 'storyblok-rich-text-react-renderer';
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 import Link from "next/link";
 
+
+const getURL = (sbLink) => {
+  if (sbLink.linktype === 'story') {
+    return `/${sbLink.cached_url}`
+  } else {
+    return sbLink.url
+  }
+}
+
 const Footer = ({ blok }) => {
   // let rgb = [250, 150, 50] // "#23e575";
   // let color = new Color(rgb[0], rgb[1], rgb[2]);
@@ -47,7 +56,7 @@ const Footer = ({ blok }) => {
         { blok.links && (blok.links.map((link, index, array) => {
           return (
             <div key={link._uid} {...storyblokEditable(link)}>
-              <Link href={link.link.url}>
+              <Link href={getURL(link.link)}>
                 <a className="no-underline text-sm" style={{ color: blok.links_color }}>{link.name}</a>
               </Link>
             </div> 

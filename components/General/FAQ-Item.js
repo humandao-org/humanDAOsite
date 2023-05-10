@@ -14,7 +14,7 @@ const FAQItem = ({ blok }) => (
           style={{ width:'16px', height: '16px'}}
         />
       </div>
-      <div className="text-[#919191FF] !mt-0 peer-checked:!mt-3 max-h-0 overflow-hidden transition-all duration-300 ease-in-out peer-checked:max-h-40 max-w-[80%]">
+      <div className="text-[#919191FF] !mt-0 peer-checked:!mt-3 max-h-0 overflow-hidden transition-all duration-300 ease-in-out peer-checked:max-h-[30rem] max-w-[80%]">
         { blok.answer }
       </div>
     </div>

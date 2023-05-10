@@ -13,6 +13,10 @@ module.exports = {
       variants: ['sm', 'md', 'lg', 'xl'],
     },
     {
+      pattern: /order-(\d+|first|last)/,
+      variants: ['sm', 'md', 'lg', 'xl'],
+    },
+    {
       pattern: /items-(start|center|end)/,
       variants: ['sm', 'md', 'lg', 'xl'],
     },

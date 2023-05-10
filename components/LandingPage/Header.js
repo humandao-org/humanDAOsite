@@ -1,6 +1,14 @@
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 import Link from "next/link";
 
+const getURL = (sbLink) => {
+  if (sbLink.linktype === 'story') {
+    return `/${sbLink.cached_url}`
+  } else {
+    return sbLink.url
+  }
+}
+
 const Header = ({ blok, parent, last }) => (
   <header className={`${blok.margins} bg-white h-[60px] px-4 flex justify-between items-center sticky top-0 left-0 w-full z-50`} {...storyblokEditable(blok)}>
     <div className="flex flex-row space-x-2 items-center justify-center">
@@ -17,7 +25,7 @@ const Header = ({ blok, parent, last }) => (
       { blok.links && (blok.links.map((link, index, array) => {
           return (
             <div key={link._uid} {...storyblokEditable(link)}>
-              <a href={link.link.url} className="no-underline" style={{ color: blok.links_color }}>{link.name}</a>
+              <a href={getURL(link.link)} className="no-underline" style={{ color: blok.links_color }}>{link.name}</a>
             </div> 
           )
         }))}
