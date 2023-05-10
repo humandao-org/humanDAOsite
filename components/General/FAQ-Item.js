@@ -3,7 +3,7 @@ import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 const FAQItem = ({ blok }) => (
 <div>
   <div className="flex flex-row border-2 border-r-0 border-l-0 border-b-0 border-solid border-[#DEE1E6FF]">
-    <div className="flex flex-col py-7 space-y-3 relative">
+    <div className="flex flex-col py-7 space-y-3 relative w-full">
       <div className="question-title text-xl font-bold pr-12">
         { blok.question }
       </div>

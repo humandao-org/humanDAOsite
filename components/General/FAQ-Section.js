@@ -20,4 +20,3 @@ const FAQSection = ({ blok }) => (
 );
  
 export default FAQSection;
-
