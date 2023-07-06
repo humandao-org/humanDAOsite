@@ -13,7 +13,7 @@ const Header = ({ blok, parent, last }) => (
   <header className={`${blok.margins} bg-white h-[60px] px-4 flex justify-between items-center sticky top-0 left-0 w-full z-50`} {...storyblokEditable(blok)}>
     <div className="flex flex-row space-x-2 items-center justify-center">
       <div id="logo">
-      <Link href="/">
+      <Link href={getURL(blok.home_link)}>
         <a>
           <img className="max-w-none" src="/images/hdao-logo.png"  width="50px" height="50px"/>
         </a>
