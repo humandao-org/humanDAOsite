@@ -19,7 +19,7 @@ const Header = ({ blok, parent, last }) => (
         </a>
       </Link>
       </div>
-      <div id="text" className="font-bold text-3xl hidden md:block">humanDAO</div>
+      <div id="text" className="font-bold text-3xl hidden md:block">blok.title</div>
     </div>
     <div className="flex flex-row px-2 md:text-sm text-xs space-x-2 md:space-x-4 text-center md:text-left justify-center items-center text-[#565D6DFF]">
       { blok.links && (blok.links.map((link, index, array) => {
