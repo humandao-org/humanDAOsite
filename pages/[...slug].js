@@ -71,7 +71,7 @@ export async function getStaticPaths() {
   let paths = [];
   Object.keys(data.links).forEach((linkKey) => {
     try {
-      if (data.links[linkKey].is_folder || ['buyhdao', 'dashboard', 'quiz-test'].includes(data.links[linkKey].slug)) {
+      if (data.links[linkKey].is_folder || ['/buyhdao', '/dashboard'].includes(data.links[linkKey].path)) {
         return;
       } else if (data.links[linkKey].slug.indexOf(rootFolder) === -1) {
         console.log('root folder not there', data.links[linkKey].slug)
