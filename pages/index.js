@@ -46,7 +46,7 @@ export async function getStaticProps({ params }) {
  
   let sbParams = {
     version: "draft", // or 'published',
-    cv: 1695954532853
+    cv: 1695954532888
   };
  
   const storyblokApi = getStoryblokApi();
