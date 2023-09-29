@@ -234,7 +234,7 @@ export default function BuyHDAO({ story }) {
 
 export async function getStaticProps({ preview = false }) {
   // home is the default slug for the homepage in Storyblok
-  let slug = "buy-hdao" // has to match slug in Storyblok
+  let slug = "buyhdao" // has to match slug in Storyblok
   // load the published content outside of the preview mode
   let sbParams = {
     version: "draft", // or 'published'
