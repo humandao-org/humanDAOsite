@@ -247,7 +247,7 @@ export async function getStaticProps({ preview = false }) {
   }
  
   const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+  let { data } = await storyblokApi.get(`cdn/stories/humandao/${slug}`, sbParams);
  
   return {
     props: {

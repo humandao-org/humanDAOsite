@@ -1,133 +1,58 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css"
-import Link from 'next/link'
-
-/*
-import { CeramicClient } from '@ceramicnetwork/http-client'
-import { DID } from 'dids'
-import { getResolver as getKeyResolver } from 'key-did-resolver'
-import { getResolver as get3IDResolver } from '@ceramicnetwork/3id-did-resolver'
-import { EthereumAuthProvider, ThreeIdConnect } from '@3id/connect'
-
-if (process.browser) {
-  // Create a ThreeIdConnect connect instance as soon as possible in your app to start loading assets
-  var threeID = new ThreeIdConnect()
-}
-
-async function authenticateWithEthereum(ethereumProvider) {
-  // Request accounts from the Ethereum provider
-  const accounts = await ethereumProvider.request({
-    method: 'eth_requestAccounts',
-  })
-  // Create an EthereumAuthProvider using the Ethereum provider and requested account
-  const authProvider = new EthereumAuthProvider(ethereumProvider, accounts[0])
-  // Connect the created EthereumAuthProvider to the 3ID Connect instance so it can be used to
-  // generate the authentication secret
-  await threeID.connect(authProvider)
-
-  const ceramic = new CeramicClient()
-  const did = new DID({
-    // Get the DID provider from the 3ID Connect instance
-    provider: threeID.getDidProvider(),
-    resolver: {
-      ...get3IDResolver(ceramic),
-      ...getKeyResolver(),
-    },
-  })
-
-  // Authenticate the DID using the 3ID provider from 3ID Connect, this will trigger the
-  // authentication flow using 3ID Connect and the Ethereum provider
-  await did.authenticate()
-
-  // The Ceramic client can create and update streams using the authenticated DID
-  ceramic.did = did
-}
-
-// When using extensions such as MetaMask, an Ethereum provider may be injected as `window.ethereum`
-async function tryAuthenticate() {
-  if (window.ethereum == null) {
-    throw new Error('No injected Ethereum provider')
-  }
-  await authenticateWithEthereum(window.ethereum)
-}
-*/
-
-
+ 
 import {
   useStoryblokState,
   getStoryblokApi,
   StoryblokComponent,
-} from "@storyblok/react"
-
-export default function Home({ story }) {
-  story = useStoryblokState(story)
+} from "@storyblok/react";
+ 
+export default function Page({ story }) {
+  story = useStoryblokState(story);
+  const getStyle = () => {
+    const style = { 
+      height: '100%', 
+    }
+    if (story.content.bg_image) {
+      style.backgroundImage = `url(${story.content.bg_image.filename})`
+    }
+    if (story.content.bg_color) {
+      style.backgroundColor = story.content.bg_color
+    }
+    return style
+  }
 
   return (
-    <div className={styles.container}>
+    <div style={getStyle()}> 
       <Head>
-        <title>humanDAO</title>
+        <title>{story ? story.name : "My Site"}</title>
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
+        <style>
+          {`body { font-family: ${story.content.font_body || 'Play' } !important } `}
+          {`h1, h2, h3, h4, h5 { font-family: ${story.content.font_headers || 'Bungee' } } `}
+          {story.content.h1_styles && `.rte-styles h1 { ${story.content.h1_styles} } ` }
+          {story.content.h2_styles && `.rte-styles h2 { ${story.content.h2_styles} } ` }
+          {story.content.h3_styles && `.rte-styles h3 { ${story.content.h3_styles} } ` }
+          {story.content.p_styles && `.rte-styles p:not(:last-of-type) { ${story.content.p_styles} } ` }
+        </style>
       </Head>
-
-      <Link href="/dashboard">
-        <a className="no-underline hover:underline">Dashboard</a>
-      </Link>
+ 
       <StoryblokComponent blok={story.content} />
-
-      <div className="mx-auto max-w-sm">
-        <h1 className="mb-6 pt-6"> Make the right choice :</h1>
-        
-        <div className="pl-12">
-        
-          <div className="flex items-center mr-4 mb-4">
-            <input id="radio1" type="radio" name="radio" className="hidden" />
-            <label htmlFor="radio1" className="flex items-center cursor-pointer text-xl">
-            <span className="w-8 h-8 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
-            Best choice</label>
-          </div>
-
-          <div className="flex items-center mr-4 mb-4">
-            <input id="radio2" type="radio" name="radio" className="hidden" />
-            <label htmlFor="radio2" className="flex items-center cursor-pointer text-xl">
-            <span className="w-8 h-8 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
-            Second choice</label>
-          </div>
-          
-            <div className="flex items-center mr-4 mb-4">
-            <input id="radio3" type="radio" name="radio" className="hidden" />
-            <label htmlFor="radio3" className="flex items-center cursor-pointer text-xl">
-            <span className="w-8 h-8 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
-            Third choice</label>
-          </div>
-        
-          <div className="flex items-center mr-4 mb-4">
-            <input id="radio4" type="radio" name="radio" className="hidden" />
-            <label htmlFor="radio4" className="flex items-center cursor-pointer text-xl">
-            <span className="w-8 h-8 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
-            Fourth choice</label>
-          </div>
-          
-          <div className="flex items-center mr-4 mb-4">
-              <input id="radio5" type="radio" name="radio" className="hidden" />
-              <label htmlFor="radio5" className="flex items-center cursor-pointer text-xl">
-              <span className="w-8 h-8 inline-block mr-2 rounded-full border border-grey flex-no-shrink"></span>
-              Choice Five with a longer title</label>
-          </div>
-        </div>
-      </div>
-    </div>);
+    </div>
+  );
 }
-
-export async function getStaticProps() {
-  let slug = "home";
-
+ 
+export async function getStaticProps({ params }) {
+  //let slug = params.slug ? params.slug.join("/") : "home";
+ 
   let sbParams = {
     version: "draft", // or 'published'
   };
-
+ 
   const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
-
+  const rootFolder = process.env.ROOT_FOLDER
+  console.log('get story at index from: ', `cdn/stories/${rootFolder}/`)
+  let { data } = await storyblokApi.get(`cdn/stories/${rootFolder}/`, sbParams);
+  // console.log(data)
   return {
     props: {
       story: data ? data.story : false,
@@ -136,3 +61,27 @@ export async function getStaticProps() {
     revalidate: 3600,
   };
 }
+ 
+/*
+export async function getStaticPaths() {
+  const storyblokApi = getStoryblokApi();
+  let { data } = await storyblokApi.get("cdn/links/");
+ 
+  let paths = [];
+  Object.keys(data.links).forEach((linkKey) => {
+    if (data.links[linkKey].is_folder || data.links[linkKey].slug === "home" || data.links[linkKey].slug === "dashboard") {
+      return;
+    }
+ 
+    const slug = data.links[linkKey].slug;
+    let splittedSlug = slug.split("/");
+ 
+    paths.push({ params: { slug: splittedSlug } });
+  });
+ 
+  return {
+    paths: paths,
+    fallback: false,
+  };
+}
+*/
