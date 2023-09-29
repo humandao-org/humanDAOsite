@@ -67,10 +67,11 @@ export async function getStaticPaths() {
   const rootFolder = process.env.ROOT_FOLDER
   //console.log("getting static paths")
   let { data } = await storyblokApi.get(`cdn/links/`);
+  console.log(data)
   let paths = [];
   Object.keys(data.links).forEach((linkKey) => {
     try {
-      if (data.links[linkKey].is_folder || data.links[linkKey].slug === "home" || data.links[linkKey].slug === "dashboard") {
+      if (data.links[linkKey].is_folder || ['buyhdao', 'dashboard', 'quiz-test'].includes(data.links[linkKey].slug)) {
         return;
       } else if (data.links[linkKey].slug.indexOf(rootFolder) === -1) {
         console.log('root folder not there', data.links[linkKey].slug)
