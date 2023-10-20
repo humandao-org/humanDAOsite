@@ -57,10 +57,10 @@ class Token extends React.Component {
         }]
       },
       tokenHolders : { 
-        labels: ['June 2022', 'July 2022', 'Aug 2022', 'Sep 2022', 'Oct 2022', 'Nov 2022', 'Dec 2022', 'Jan 2023', 'Feb 2023', 'March 2023', 'April 2023', 'May 2023'],
+        labels: ['Nov 2022', 'Dec 2022', 'Jan 2023', 'Feb 2023', 'Mar 2023', 'Apr 2023', 'May 2023', 'June 2023', 'Jul 2023', 'Aug 2023', 'Sep 2023','Oct 2023'],
         datasets: [{
-          label: 'Number of holders - 23 months',
-          data: [1331, 1310, 1289, 1296, 1301, 1310, 1299, 1305, 1302, 1308, 1312, 1311],
+          label: 'Number of holders - 12 months',
+          data: [1301, 1310, 1299, 1305, 1302, 1308, 1312, 1317, 1320, 1327, 1331, 1339],
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
         }]
@@ -179,7 +179,7 @@ class Token extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="flex flex-wrap rounded-xl lg:p-2">
+            {/* <div className="flex flex-wrap rounded-xl lg:p-2">
               <div className="Card-1 bg-white rounded-md p-2 w-full md:inline-flex" style={{overflow: 'auto', maxHeight: '500px' }}>
                 <div className="md:ml-2 flex-col inline-flex w-full">
                   <p className="font-play uppercase text-lg sm:text-xl lg:text-3xl">
@@ -193,7 +193,7 @@ class Token extends React.Component {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </div>
         </section>
       </div>
