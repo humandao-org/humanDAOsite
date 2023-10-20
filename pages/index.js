@@ -41,17 +41,21 @@ export default function Page({ story }) {
   );
 }
  
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ preview = false }) {
   //let slug = params.slug ? params.slug.join("/") : "home";
  
   let sbParams = {
-    version: "draft", // or 'published',
-    cv: 1695954532888
+    version: 'published',
   };
+
+  if (preview) {
+    // load the draft version inside of the preview mode
+    sbParams.version = "draft";
+  }
  
   const storyblokApi = getStoryblokApi();
   const rootFolder = process.env.ROOT_FOLDER
-  console.log('get story at index from: ', `cdn/stories/${rootFolder}/`)
+  //console.log('get story at index from: ', `cdn/stories/${rootFolder}/`)
   let { data } = await storyblokApi.get(`cdn/stories/${rootFolder}/`, sbParams);
   // console.log(data)
   return {

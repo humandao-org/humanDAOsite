@@ -237,13 +237,12 @@ export async function getStaticProps({ preview = false }) {
   let slug = "buyhdao" // has to match slug in Storyblok
   // load the published content outside of the preview mode
   let sbParams = {
-    version: "draft", // or 'published'
+    version: 'published'
   };
  
   if (preview) {
     // load the draft version inside of the preview mode
     sbParams.version = "draft";
-    sbParams.cv = Date.now();
   }
  
   const storyblokApi = getStoryblokApi();

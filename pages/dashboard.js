@@ -35,13 +35,14 @@ export async function getStaticProps({ preview = false }) {
   // load the published content outside of the preview mode
   let sbParams = {
     version: "published",
-    cv: Date.now() // Attempt to Avoid the dashboard being cached but does not seem to have an affect
+    //cv: Date.now() // Not relevant to use for netx.js. The page is build using ISR method and so it is not being evaluated by the server on each reqeust. 
+    // Therefore, it is pointless to query the story with an updated cv number. To get the page updated it must be rebuild by the server. This is done using the `revalidate` parameter (see further down). 
+    // And when the page is being rebuild it will get the latest version of the story.
   };
  
   if (preview) {
     // load the draft version inside of the preview mode
     sbParams.version = "draft";
-    sbParams.cv = Date.now();
   }
  
   const storyblokApi = getStoryblokApi();

@@ -42,16 +42,21 @@ export default function Page({ story }) {
   );
 }
  
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, preview = false }) {
   let slug = params.slug ? params.slug.join("/") : "home";
   let sbParams = {
-    version: "draft", // or 'published'
-    cv: 1695954534888
+    version: 'published'
   };
  
+  if (preview) {
+    // load the draft version inside of the preview mode
+    sbParams.version = "draft";
+  }
+
   const storyblokApi = getStoryblokApi();
   const rootFolder = process.env.ROOT_FOLDER
   console.log('get story from: ', `cdn/stories/${rootFolder}/${slug}`)
+  console.log(sbParams)
   let { data } = await storyblokApi.get(`cdn/stories/${rootFolder}/${slug}`, sbParams);
   // console.log(data)
   return {
@@ -68,14 +73,14 @@ export async function getStaticPaths() {
   const rootFolder = process.env.ROOT_FOLDER
   //console.log("getting static paths")
   let { data } = await storyblokApi.get(`cdn/links/`);
-  console.log(data)
+  // console.log(data)
   let paths = [];
   Object.keys(data.links).forEach((linkKey) => {
     try {
       if (data.links[linkKey].is_folder || ['/buyhdao', '/dashboard'].includes(data.links[linkKey].path)) {
         return;
       } else if (data.links[linkKey].slug.indexOf(rootFolder) === -1) {
-        console.log('root folder not there', data.links[linkKey].slug)
+        // console.log('root folder not there', data.links[linkKey].slug)
         return
       }
    
