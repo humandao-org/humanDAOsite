@@ -11,9 +11,8 @@ export default function Page({ story }) {
   story = useStoryblokState(story);
   const getStyle = () => {
     const style = { 
-      height: '100%', 
     }
-    if (story.content && story.content.bg_image) {
+    if (story.content && story.content.bg_image.filename) {
       style.backgroundImage = `url(${story.content.bg_image.filename})`
     }
     if (story.content && story.content.bg_color) {
@@ -21,19 +20,23 @@ export default function Page({ story }) {
     }
     return style
   }
-  //console.log(story.content )
+  let bodyColor = story.content.text_color ? `color: ${story.content.text_color}` : ''
   return (
-    <div style={getStyle()}> 
+    <div style={getStyle()} className="min-h-screen"> 
       <Head>
         <title>{story ? story.name : "My Site"}</title>
         <link rel="icon" href="/HDAO-logo-transp-60x60-1.png" />
         <style>
-          {`body { font-family: ${story.content?.font_body || 'Play' } !important } `}
+          {`body { font-family: ${story.content?.font_body || 'Play' } !important; ${bodyColor} }`}
           {`h1, h2, h3, h4, h5 { font-family: ${story.content.font_headers || 'Bungee' } } `}
           {story.content.h1_styles && `.rte-styles h1 { ${story.content.h1_styles} } ` }
           {story.content.h2_styles && `.rte-styles h2 { ${story.content.h2_styles} } ` }
           {story.content.h3_styles && `.rte-styles h3 { ${story.content.h3_styles} } ` }
           {story.content.p_styles && `.rte-styles p:not(:last-of-type) { ${story.content.p_styles} } ` }
+          {story.content.anchor_styles && `.rte-styles a { ${story.content.anchor_styles} } ` }
+          {story.content.anchor_hover_styles && `.rte-styles a:hover { ${story.content.anchor_hover_styles} } ` }
+          {story.content.a_button_styles && `a.button:hover { ${story.content.a_button_styles} } ` }
+          { `.rte-styles img { display: inline-block }`}
         </style>
       </Head>
  
@@ -52,13 +55,11 @@ export async function getStaticProps({ params, preview = false }) {
     // load the draft version inside of the preview mode
     sbParams.version = "draft";
   }
-
   const storyblokApi = getStoryblokApi();
   const rootFolder = process.env.ROOT_FOLDER
   console.log('get story from: ', `cdn/stories/${rootFolder}/${slug}`)
   console.log(sbParams)
   let { data } = await storyblokApi.get(`cdn/stories/${rootFolder}/${slug}`, sbParams);
-  // console.log(data)
   return {
     props: {
       story: data ? data.story : false,

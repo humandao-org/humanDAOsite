@@ -33,6 +33,9 @@ export default function Page({ story }) {
           {story.content.h2_styles && `.rte-styles h2 { ${story.content.h2_styles} } ` }
           {story.content.h3_styles && `.rte-styles h3 { ${story.content.h3_styles} } ` }
           {story.content.p_styles && `.rte-styles p:not(:last-of-type) { ${story.content.p_styles} } ` }
+          {story.content.a_styles && `.rte-styles a { ${story.content.a_styles} } ` }
+          {story.content.a_hover_styles && `.rte-styles a:hover { ${story.content.a_hover_styles} } ` }
+          {story.content.a_button_styles && `.rte-styles a.button:hover { ${story.content.a_button_styles} } ` }
         </style>
       </Head>
  
@@ -55,7 +58,7 @@ export async function getStaticProps({ preview = false }) {
  
   const storyblokApi = getStoryblokApi();
   const rootFolder = process.env.ROOT_FOLDER
-  //console.log('get story at index from: ', `cdn/stories/${rootFolder}/`)
+  console.log('get story at index from: ', `cdn/stories/${rootFolder}/`)
   let { data } = await storyblokApi.get(`cdn/stories/${rootFolder}/`, sbParams);
   // console.log(data)
   return {

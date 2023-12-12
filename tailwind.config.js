@@ -6,7 +6,7 @@ module.exports = {
   ],
   safelist: [
     {
-      pattern: /bg-(red|green|blue)-(100|200|300)/,
+      pattern: /bg-(red|green|blue|gray)-(100|200|300|400|500)/,
     },
     {
       pattern: /^(block|inline(-block)?|flex|grid|hidden)/,
@@ -25,14 +25,22 @@ module.exports = {
       variants: ['sm', 'md', 'lg', 'xl'],
     },
     {
-      pattern:  /rounded(-[b|t|r|l])?-.*/
+      pattern:  /rounded(-[b|t|r|l])?-.*/,
+      variants: ['sm', 'md', 'lg', 'xl'],
     },
     {
       pattern: /max-w-.+/,
+      variants: ['sm', 'md', 'lg', 'xl'],
     },
     {
       pattern: /text-(sm|md|xl|left|right|center|justify)/,
       variants: ['sm', 'md', 'lg', 'xl'],
+    },
+    {
+      pattern: /text-(white|black|gray)/,
+    },
+    {
+      pattern: /text-(white|black|gray)-(100|200|300|400|500)/
     },
     {
       pattern: /m(x|y|t|b|r|l)?-\d+/,
@@ -47,7 +55,8 @@ module.exports = {
       variants: ['xl', 'sm', 'lg', 'md'],
     },
     {
-      pattern: /w-.+/,
+      pattern: /[w|h]-.+/,
+      variants: ['xl', 'sm', 'lg', 'md'],
     },
     {
       pattern: /p([x|y|b|t|l|r])?-\d+/,
@@ -58,7 +67,23 @@ module.exports = {
       variants: ['xl', 'lg', 'md', 'sm'],
     },
     { 
+      pattern: /col-span-.+/,
+      variants: ['xl', 'lg', 'md', 'sm'],
+    },
+    { 
+      pattern: /space-[x|y]-.+/,
+      variants: ['xl', 'lg', 'md', 'sm'],
+    },
+    { 
       pattern: /gap-.+/,
+      variants: ['xl', 'lg', 'md', 'sm'],
+    },
+    { 
+      pattern: /(in)?visible/,
+      variants: ['xl', 'lg', 'md', 'sm'],
+    },
+    {
+      pattern: /bg-opacity-\d+/,
       variants: ['xl', 'lg', 'md', 'sm'],
     }
   ],

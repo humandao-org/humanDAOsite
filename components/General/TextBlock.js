@@ -1,5 +1,5 @@
 import React from "react";
-import { storyblokEditable } from "@storyblok/react";
+import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 import { render, NODE_UL, NODE_LI } from 'storyblok-rich-text-react-renderer';
 import styles from "/styles/TextBlock.module.css"
 
@@ -40,18 +40,26 @@ class TextBlock extends React.Component {
   }
   render() {
     let Heading = 'h' + this.props.blok.importance || "h2"
+    const sizeHeaderClass = this.props.blok.size_header.includes('text-') 
+                            ? this.props.blok.size_header 
+                            : `text-${this.props.blok.size_header || ''}`;
     return (
       <div {...storyblokEditable(this.props.blok)} 
         style={{...(this.props.blok.grid_column && { gridColumn: this.props.blok.grid_column })}}
         className={`${this.props.blok.max_widths || ''} text-${this.props.blok.text_align || 'left'}`}>
         { this.props.blok.headline && 
-          (<Heading className={`font-bold ${this.props.blok.size_header ? 'text-' + this.props.blok.size_header : ''} ${this.props.blok.header_margins || ''}`} style={{color: this.props.blok.header_color || 'black' }}>{this.props.blok.headline}</Heading>)
+          (<Heading className={`font-bold ${sizeHeaderClass} ${this.props.blok.header_margins || ''}`} style={{color: this.props.blok.header_color || 'black' }}>{this.props.blok.headline}</Heading>)
         }
         <div 
-          className={`rte-styles ${styles.narrow_solve} ${this.props.blok.text_paddings || ''} text-${this.props.blok.size_text || 'base'}`} style={{color: this.props.blok.text_color || 'black' }}
-        >
-          {render(this.props.blok.text)}
-        </div>
+          className={`rte-styles ${styles.narrow_solve} ${this.props.blok.text_paddings || ''} text-${this.props.blok.size_text || 'base'}`} 
+          style={{color: this.props.blok.text_color || 'black' }}
+        >{ render(this.props.blok.text, {
+            defaultBlokResolver: (name, props) => {
+              const blok = { ...props, component: name };
+              return <StoryblokComponent blok={blok} key={props._uid} />;
+            }
+          })
+       }</div>
       </div>
     )
   }
