@@ -11,7 +11,7 @@ const FAQSection = ({ blok }) => (
     }
     <div className={`flex flex-col`} id="body-container">
       { blok.items && (blok.items.map((item, index, array) => (
-            <StoryblokComponent blok={item} parent={blok} first={index === 0} last={index === array.length - 1} key={item._uid} />
+            <StoryblokComponent blok={item} parent={blok} itemno={index+1} first={index === 0} last={index === array.length - 1} key={item._uid} />
           ))
         )
       }

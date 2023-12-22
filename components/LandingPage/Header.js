@@ -9,7 +9,7 @@ const getURL = (sbLink) => {
   } else {
     url = sbLink.url
   }
-  return url.replace('humantaskforce/', "")
+  return url.replace(/humantaskforce\/|humandao\//, "");
 }
 
 const getHeaderStyle = (blok) => {
@@ -86,7 +86,7 @@ const Header = ({ blok }) => {
           </button>
         )
       }
-      <div className="flex flex-row space-x-2 items-center justify-center">
+      <div className="flex flex-row items-center justify-center">
         {
           (blok.home_link.cached_url || blok.home_link.url) && (
             <div id="logo">
@@ -120,12 +120,19 @@ const Header = ({ blok }) => {
             )
           }))}
       </div>
-      {
+      <div id="button" className={`flex items-center justify-center ${blok.buttons_gap}`}>
+      { blok.action_links && (blok.action_links.map((button, index) => {
+        return (
+          <StoryblokComponent blok={button} key={index} />
+        )
+      }))}
+      </div>
+      { /*
         (blok.action_links?.length > 0) && (
         <div id="button" className="flex items-center justify-center">
           <StoryblokComponent blok={blok.action_links[0]} key={blok.action_links[0]._uid} />
         </div>
-        )
+        ) */
       }
     </div>
       {/* Mobile Menu Panel */}

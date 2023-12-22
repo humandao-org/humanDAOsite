@@ -83,7 +83,6 @@ const ContactForm = ({ blok }) => {
   const sendEmail = async () => {
     // Create an object to accumulate current validation results
     let currentErrors = {};
-
     for (const field in formData) {
       // Direct check instead of using setState to avoid async delay
       currentErrors[field] = isFieldInvalid(field, formData[field]);
@@ -94,13 +93,14 @@ const ContactForm = ({ blok }) => {
 
     // Check for any validation errors in the currentErrors object
     const anyInvalid = Object.values(currentErrors).some((error) => error);
+    console.log('sendiong email', anyInvalid)
 
     if (!anyInvalid) {
-      // Replace with your actual send mail code
       setFormInvalid(false)
       setSendError(false);
       try {
-        const response = await axios.post('/api/send_email', formData);
+        const response = await axios.post('https://pocket-assistant-api.vercel.app/api/automation/contact', formData);
+        console.log(response)
         if (response.status === 200) {
           setEmailSent(true);
           setFormData(initialFormData); // Clear the form data
@@ -108,10 +108,10 @@ const ContactForm = ({ blok }) => {
           setSendError(true);
         }
       } catch (error) {
+        console.log(error)
         setSendError(true);
       }
     } else {
-      console.log("something was invalid")
       setFormInvalid(true);
     }
   };

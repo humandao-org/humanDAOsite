@@ -3,13 +3,24 @@ import { useRouter } from 'next/router';
 
 function Button({ blok, methodToCall }) {
   const router = useRouter();
+  
+  function removeFolderPath(url) {
+    return url.replace(/humantaskforce\/|humandao\//, "");
+  }
+  
   function handleClick() {
     if (methodToCall) {
       // If methodToCall is provided, call it instead of handling the click itself
       methodToCall();
-    } else if (blok.action_url && blok.action_url.url) {
-      // Otherwise, proceed as usual by pushing the router to the URL
-      router.push(blok.action_url.url);
+    } else if (blok.action_url) {
+      // Check if the linktype is 'story' or 'url'
+      if (blok.action_url.linktype === 'story') {
+        // use router to navigate to the internal page
+        router.push(removeFolderPath(blok.action_url.cached_url));
+      } else if (blok.action_url.linktype === 'url') {
+        // open the link in a new window/tab
+        window.open(blok.action_url.url, '_blank');
+      }
     }
   }
 
